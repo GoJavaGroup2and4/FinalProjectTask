@@ -19,7 +19,7 @@ import java.util.Properties;
 @PropertySource("classpath:jdbc.properties")
 public class HibernateConfiguration {
 
-    @Value("${jdbc.properties.class")
+    @Value("${jdbc.driver.class")
     private String jdbcDriveClass;
 
     @Value("${jdbc.user}")
