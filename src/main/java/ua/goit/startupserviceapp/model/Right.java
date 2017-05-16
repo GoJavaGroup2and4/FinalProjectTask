@@ -1,9 +1,6 @@
 package ua.goit.startupserviceapp.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Alexander on 16/05/2017.
@@ -14,6 +11,7 @@ public class Right {
 
     @Id
     @Column(name = "id_right")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_right;
 
     @Column(name = "right_name")
