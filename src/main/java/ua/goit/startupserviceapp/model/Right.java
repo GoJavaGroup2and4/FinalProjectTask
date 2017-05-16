@@ -43,7 +43,6 @@ public class Right {
     @Override
     public String toString() {
         return "Right{" +
-                "id_right=" + id_right +
                 ", right_name='" + right_name + '\'' +
                 '}';
     }
