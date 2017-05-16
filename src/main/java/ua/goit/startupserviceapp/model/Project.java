@@ -222,5 +222,5 @@ public class Project {
         this.status = status;
     }
 
-    //TODO need to add other fields
+    //TODO to add OneToMany relation
 }
