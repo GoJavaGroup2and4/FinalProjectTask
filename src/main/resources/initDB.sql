@@ -8,11 +8,13 @@ CREATE TABLE IF NOT EXISTS startup (
   description        VARCHAR(500)         DEFAULT NULL,
   rating             DOUBLE               DEFAULT NULL,
   category           VARCHAR(70) NOT NULL,
-  author             VARCHAR(20) NOT NULL,
+  #   author             VARCHAR(20) NOT NULL,
+  author_id          INT(11)     NOT NULL,
   #   evaluation            INT(11),
-  status              VARCHAR(30),
+  status             VARCHAR(30),
   PRIMARY KEY (startup_id),
-  INDEX (startup_name)
+  INDEX (startup_name),
+  FOREIGN KEY (author_id) REFERENCES user (user_id)
 )
   ENGINE = InnoDB;
 
