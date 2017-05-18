@@ -48,6 +48,22 @@ public class User {
     @Column(name = "is_active")
     private byte is_active;
 
+    private String emailAddress;
+
+    private boolean isVerified;
+
+    @OneToMany(mappedBy="user",
+            targetEntity=VerificationToken.class,
+            cascade= CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VerificationToken> verificationTokens = new ArrayList<VerificationToken>();
+
+    @OneToOne(fetch = FetchType.LAZY,
+            mappedBy = "user",
+            cascade = CascadeType.ALL)
+    private AuthorizationToken authorizationToken;
+
+
     public User() {
     }
 
@@ -203,29 +219,6 @@ public class User {
         this.is_active = is_active;
     }
 
-    //TODO make relations
-    private String emailAddress;
-
-    private boolean isVerified;
-
-    @OneToMany(mappedBy="user",
-               targetEntity=VerificationToken.class,
-               cascade= CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VerificationToken> verificationTokens = new ArrayList<VerificationToken>();
-
-    @OneToOne(fetch = FetchType.LAZY,
-              mappedBy = "user",
-              cascade = CascadeType.ALL)
-    private AuthorizationToken authorizationToken;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmailAddress() {
         return emailAddress;
@@ -252,8 +245,6 @@ public class User {
     }
 
     public synchronized void setAuthorizationToken(AuthorizationToken token) {
-
-
         this.authorizationToken = token;
     }
 
@@ -284,6 +275,4 @@ public class User {
         }
         return activeToken;
     }
-
-    //TODO need to add other fields
 }
