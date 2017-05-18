@@ -42,5 +42,27 @@ public class Test {
         Category c = session.get(Category.class,category.getId());
         System.out.println(c.getStartups());
         session.getTransaction().commit();
+
+        session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        UserDB user = new UserDB("gala","zubenko","gala@mail.ru","gala6ap","gala");
+        session.save(user);
+        System.out.println(c.getStartups());
+        session.getTransaction().commit();
+
+        session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        ProjectEvaluation mark = new ProjectEvaluation(user, startup, 5);
+        session.save(mark);
+        System.out.println(c.getStartups());
+        session.getTransaction().commit();
+
+        session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        UserDB u = session.get(UserDB.class,user.getId());
+        System.out.println(u.getMarks());
+        Startup s = session.get(Startup.class,startup.getId());
+        System.out.println(s.getMarks());
+        session.getTransaction().commit();
     }
 }

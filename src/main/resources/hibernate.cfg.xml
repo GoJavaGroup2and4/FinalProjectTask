@@ -23,6 +23,8 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <mapping class="ua.goit.startupserviceapp.model.Category"/>
         <mapping class="ua.goit.startupserviceapp.model.Startup"/>
+        <mapping class="ua.goit.startupserviceapp.model.UserDB"/>
+        <mapping class="ua.goit.startupserviceapp.model.ProjectEvaluation"/>
 
     </session-factory>
 </hibernate-configuration>

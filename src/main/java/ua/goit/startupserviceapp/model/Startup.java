@@ -4,6 +4,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -19,6 +21,7 @@ public class Startup {
     private double rating;
     private String status;
     private Category category;
+    private Set<ProjectEvaluation> marks = new HashSet<>();
 
     @Id
     @Column(name = "startup_id", unique = true, nullable = false)
@@ -115,6 +118,15 @@ public class Startup {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @OneToMany(mappedBy = "project")
+    public Set<ProjectEvaluation> getMarks() {
+        return marks;
+    }
+
+    public void setMarks(Set<ProjectEvaluation> marks) {
+        this.marks = marks;
     }
 
     public Startup() {
