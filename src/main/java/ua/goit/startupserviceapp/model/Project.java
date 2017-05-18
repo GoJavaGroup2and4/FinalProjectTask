@@ -7,12 +7,12 @@ import javax.persistence.*;
 
 @Entity
 @Table (name = "projects")
-public class Project {
+public class Project extends BaseEntity {
 
-    @Id
+    /*@Id
     @Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+*/
     //TODO need to add other fields
 }

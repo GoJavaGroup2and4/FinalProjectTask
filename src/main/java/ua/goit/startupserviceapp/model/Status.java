@@ -1,4 +1,4 @@
 package ua.goit.startupserviceapp.model;
 
-public class Status {
+public class Status extends BaseEntity {
 }

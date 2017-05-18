@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table (name = "roles")
-public class Role {
+public class Role extends BaseEntity {
 
     @Id
     @Column(unique = true, nullable = false)
