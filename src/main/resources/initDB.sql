@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS category (
   category_name VARCHAR(50) NOT NULL,
   PRIMARY KEY (category_id),
   INDEX (category_name),
-  UNIQUE (category_id, category_name)
+  UNIQUE (category_name)
 )
   ENGINE = InnoDB;
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS role (
   role_name VARCHAR(100) NOT NULL,
   PRIMARY KEY (role_id),
   INDEX (role_name),
-  UNIQUE (role_id, role_name)
+  UNIQUE (role_name)
 )
   ENGINE = InnoDB;
 
