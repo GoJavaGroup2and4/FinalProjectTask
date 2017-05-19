@@ -1,6 +1,6 @@
 package ua.goit.startupserviceapp.service;
 
-import ua.goit.startupserviceapp.model.User;
+import ua.goit.startupserviceapp.model.UserDB;
 
 import java.util.List;
 
@@ -13,17 +13,17 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     @Override
-    public void save(User user) {
+    public void save(UserDB user) {
 
     }
 
     @Override
-    public void edit(User user) {
+    public void edit(UserDB user) {
 
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(UserDB user) {
 
     }
 
@@ -33,27 +33,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(int id) {
+    public UserDB getUserById(int id) {
         return null;
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<UserDB> getAllUsers() {
         return null;
     }
 
     @Override
-    public List<User> getAllFounders() {
+    public List<UserDB> getAllFounders() {
         return null;
     }
 
     @Override
-    public List<User> getAllInvestors() {
+    public List<UserDB> getAllInvestors() {
         return null;
     }
 
     @Override
-    public List<User> getAllAdministrators() {
+    public List<UserDB> getAllAdministrators() {
         return null;
     }
 }

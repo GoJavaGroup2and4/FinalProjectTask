@@ -1,11 +1,11 @@
 package ua.goit.startupserviceapp.service;
 
-import ua.goit.startupserviceapp.model.User;
+import ua.goit.startupserviceapp.model.UserDB;
 
 import java.util.List;
 
 /**
- * Service class for {@link ua.goit.startupserviceapp.model.User}
+ * Service class for {@link ua.goit.startupserviceapp.model.UserDB}
  *
  * @author Illia Kulinich
  * @version 1.0
@@ -13,23 +13,23 @@ import java.util.List;
 
 public interface UserService {
 
-    public void save (User user);
+    public void save (UserDB user);
 
-    public void edit (User user);
+    public void edit (UserDB user);
 
-    public void delete (User user);
+    public void delete (UserDB user);
 
     public void deleteById (int id);
 
-    public User getUserById (int id);
+    public UserDB getUserById (int id);
 
-    public List<User> getAllUsers ();
+    public List<UserDB> getAllUsers ();
 
-    public List<User> getAllFounders ();
+    public List<UserDB> getAllFounders ();
 
-    public List<User> getAllInvestors ();
+    public List<UserDB> getAllInvestors ();
 
-    public List<User> getAllAdministrators ();
+    public List<UserDB> getAllAdministrators ();
 
 
 }
