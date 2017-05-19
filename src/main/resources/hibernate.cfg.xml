@@ -26,6 +26,7 @@
         <mapping class="ua.goit.startupserviceapp.model.UserDB"/>
         <mapping class="ua.goit.startupserviceapp.model.ProjectEvaluation"/>
         <mapping class="ua.goit.startupserviceapp.model.UserStartup"/>
+        <mapping class="ua.goit.startupserviceapp.model.Permission"/>
 
     </session-factory>
 </hibernate-configuration>

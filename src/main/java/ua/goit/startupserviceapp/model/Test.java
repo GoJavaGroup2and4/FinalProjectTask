@@ -72,6 +72,13 @@ public class Test {
         System.out.println(u.getMarks());
         System.out.println(u.getStartups());
         session.getTransaction().commit();
+
+        session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Permission p = new Permission("new permission");
+        session.save(p);
+        session.getTransaction().commit();
+
         sessionFactory.close();
     }
 }
