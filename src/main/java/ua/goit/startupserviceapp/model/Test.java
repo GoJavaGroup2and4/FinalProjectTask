@@ -59,10 +59,19 @@ public class Test {
 
         session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        UserDB u = session.get(UserDB.class,user.getId());
-        System.out.println(u.getMarks());
+        UserStartup us = new UserStartup(user, startup);
+        session.save(us);
+        session.getTransaction().commit();
+
+        session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
         Startup s = session.get(Startup.class,startup.getId());
         System.out.println(s.getMarks());
+        System.out.println(s.getUsers());
+        UserDB u = session.get(UserDB.class,user.getId());
+        System.out.println(u.getMarks());
+        System.out.println(u.getStartups());
         session.getTransaction().commit();
+        sessionFactory.close();
     }
 }
