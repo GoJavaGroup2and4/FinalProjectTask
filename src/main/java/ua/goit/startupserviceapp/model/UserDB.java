@@ -19,6 +19,7 @@ public class UserDB {
     private String password;
     private int active;
     private Set<ProjectEvaluation> marks = new HashSet<>();
+    private Set<UserStartup> startups = new HashSet<>();
 
     public UserDB() {
     }
@@ -130,6 +131,15 @@ public class UserDB {
 
     public void setMarks(Set<ProjectEvaluation> marks) {
         this.marks = marks;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Set<UserStartup> getStartups() {
+        return startups;
+    }
+
+    public void setStartups(Set<UserStartup> startups) {
+        this.startups = startups;
     }
 
     @Override

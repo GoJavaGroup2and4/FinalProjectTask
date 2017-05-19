@@ -22,6 +22,7 @@ public class Startup {
     private String status;
     private Category category;
     private Set<ProjectEvaluation> marks = new HashSet<>();
+    private Set<UserStartup> users = new HashSet<>();
 
     @Id
     @Column(name = "startup_id", unique = true, nullable = false)
@@ -127,6 +128,15 @@ public class Startup {
 
     public void setMarks(Set<ProjectEvaluation> marks) {
         this.marks = marks;
+    }
+
+    @OneToMany(mappedBy = "project")
+    public Set<UserStartup> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UserStartup> users) {
+        this.users = users;
     }
 
     public Startup() {
