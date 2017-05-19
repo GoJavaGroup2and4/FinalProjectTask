@@ -1,12 +1,17 @@
 package ua.goit.startupserviceapp.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "permission")
 public class Permission {
     private long id;
     private String name;
+    private List<Role> roles = new ArrayList<>();
 
     public Permission() {
     }
@@ -38,5 +43,19 @@ public class Permission {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "role_permission",
+            joinColumns = @JoinColumn(name = "permission_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

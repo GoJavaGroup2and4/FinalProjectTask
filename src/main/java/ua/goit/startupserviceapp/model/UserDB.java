@@ -1,9 +1,11 @@
 package ua.goit.startupserviceapp.model;
 
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
@@ -20,6 +22,11 @@ public class UserDB {
     private int active;
     private Set<StartupEvaluation> marks = new HashSet<>();
     private Set<UserStartup> startups = new HashSet<>();
+  //  private List<VerificationToken> verificationTokens = new ArrayList<VerificationToken>();
+   // private AuthorizationToken authorizationToken;
+
+    @Transient
+    private boolean isVerified;
 
     public UserDB() {
     }
@@ -141,6 +148,66 @@ public class UserDB {
     public void setStartups(Set<UserStartup> startups) {
         this.startups = startups;
     }
+
+   /* @OneToMany(mappedBy="user",
+            targetEntity=VerificationToken.class,
+            cascade= CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public List<VerificationToken> getVerificationTokens() {
+        return verificationTokens;
+    }
+
+    public void setVerificationTokens(List<VerificationToken> verificationTokens) {
+        this.verificationTokens = verificationTokens;
+    }*/
+
+    @Transient
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.isVerified = verified;
+    }
+ /*
+    public synchronized void addVerificationToken(VerificationToken token) {
+        this.verificationTokens.add(token);
+    }
+
+   @OneToOne(fetch = FetchType.LAZY,
+            mappedBy = "user",
+            cascade = CascadeType.ALL)
+    public synchronized AuthorizationToken getAuthorizationToken() {
+        return authorizationToken;
+    }
+
+    public synchronized void setAuthorizationToken(AuthorizationToken token) {
+        this.authorizationToken = token;
+    }
+
+    public VerificationToken getActiveLostPasswordToken() {
+        return getActiveToken(VerificationTokenType.lostPassword);
+    }
+
+    public VerificationToken getActiveEmailVerificationToken() {
+        return getActiveToken(VerificationTokenType.emailVerification);
+    }
+
+    public VerificationToken getActiveEmailRegistrationToken() {
+        return getActiveToken(VerificationTokenType.emailRegistration);
+    }
+
+    private VerificationToken getActiveToken(VerificationTokenType tokenType) {
+        VerificationToken activeToken = null;
+        for (VerificationToken token : getVerificationTokens()) {
+            if (token.getTokenType().equals(tokenType)
+                    && !token.hasExpired() && !token.isVerified()) {
+                activeToken = token;
+                break;
+            }
+        }
+        return activeToken;
+    }*/
 
     @Override
     public String toString() {

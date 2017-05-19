@@ -79,6 +79,19 @@ public class Test {
         session.save(p);
         session.getTransaction().commit();
 
+        session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Role r = new Role("new role");
+        r.getPermissions().add(p);
+        session.save(r);
+        session.getTransaction().commit();
+
+        session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        p = session.get(Permission.class, p.getId());
+        System.out.println(p.getRoles());
+        session.getTransaction().commit();
+
         sessionFactory.close();
     }
 }

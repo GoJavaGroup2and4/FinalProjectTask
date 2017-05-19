@@ -27,6 +27,9 @@
         <mapping class="ua.goit.startupserviceapp.model.StartupEvaluation"/>
         <mapping class="ua.goit.startupserviceapp.model.UserStartup"/>
         <mapping class="ua.goit.startupserviceapp.model.Permission"/>
+        <mapping class="ua.goit.startupserviceapp.model.Role"/>
+        <!--mapping class="ua.goit.startupserviceapp.model.AuthorizationToken"/>
+        <mapping class="ua.goit.startupserviceapp.model.VerificationToken"/-->
 
     </session-factory>
 </hibernate-configuration>
