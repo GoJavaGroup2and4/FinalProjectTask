@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS project_evaluation (
   user_id    INT(11) NOT NULL,
   project_id INT(11) NOT NULL,
   mark       INT(11) NOT NULL,
-  PRIMARY KEY (user_id, project_id, mark),
+  PRIMARY KEY (user_id, project_id),
   FOREIGN KEY (user_id) REFERENCES user (user_id),
   FOREIGN KEY (project_id) REFERENCES startup (startup_id)
 )
