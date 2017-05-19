@@ -17,8 +17,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ua.goit.startupserviceapp.controller.UserController;
-import ua.goit.startupserviceapp.model.Test;
-import ua.goit.startupserviceapp.model.User;
+import ua.goit.startupserviceapp.model.*;
 import ua.goit.startupserviceapp.service.UserService;
 import ua.goit.startupserviceapp.service.UserServiceImpl;
 
@@ -114,6 +113,12 @@ public class DataConfig {
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
 
         sessionBuilder.addAnnotatedClasses(User.class);
+        sessionBuilder.addAnnotatedClasses(Category.class);
+        sessionBuilder.addAnnotatedClasses(Startup.class);
+        sessionBuilder.addAnnotatedClasses(StartupEvaluation.class);
+        sessionBuilder.addAnnotatedClasses(UserStartup.class);
+        sessionBuilder.addAnnotatedClasses(Permission.class);
+        sessionBuilder.addAnnotatedClasses(Role.class);
 
         return sessionBuilder.buildSessionFactory();
     }
