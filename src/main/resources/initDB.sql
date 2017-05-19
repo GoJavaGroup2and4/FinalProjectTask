@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS permission (
   permission_name VARCHAR(300) NOT NULL,
   PRIMARY KEY (permission_id),
   INDEX (permission_name),
-  UNIQUE (permission_id, permission_name)
+  UNIQUE (permission_name)
 )
   ENGINE = InnoDB;
 
