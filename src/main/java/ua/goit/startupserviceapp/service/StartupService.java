@@ -19,7 +19,7 @@ public interface StartupService {
 
     public void delete(Startup startup);
 
-    public void deleteById (int id);
+    public void deleteById (long id);
 
     public void ready (Startup startup);
 
@@ -29,15 +29,15 @@ public interface StartupService {
 
     public List<Startup> getAllStartups ();
 
-    public List<Startup> getStartupsByFounder();
+//    public List<Startup> getStartupsByUser(UserDB user);
 
-    public List <Startup> getStartupsByName();
+    public List <Startup> getStartupsByName(String name);
 
-    public List <Startup> getStartupsByCategory();
+//    public List <Startup> getStartupsByCategory();
 
-    public List <Startup> getStartupsByStatus();
+//    public List <Startup> getStartupsByStatus(String status);
 
-    public Startup getStartupById (int id);
+    public Startup getStartupById (long id);
 
 
 

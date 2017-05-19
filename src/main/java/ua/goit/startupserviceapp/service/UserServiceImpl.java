@@ -1,5 +1,6 @@
 package ua.goit.startupserviceapp.service;
 
+import org.springframework.stereotype.Service;
 import ua.goit.startupserviceapp.model.UserDB;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @version 1.0
  */
 
+@Service
 public class UserServiceImpl implements UserService {
     @Override
     public void save(UserDB user) {

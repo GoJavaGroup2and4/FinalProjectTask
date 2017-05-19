@@ -149,6 +149,7 @@ public class Startup {
         this.category = category;
     }
 
+    //    TODO: Do we need String status in parameters? Isn't default status for newly created Startup "Draft"?
     public Startup(long id, String name, byte[] image, byte[] attachment, int current_investment, int needed_investment, String description, double rating, String status, Category category) {
         this.id = id;
         this.name = name;
