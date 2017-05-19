@@ -24,7 +24,7 @@
         <mapping class="ua.goit.startupserviceapp.model.Category"/>
         <mapping class="ua.goit.startupserviceapp.model.Startup"/>
         <mapping class="ua.goit.startupserviceapp.model.UserDB"/>
-        <mapping class="ua.goit.startupserviceapp.model.ProjectEvaluation"/>
+        <mapping class="ua.goit.startupserviceapp.model.StartupEvaluation"/>
         <mapping class="ua.goit.startupserviceapp.model.UserStartup"/>
         <mapping class="ua.goit.startupserviceapp.model.Permission"/>
 

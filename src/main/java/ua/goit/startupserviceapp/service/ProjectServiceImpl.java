@@ -1,6 +1,6 @@
 package ua.goit.startupserviceapp.service;
 
-import ua.goit.startupserviceapp.model.Project;
+import ua.goit.startupserviceapp.model.Startup;
 
 import java.util.List;
 
@@ -11,19 +11,19 @@ import java.util.List;
  * @version 1.0
  */
 
-public class ProjectServiceImpl implements ProjectService {
+public class ProjectServiceImpl implements StartupService {
     @Override
-    public void save(Project project) {
+    public void save(Startup startup) {
 
     }
 
     @Override
-    public void edit(Project project) {
+    public void edit(Startup startup) {
 
     }
 
     @Override
-    public void delete(Project project) {
+    public void delete(Startup startup) {
 
     }
 
@@ -33,47 +33,47 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void ready(Project project) {
+    public void ready(Startup startup) {
 
     }
 
     @Override
-    public void approve(Project project) {
+    public void approve(Startup startup) {
 
     }
 
     @Override
-    public void reject(Project project) {
+    public void reject(Startup startup) {
 
     }
 
     @Override
-    public List<Project> getAllProjects() {
+    public List<Startup> getAllStartups() {
         return null;
     }
 
     @Override
-    public List<Project> getProjectsByFounder() {
+    public List<Startup> getStartupsByFounder() {
         return null;
     }
 
     @Override
-    public List<Project> getProjectsByName() {
+    public List<Startup> getStartupsByName() {
         return null;
     }
 
     @Override
-    public List<Project> getProjectsByCategory() {
+    public List<Startup> getStartupsByCategory() {
         return null;
     }
 
     @Override
-    public List<Project> getProjectsByStatus() {
+    public List<Startup> getStartupsByStatus() {
         return null;
     }
 
     @Override
-    public Project getProjectById(int id) {
+    public Startup getStartupById(int id) {
         return null;
     }
 }

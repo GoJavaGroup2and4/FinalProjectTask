@@ -2,9 +2,7 @@ package ua.goit.startupserviceapp.model;
 
 import javax.persistence.*;
 
-/**
- * Created by Alexander on 16/05/2017.
- */
+/* TODO delete because of StartupEvaluation was created
 @Entity
 @Table(name = "project_valuation")
 public class Project_valuation {
@@ -99,3 +97,4 @@ public class Project_valuation {
 
 //    TODO set relations
 }
+*/

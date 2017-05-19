@@ -4,18 +4,18 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "project_evaluation")
-public class ProjectEvaluation implements Serializable{
+@Table(name = "startup_evaluation")
+public class StartupEvaluation implements Serializable{
     private UserDB user;
-    private Startup project;
+    private Startup startup;
     private int mark;
 
-    public ProjectEvaluation() {
+    public StartupEvaluation() {
     }
 
-    public ProjectEvaluation(UserDB user, Startup project, int mark) {
+    public StartupEvaluation(UserDB user, Startup startup, int mark) {
         this.user = user;
-        this.project = project;
+        this.startup = startup;
         this.mark = mark;
     }
 
@@ -32,13 +32,13 @@ public class ProjectEvaluation implements Serializable{
 
     @Id
     @ManyToOne
-    @JoinColumn (name = "project_id", nullable = false)
+    @JoinColumn (name = "startup_id", nullable = false)
     public Startup getProject() {
-        return project;
+        return startup;
     }
 
-    public void setProject(Startup project) {
-        this.project = project;
+    public void setProject(Startup startup) {
+        this.startup = startup;
     }
 
     @Column(name = "mark")
@@ -54,7 +54,7 @@ public class ProjectEvaluation implements Serializable{
     public String toString() {
         return "ProjectEvaluation{" +
                 "user=" + user +
-                ", project=" + project +
+                ", startup=" + startup +
                 ", mark=" + mark +
                 '}';
     }

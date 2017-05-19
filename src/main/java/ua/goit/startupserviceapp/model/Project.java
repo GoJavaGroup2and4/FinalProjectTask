@@ -1,12 +1,13 @@
 package ua.goit.startupserviceapp.model;
 
+//TODO delete because of Startup was created
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
-
+/*
 @Entity
 @Table (name = "projects")
 public class Project {
@@ -223,4 +224,4 @@ public class Project {
     }
 
     //TODO to add OneToMany relation
-}
+}*/

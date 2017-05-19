@@ -52,7 +52,7 @@ public class Test {
 
         session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        ProjectEvaluation mark = new ProjectEvaluation(user, startup, 5);
+        StartupEvaluation mark = new StartupEvaluation(user, startup, 5);
         session.save(mark);
         System.out.println(c.getStartups());
         session.getTransaction().commit();

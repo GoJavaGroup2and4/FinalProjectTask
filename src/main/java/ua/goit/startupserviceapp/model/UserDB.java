@@ -18,7 +18,7 @@ public class UserDB {
     private String login;
     private String password;
     private int active;
-    private Set<ProjectEvaluation> marks = new HashSet<>();
+    private Set<StartupEvaluation> marks = new HashSet<>();
     private Set<UserStartup> startups = new HashSet<>();
 
     public UserDB() {
@@ -125,11 +125,11 @@ public class UserDB {
     }
 
     @OneToMany(mappedBy = "user")
-    public Set<ProjectEvaluation> getMarks() {
+    public Set<StartupEvaluation> getMarks() {
         return marks;
     }
 
-    public void setMarks(Set<ProjectEvaluation> marks) {
+    public void setMarks(Set<StartupEvaluation> marks) {
         this.marks = marks;
     }
 

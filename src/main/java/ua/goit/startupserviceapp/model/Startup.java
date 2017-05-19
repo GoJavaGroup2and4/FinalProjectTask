@@ -21,7 +21,7 @@ public class Startup {
     private double rating;
     private String status;
     private Category category;
-    private Set<ProjectEvaluation> marks = new HashSet<>();
+    private Set<StartupEvaluation> marks = new HashSet<>();
     private Set<UserStartup> users = new HashSet<>();
 
     @Id
@@ -122,11 +122,11 @@ public class Startup {
     }
 
     @OneToMany(mappedBy = "project")
-    public Set<ProjectEvaluation> getMarks() {
+    public Set<StartupEvaluation> getMarks() {
         return marks;
     }
 
-    public void setMarks(Set<ProjectEvaluation> marks) {
+    public void setMarks(Set<StartupEvaluation> marks) {
         this.marks = marks;
     }
 
@@ -146,6 +146,39 @@ public class Startup {
         this.name = name;
         this.needed_investment = needed_investment;
         this.category = category;
+    }
+
+    public Startup(long id, String name, byte[] image, byte[] attachment, int current_investment, int needed_investment, String description, double rating, String status, Category category) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.attachment = attachment;
+        this.current_investment = current_investment;
+        this.needed_investment = needed_investment;
+        this.description = description;
+        this.rating = rating;
+        this.status = status;
+        this.category = category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Startup startup = (Startup) o;
+
+        if (needed_investment != startup.needed_investment) return false;
+        if (name != null ? !name.equals(startup.name) : startup.name != null) return false;
+        return category != null ? category.equals(startup.category) : startup.category == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + needed_investment;
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        return result;
     }
 
     @Override
