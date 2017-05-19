@@ -71,9 +71,9 @@ public class UserStartup implements Serializable{
     public String toString() {
         return "UserStartup{" +
                 "user=" + user +
-                ", startup=" + startup +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
+                ", \n startup=" + startup +
+                ", \n startDate=" + startDate +
+                ", \n endDate=" + endDate +
                 '}';
     }
 }

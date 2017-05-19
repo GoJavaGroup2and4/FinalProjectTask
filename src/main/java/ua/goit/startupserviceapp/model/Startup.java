@@ -103,6 +103,7 @@ public class Startup {
     }
 
     @Column(name = "status")
+//    @Enumerated(EnumType.STRING) // Add lately or never add
     public String getStatus() {
         return status;
     }
@@ -185,14 +186,14 @@ public class Startup {
     public String toString() {
         return "Startup{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", image=" + Arrays.toString(image) +
-                ", attachment=" + Arrays.toString(attachment) +
-                ", current_investment=" + current_investment +
-                ", needed_investment=" + needed_investment +
-                ", description='" + description + '\'' +
-                ", rating=" + rating +
-                ", status='" + status + '\'' +
+                ", \n name='" + name + '\'' +
+//                ", image=" + Arrays.toString(image) +             // Do we need pictures to be displayed in console?))
+//                ", attachment=" + Arrays.toString(attachment) +
+                ", \n current_investment=" + current_investment +
+                ", \n needed_investment=" + needed_investment +
+                ", \n description='" + description + '\'' +
+                ", \n rating=" + rating +
+                ", \n status='" + status + '\'' +
                 ", category=" + category +
                 '}';
     }

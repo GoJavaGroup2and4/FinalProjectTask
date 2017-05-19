@@ -54,8 +54,8 @@ public class StartupEvaluation implements Serializable{
     public String toString() {
         return "StartupEvaluation{" +
                 "user=" + user +
-                ", startup=" + startup +
-                ", mark=" + mark +
+                ", \n startup=" + startup +
+                ", \n mark=" + mark +
                 '}';
     }
 }

@@ -213,15 +213,15 @@ public class UserDB {
     public String toString() {
         return "UserDB{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", active=" + active +
+                ", \n firstName='" + firstName + '\'' +
+                ", \n lastName='" + lastName + '\'' +
+                ", \n phoneNumber='" + phoneNumber + '\'' +
+                ", \n email='" + email + '\'' +
+                ", \n country='" + country + '\'' +
+                ", \n city='" + city + '\'' +
+                ", \n login='" + login + '\'' +
+                ", \n password='" + password + '\'' +
+                ", \n active=" + active +
                 '}';
     }
 }
