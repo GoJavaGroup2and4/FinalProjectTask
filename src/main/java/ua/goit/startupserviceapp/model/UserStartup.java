@@ -8,21 +8,21 @@ import java.util.Date;
 @Table(name = "user_startup")
 public class UserStartup implements Serializable{
     private UserDB user;
-    private Startup project;
+    private Startup startup;
     private Date startDate;
     private Date endDate;
 
     public UserStartup() {
     }
 
-    public UserStartup(UserDB user, Startup project) {
+    public UserStartup(UserDB user, Startup startup) {
         this.user = user;
-        this.project = project;
+        this.startup = startup;
     }
 
-    public UserStartup(UserDB user, Startup project, Date startDate, Date endDate) {
+    public UserStartup(UserDB user, Startup startup, Date startDate, Date endDate) {
         this.user = user;
-        this.project = project;
+        this.startup = startup;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -41,12 +41,12 @@ public class UserStartup implements Serializable{
     @Id
     @ManyToOne
     @JoinColumn (name = "startup_id", nullable = false)
-    public Startup getProject() {
-        return project;
+    public Startup getStartup() {
+        return startup;
     }
 
-    public void setProject(Startup project) {
-        this.project = project;
+    public void setStartup(Startup startup) {
+        this.startup = startup;
     }
 
     @Column(name = "start_date")
@@ -71,7 +71,7 @@ public class UserStartup implements Serializable{
     public String toString() {
         return "UserStartup{" +
                 "user=" + user +
-                ", project=" + project +
+                ", startup=" + startup +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';

@@ -121,7 +121,7 @@ public class Startup {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "startup")
     public Set<StartupEvaluation> getMarks() {
         return marks;
     }
@@ -130,7 +130,7 @@ public class Startup {
         this.marks = marks;
     }
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "startup")
     public Set<UserStartup> getUsers() {
         return users;
     }

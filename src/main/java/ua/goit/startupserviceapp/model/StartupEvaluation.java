@@ -33,11 +33,11 @@ public class StartupEvaluation implements Serializable{
     @Id
     @ManyToOne
     @JoinColumn (name = "startup_id", nullable = false)
-    public Startup getProject() {
+    public Startup getStartup() {
         return startup;
     }
 
-    public void setProject(Startup startup) {
+    public void setStartup(Startup startup) {
         this.startup = startup;
     }
 
@@ -52,7 +52,7 @@ public class StartupEvaluation implements Serializable{
 
     @Override
     public String toString() {
-        return "ProjectEvaluation{" +
+        return "StartupEvaluation{" +
                 "user=" + user +
                 ", startup=" + startup +
                 ", mark=" + mark +
