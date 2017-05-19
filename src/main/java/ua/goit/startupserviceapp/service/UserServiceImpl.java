@@ -1,6 +1,8 @@
 package ua.goit.startupserviceapp.service;
 
-import ua.goit.startupserviceapp.model.UserDB;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import ua.goit.startupserviceapp.model.User;
 
 import java.util.List;
 
@@ -12,18 +14,22 @@ import java.util.List;
  */
 
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
-    public void save(UserDB user) {
+    public void save(User user) {
 
     }
 
     @Override
-    public void edit(UserDB user) {
+    public void edit(User user) {
 
     }
 
     @Override
-    public void delete(UserDB user) {
+    public void delete(User user) {
 
     }
 
@@ -33,27 +39,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDB getUserById(int id) {
+    public User getUserById(int id) {
         return null;
     }
 
     @Override
-    public List<UserDB> getAllUsers() {
+    public List getAllUsers() {
+        return sessionFactory.getCurrentSession().createQuery("select u from User u").list();
+    }
+
+    @Override
+    public List<User> getAllFounders() {
         return null;
     }
 
     @Override
-    public List<UserDB> getAllFounders() {
+    public List<User> getAllInvestors() {
         return null;
     }
 
     @Override
-    public List<UserDB> getAllInvestors() {
+    public List<User> getAllAdministrators() {
         return null;
     }
 
-    @Override
-    public List<UserDB> getAllAdministrators() {
-        return null;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }

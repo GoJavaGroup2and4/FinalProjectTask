@@ -23,14 +23,14 @@ public class VerificationToken extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    UserDB user;
+    User user;
 
     public VerificationToken() {
         this.token = UUID.randomUUID().toString();
         this.expiryDate = calculateExpiryDate(DEFAULT_EXPIRY_TIME_IN_MINS);
     }
 
-    public VerificationToken(UserDB user, VerificationTokenType tokenType, int expirationTimeInMinutes) {
+    public VerificationToken(User user, VerificationTokenType tokenType, int expirationTimeInMinutes) {
         this.user = user;
         this.tokenType = tokenType;
         this.expiryDate = calculateExpiryDate(expirationTimeInMinutes);
@@ -60,11 +60,11 @@ public class VerificationToken extends BaseEntity {
         this.token = token;
     }
 
-    public UserDB getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserDB user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

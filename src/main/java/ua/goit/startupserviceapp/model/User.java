@@ -9,7 +9,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "user")
-public class UserDB {
+public class User {
     private long id;
     private String firstName;
     private String lastName;
@@ -22,16 +22,16 @@ public class UserDB {
     private int active;
     private Set<StartupEvaluation> marks = new HashSet<>();
     private Set<UserStartup> startups = new HashSet<>();
-  //  private List<VerificationToken> verificationTokens = new ArrayList<VerificationToken>();
-   // private AuthorizationToken authorizationToken;
+    private List<VerificationToken> verificationTokens = new ArrayList<VerificationToken>();
+    private AuthorizationToken authorizationToken;
 
     @Transient
     private boolean isVerified;
 
-    public UserDB() {
+    public User() {
     }
 
-    public UserDB(String firstName, String lastName, String email, String login, String password) {
+    public User(String firstName, String lastName, String email, String login, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -211,7 +211,7 @@ public class UserDB {
 
     @Override
     public String toString() {
-        return "UserDB{" +
+        return "User{" +
                 "id=" + id +
                 ", \n firstName='" + firstName + '\'' +
                 ", \n lastName='" + lastName + '\'' +

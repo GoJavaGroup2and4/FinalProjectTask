@@ -7,7 +7,7 @@ import java.util.Date;
 @Entity
 @Table(name = "user_startup")
 public class UserStartup implements Serializable{
-    private UserDB user;
+    private User user;
     private Startup startup;
     private Date startDate;
     private Date endDate;
@@ -15,12 +15,12 @@ public class UserStartup implements Serializable{
     public UserStartup() {
     }
 
-    public UserStartup(UserDB user, Startup startup) {
+    public UserStartup(User user, Startup startup) {
         this.user = user;
         this.startup = startup;
     }
 
-    public UserStartup(UserDB user, Startup startup, Date startDate, Date endDate) {
+    public UserStartup(User user, Startup startup, Date startDate, Date endDate) {
         this.user = user;
         this.startup = startup;
         this.startDate = startDate;
@@ -30,11 +30,11 @@ public class UserStartup implements Serializable{
     @Id
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    public UserDB getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserDB user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

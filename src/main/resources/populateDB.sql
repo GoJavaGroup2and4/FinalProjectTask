@@ -22,7 +22,7 @@ INSERT INTO user (first_name, last_name, phone_number, email, country, city, log
   ("Hanna", "Moos", "444-55-66", "Hanna.moos@gmail.com", "Hungary", "Budapest", "hmoos", "12345678", 1),
   ("Martin", "Sommer", "555-66-77", "Martin.sommer@gmail.com", "Germany", "Berlin", "msommer", "12345678", 1);
 
-INSERT INTO project_evaluation (user_id, project_id, mark) VALUES
+INSERT INTO startup_evaluation (user_id, startup_id, mark) VALUES
   (3, 1, 1),
   (4, 1, 2),
   (5, 1, 5),

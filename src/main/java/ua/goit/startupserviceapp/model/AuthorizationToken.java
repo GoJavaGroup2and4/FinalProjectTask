@@ -21,15 +21,15 @@ public class AuthorizationToken extends AbstractPersistable<Long> {
 
     @JoinColumn(name = "user_id")
     @OneToOne(fetch = FetchType.LAZY)
-    private UserDB user;
+    private User user;
 
     public AuthorizationToken() {}
 
-    public AuthorizationToken(UserDB user) {
+    public AuthorizationToken(User user) {
         this(user, DEFAULT_TIME_TO_LIVE_IN_SECONDS);
     }
 
-    public AuthorizationToken(UserDB user, Integer timeToLiveInSeconds) {
+    public AuthorizationToken(User user, Integer timeToLiveInSeconds) {
         this.token = UUID.randomUUID().toString();
         this.user = user;
         this.timeCreated = LocalDateTime.now();
@@ -44,7 +44,7 @@ public class AuthorizationToken extends AbstractPersistable<Long> {
         return token;
     }
 
-    public UserDB getUser() {
+    public User getUser() {
         return user;
     }
 

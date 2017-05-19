@@ -6,14 +6,14 @@ import java.io.Serializable;
 @Entity
 @Table(name = "startup_evaluation")
 public class StartupEvaluation implements Serializable{
-    private UserDB user;
+    private User user;
     private Startup startup;
     private int mark;
 
     public StartupEvaluation() {
     }
 
-    public StartupEvaluation(UserDB user, Startup startup, int mark) {
+    public StartupEvaluation(User user, Startup startup, int mark) {
         this.user = user;
         this.startup = startup;
         this.mark = mark;
@@ -22,11 +22,11 @@ public class StartupEvaluation implements Serializable{
     @Id
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    public UserDB getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserDB user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
