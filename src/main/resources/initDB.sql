@@ -41,13 +41,13 @@ CREATE TABLE IF NOT EXISTS user (
 )
   ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS project_evaluation (
+CREATE TABLE IF NOT EXISTS startup_evaluation (
   user_id    INT(11) NOT NULL,
-  project_id INT(11) NOT NULL,
+  startup_id INT(11) NOT NULL,
   mark       INT(11) NOT NULL,
-  PRIMARY KEY (user_id, project_id),
+  PRIMARY KEY (user_id, startup_id),
   FOREIGN KEY (user_id) REFERENCES user (user_id),
-  FOREIGN KEY (project_id) REFERENCES startup (startup_id)
+  FOREIGN KEY (startup_id) REFERENCES startup (startup_id)
 )
   ENGINE = InnoDB;
 
