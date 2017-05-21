@@ -1,11 +1,11 @@
 package ua.goit.startupserviceapp.model;
 
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -22,11 +22,18 @@ public class UserDB {
     private int active;
     private Set<StartupEvaluation> marks = new HashSet<>();
     private Set<UserStartup> startups = new HashSet<>();
+
+    private List<Role> roles=new ArrayList<>();
   //  private List<VerificationToken> verificationTokens = new ArrayList<VerificationToken>();
    // private AuthorizationToken authorizationToken;
 
+//    @Transient
+//    private boolean isVerified;
+
     @Transient
-    private boolean isVerified;
+    transient private String confirmPassword;
+
+
 
     public UserDB() {
     }
@@ -149,7 +156,31 @@ public class UserDB {
         this.startups = startups;
     }
 
-   /* @OneToMany(mappedBy="user",
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+
+    /* @OneToMany(mappedBy="user",
             targetEntity=VerificationToken.class,
             cascade= CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -161,14 +192,14 @@ public class UserDB {
         this.verificationTokens = verificationTokens;
     }*/
 
-    @Transient
-    public boolean isVerified() {
-        return isVerified;
-    }
-
-    public void setVerified(boolean verified) {
-        this.isVerified = verified;
-    }
+//    @Transient
+//    public boolean isVerified() {
+//        return isVerified;
+//    }
+//
+//    public void setVerified(boolean verified) {
+//        this.isVerified = verified;
+//    }
  /*
     public synchronized void addVerificationToken(VerificationToken token) {
         this.verificationTokens.add(token);

@@ -3,16 +3,17 @@ package ua.goit.startupserviceapp.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table (name = "role")
+@Table(name = "role")
 public class Role {
     private long id;
     private String name;
     private List<Permission> permissions = new ArrayList<>();
+
+    private List<UserDB> users = new ArrayList<>();
+
 
     public Role() {
     }
@@ -45,7 +46,7 @@ public class Role {
     }
 
     @Id
-    @Column(name = "role_id",unique = true, nullable = false)
+    @Column(name = "role_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
@@ -77,5 +78,15 @@ public class Role {
 
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
+    }
+
+
+    @ManyToMany
+    public List<UserDB> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserDB> users) {
+        this.users = users;
     }
 }
