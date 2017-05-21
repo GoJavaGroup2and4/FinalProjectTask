@@ -6,4 +6,5 @@ import ua.goit.startupserviceapp.model.UserDB;
 
 @Repository
 public interface UserDAO extends JpaRepository<UserDB, Long> {
+    UserDB findByUsername(String login);
 }

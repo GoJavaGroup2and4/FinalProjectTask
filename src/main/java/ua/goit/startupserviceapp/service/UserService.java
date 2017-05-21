@@ -1,5 +1,7 @@
 package ua.goit.startupserviceapp.service;
 
+import org.springframework.stereotype.Service;
+import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.model.UserDB;
 
 import java.util.List;
@@ -7,13 +9,17 @@ import java.util.List;
 /**
  * Service class for {@link ua.goit.startupserviceapp.model.UserDB}
  *
- * @author Illia Kulinich
+ * @author Illia Kulinich, Anastasiya Kravchenko
  * @version 1.0
  */
-
+@Service
 public interface UserService {
 
-    public void save (UserDB user);
+    void save (UserDB user);
+
+    UserDB findByUsername(String login);
+
+    void invest(UserDB user, Startup startup);
 
     public void edit (UserDB user);
 
