@@ -14,7 +14,7 @@
     <tx:annotation-driven/>
 
     <!--Files responsible for DAO layer-->
-    <jpa:repositories base-package="ua.goit.startupserviceapp.dao"/>
+    <jpa:repositories base-package="ua.goit.startupserviceapp.repository"/>
 
     <!--Transaction Manager-->
     <bean id="transactionManager"

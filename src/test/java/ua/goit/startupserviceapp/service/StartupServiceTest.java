@@ -2,7 +2,7 @@ package ua.goit.startupserviceapp.service;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.goit.startupserviceapp.dao.StartupRepository;
+import ua.goit.startupserviceapp.repository.StartupRepository;
 import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
 

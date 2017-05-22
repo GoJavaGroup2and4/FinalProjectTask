@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
-import ua.goit.startupserviceapp.dao.UserDBRepository;
+import ua.goit.startupserviceapp.repository.UserDBRepository;
 import ua.goit.startupserviceapp.model.Role;
 import ua.goit.startupserviceapp.model.UserDB;
 

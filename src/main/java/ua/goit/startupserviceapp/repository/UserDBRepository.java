@@ -1,4 +1,4 @@
-package ua.goit.startupserviceapp.dao;
+package ua.goit.startupserviceapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
