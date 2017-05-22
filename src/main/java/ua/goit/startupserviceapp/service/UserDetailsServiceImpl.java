@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UserDB user= userDBRepository.findByUsername(login);
+        UserDB user= userDBRepository.findByLogin(login);
         List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
         for (Role role:user.getRoles()){
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
