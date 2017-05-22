@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
-import ua.goit.startupserviceapp.dao.UserDAO;
+import ua.goit.startupserviceapp.dao.UserDBRepository;
 import ua.goit.startupserviceapp.model.Role;
 import ua.goit.startupserviceapp.model.UserDB;
 
@@ -22,12 +22,12 @@ import java.util.List;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserDBRepository userDBRepository;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UserDB user=userDAO.findByUsername(login);
+        UserDB user= userDBRepository.findByUsername(login);
         List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
         for (Role role:user.getRoles()){
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));

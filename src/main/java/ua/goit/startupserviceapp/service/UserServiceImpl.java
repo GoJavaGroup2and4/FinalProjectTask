@@ -3,8 +3,8 @@ package ua.goit.startupserviceapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ua.goit.startupserviceapp.dao.RoleDAO;
-import ua.goit.startupserviceapp.dao.UserDAO;
+import ua.goit.startupserviceapp.dao.RoleRepository;
+import ua.goit.startupserviceapp.dao.UserDBRepository;
 import ua.goit.startupserviceapp.model.Role;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.model.UserDB;
@@ -23,10 +23,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserDBRepository userDBRepository;
 
     @Autowired
-    private RoleDAO roleDAO;
+    private RoleRepository roleRepository;
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -34,15 +34,15 @@ public class UserServiceImpl implements UserService {
     public void save(UserDB user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         List<Role> roles=new ArrayList<>();
-        roles.add(roleDAO.getOne(1L));
+        roles.add(roleRepository.getOne(1L));
         user.setRoles(roles);
-        userDAO.save(user);
+        userDBRepository.save(user);
 
     }
 
     @Override
     public UserDB findByUsername(String login) {
-        return userDAO.findByUsername(login);
+        return userDBRepository.findByUsername(login);
     }
 
     @Override

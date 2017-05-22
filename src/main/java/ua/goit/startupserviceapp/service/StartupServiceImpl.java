@@ -2,7 +2,7 @@ package ua.goit.startupserviceapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.goit.startupserviceapp.dao.StartupDAO;
+import ua.goit.startupserviceapp.dao.StartupRepository;
 import ua.goit.startupserviceapp.model.Startup;
 import java.util.List;
 
@@ -16,31 +16,31 @@ import java.util.List;
 @Service
 public class StartupServiceImpl implements StartupService {
 
-    private StartupDAO startupDAO;
+    private StartupRepository startupRepository;
 
     @Autowired
-    public StartupServiceImpl (StartupDAO startupDAO) {
-        this.startupDAO = startupDAO;
+    public StartupServiceImpl (StartupRepository startupRepository) {
+        this.startupRepository = startupRepository;
     }
 
     @Override
     public void save(Startup startup) {
-        startupDAO.save(startup);
+        startupRepository.save(startup);
     }
 
     @Override
     public void edit(Startup startup) {
-        startupDAO.save(startup);
+        startupRepository.save(startup);
     }
 
     @Override
     public void delete(Startup startup) {
-        startupDAO.delete(startup);
+        startupRepository.delete(startup);
     }
 
     @Override
     public void deleteById(long id) {
-        startupDAO.delete(id);
+        startupRepository.delete(id);
     }
 
 
@@ -77,7 +77,7 @@ public class StartupServiceImpl implements StartupService {
 
     @Override
     public List<Startup> getAllStartups() {
-        return startupDAO.findAll();
+        return startupRepository.findAll();
     }
 
 //    TODO: розібратися що таке UserStartup

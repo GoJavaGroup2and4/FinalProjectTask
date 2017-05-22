@@ -2,8 +2,9 @@ package ua.goit.startupserviceapp.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ua.goit.startupserviceapp.model.Startup;
+import ua.goit.startupserviceapp.model.Role;
 
 @Repository
-public interface StartupDAO extends JpaRepository<Startup, Long>{
+public interface RoleRepository extends JpaRepository<Role, Long> {
+
 }

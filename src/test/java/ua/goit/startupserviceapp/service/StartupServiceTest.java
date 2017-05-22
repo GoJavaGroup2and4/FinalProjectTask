@@ -2,7 +2,7 @@ package ua.goit.startupserviceapp.service;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.goit.startupserviceapp.dao.StartupDAO;
+import ua.goit.startupserviceapp.dao.StartupRepository;
 import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
 
@@ -22,12 +22,12 @@ import static org.mockito.Mockito.*;
 public class StartupServiceTest {
 
     private StartupServiceImpl startupService;
-    private StartupDAO startupDAO;
+    private StartupRepository startupRepository;
 
     @Before
     public void init (){
-        startupDAO = mock(StartupDAO.class);
-        startupService = new StartupServiceImpl(startupDAO);
+        startupRepository = mock(StartupRepository.class);
+        startupService = new StartupServiceImpl(startupRepository);
     }
 
     @Test
@@ -35,14 +35,14 @@ public class StartupServiceTest {
 
 //       init
         Startup startup = new Startup();
-        when(startupDAO.save(startup)).thenReturn(startup);
+        when(startupRepository.save(startup)).thenReturn(startup);
 
 //       use
         startupService.save(startup);
 
 //       check
-        verify(startupDAO, times(1)).save(startup);
-        assertEquals(startup, startupDAO.save(startup));
+        verify(startupRepository, times(1)).save(startup);
+        assertEquals(startup, startupRepository.save(startup));
     }
 
     @Test
@@ -52,15 +52,15 @@ public class StartupServiceTest {
         Startup startup = new Startup();
         startup.setName("GoJava5");
         final String[] authorToCheck = new String[1];
-        when(startupDAO.save(startup)).thenReturn(startup);
-        when(startupDAO.save(startup)).thenReturn(startup);
+        when(startupRepository.save(startup)).thenReturn(startup);
+        when(startupRepository.save(startup)).thenReturn(startup);
 
 //       use
         startupService.edit(startup);
 
 //       check
-        verify(startupDAO, times(1)).save(startup);
-        assertEquals("GoJava5", startupDAO.save(startup).getName());
+        verify(startupRepository, times(1)).save(startup);
+        assertEquals("GoJava5", startupRepository.save(startup).getName());
     }
 
     @Test
@@ -72,13 +72,13 @@ public class StartupServiceTest {
         doAnswer(i -> {
             assertEquals(startup, i.getArgumentAt(0, Startup.class));
             return null;
-        }).when(startupDAO).delete(startup);
+        }).when(startupRepository).delete(startup);
 
 //       use
         startupService.delete(startup);
 
 //       check
-        verify(startupDAO, times(1)).delete(startup);
+        verify(startupRepository, times(1)).delete(startup);
     }
 
     @Test
@@ -89,13 +89,13 @@ public class StartupServiceTest {
         doAnswer(i -> {
             assertEquals(startup.getId(), (long) i.getArgumentAt(0, Long.class));
             return null;
-        }).when(startupDAO).delete(startup.getId());
+        }).when(startupRepository).delete(startup.getId());
 
 //       use
         startupService.deleteById(startup.getId());
 
 //       check
-        verify(startupDAO, times(1)).delete(startup.getId());
+        verify(startupRepository, times(1)).delete(startup.getId());
     }
 
     @Test
@@ -218,14 +218,14 @@ public class StartupServiceTest {
         testList.add(startup2);
         testList.add(startup3);
 
-        when(startupDAO.findAll()).thenReturn(testList);
+        when(startupRepository.findAll()).thenReturn(testList);
 
 //        use
         List<Startup> listToCheck =  startupService.getAllStartups();
 
 //        check
         assertEquals(testList, listToCheck);
-        verify(startupDAO, times(1)).findAll();
+        verify(startupRepository, times(1)).findAll();
     }
 
     @Test
@@ -247,13 +247,13 @@ public class StartupServiceTest {
         testList.add(startup2);
         testList.add(startup22);
 
-        when(startupDAO.findAll()).thenReturn(allStartups);
+        when(startupRepository.findAll()).thenReturn(allStartups);
 
 //        use
         List<Startup> listToCheck =  startupService.getStartupsByName("Second");
 
 //        check
-        verify(startupDAO, times(1)).findAll();
+        verify(startupRepository, times(1)).findAll();
         assertEquals(testList, listToCheck);
     }
 
@@ -272,13 +272,13 @@ public class StartupServiceTest {
         allStartups.add(startup2);
         allStartups.add(startup3);
 
-        when(startupDAO.findAll()).thenReturn(allStartups);
+        when(startupRepository.findAll()).thenReturn(allStartups);
 
 //        use
         Startup startupToCheck = startupService.getStartupById(1);
 
 //        check
-        verify(startupDAO, times(1)).findAll();
+        verify(startupRepository, times(1)).findAll();
         assertEquals(startup2, startupToCheck);
     }
 
