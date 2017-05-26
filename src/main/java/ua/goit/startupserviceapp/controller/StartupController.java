@@ -12,11 +12,15 @@ import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.service.StartupService;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class StartupController {
+public class StartupController extends HttpServlet {
     private StartupService startupService;
 
     @Autowired(required = true)
@@ -47,6 +51,43 @@ public class StartupController {
         model.addAttribute("listCategory", list);
         return "sturtupedit";
     }
+
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //    response.sendRedirect("/newStartup/add");
+
+    }
+
+    @Override
+    @RequestMapping(value = "startup/servlet-parameters")
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("Utf-8");
+
+        if (request.getParameterMap().size() >0) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Startup s;
+            if (id == 0) {
+                s = new Startup();
+            } else {
+                //        s = new StartupServiceImpl().getStartupById(id);
+            }
+
+        /*    try {
+                InputStream st = request.getPart("photo").getInputStream();
+                Blob blob = new Dao().createBlob(st);
+                user.setPhoto(blob);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
+            process(request, user);
+        }
+        response.sendRedirect("../users.html");*/
+        }
+    }
+
+
+
 
     @RequestMapping(value = "startups/add", method = RequestMethod.POST)
     public String addStartup(@ModelAttribute("startup") Startup startup) {
