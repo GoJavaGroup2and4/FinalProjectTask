@@ -15,7 +15,7 @@ INSERT INTO startup (startup_name, current_investment, needed_investment, descri
    NULL, 3, "Draft");
 
 INSERT INTO user (first_name, last_name, phone_number, email, country, city, login, password, is_active) VALUES
-  ("Admin", "Admin", "000-00-00", "admin@gmail.com", "USA", "Chicago", "admin", "admin", 1),
+  ("Admin", "Admin", "000-00-00", "admin@gmail.com", "USA", "Chicago", "admin", "$2a$10$Yhhf7plnz0jaX4m6270PKuMxfXWkqF8i0Jk8Y7MsRWZ3cMWVMnH2K", 1),
   ("Maria", "Anders", "111-22-33", "Maria.anders@gmail.com", "Ukraine", "Kyiv", "manders", "12345678", 1),
   ("Antonio", "Moreno", "222-33-44", "Antonio.moreno@gmail.com", "Italy", "Turin", "amoreno", "12345678", 1),
   ("Thomas", "Hardy", "333-44-55", "Thomas.Hardy@gmail.com", "Greece", "Sparta", "thardy", "12345678", 1),
@@ -55,9 +55,9 @@ INSERT INTO permission (permission_name) VALUES
   ("Edit user");
 
 INSERT INTO role (role_name) VALUES
-  ("Administrator"),
-  ("Investor"),
-  ("Founder");
+  ("ROLE_ADMIN"),
+  ("ROLE_INVESTOR"),
+  ("ROLE_FOUNDER");
 
 INSERT INTO user_role (user_id, role_id) VALUES
   (1, 1),
