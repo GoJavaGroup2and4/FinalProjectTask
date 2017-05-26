@@ -8,8 +8,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.service.StartupService;
+
+import javax.servlet.ServletException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 public class StartupController {
@@ -38,6 +45,20 @@ public class StartupController {
         }
 
         return "redirect:/startups";
+    }
+
+    @RequestMapping(value = "/newStartup")
+    public String newStartup(Model model) {
+        model.addAttribute("startup", new Startup());
+        //TODO use DAO getAll()
+        List<Category> list = new ArrayList<>();
+        list.add(new Category("category 1"));
+        list.add(new Category("category 2"));
+        list.get(1).setId(1);
+        list.add(new Category("category 3"));
+        list.get(2).setId(2);
+        model.addAttribute("listCategory", list);
+        return "sturtupedit";
     }
 
     @RequestMapping("/remove/{id}")

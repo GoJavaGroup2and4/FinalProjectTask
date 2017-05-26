@@ -18,6 +18,8 @@ public class StartupServiceImpl implements StartupService {
 
     private StartupRepository startupRepository;
 
+    public StartupServiceImpl(){};
+
     @Autowired
     public StartupServiceImpl (StartupRepository startupRepository) {
         this.startupRepository = startupRepository;

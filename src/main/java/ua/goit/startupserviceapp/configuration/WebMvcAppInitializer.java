@@ -1,12 +1,12 @@
-package ua.goit.startupserviceapp.configuration;
+/**package ua.goit.startupserviceapp.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-/**
+
  * Register a Dispatcher Servlet
  *
  * @author Vadim Kozak
- */
+
 
 public class WebMvcAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -24,4 +24,4 @@ public class WebMvcAppInitializer extends AbstractAnnotationConfigDispatcherServ
         return new String[] {"/"};
     }
 
-}
+}*/
