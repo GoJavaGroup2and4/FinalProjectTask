@@ -31,11 +31,12 @@
                 <h1>Login to Your Account</h1><br>
                 <form>
                     <span>${message}</span>
-                    <input type="text" name="user" placeholder="Username">
-                    <input type="password" name="pass" placeholder="Password">
+                    <input type="text" name="login" placeholder="Login" autofocus="true">
+                    <input type="password" name="password" placeholder="Password">
                     <span>${error}</span>
-                    <input type="submit" name="login" class="login loginmodal-submit" value="Login">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                    <input type="submit" name="login" class="login loginmodal-submit" value="Login">
                 </form>
 
                 <div class="login-help">
