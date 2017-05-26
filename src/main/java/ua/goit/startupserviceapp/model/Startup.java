@@ -3,6 +3,7 @@ package ua.goit.startupserviceapp.model;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +14,8 @@ import java.util.Set;
 public class Startup {
     private long id;
     private String name;
-    private byte[] image;
-    private byte[] attachment;
+    private Blob image;
+    private Blob attachment;
     private int current_investment;
     private int needed_investment;
     private String description;
@@ -45,24 +46,24 @@ public class Startup {
     }
 
     @Lob
-    @Column(name="picture")
-    @Type(type="org.hibernate.type.BinaryType")
-    public byte[] getImage() {
+    @Column(name="picture", columnDefinition="BLOB")
+    //  @Type(type="org.hibernate.type.BinaryType")
+    public Blob getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(Blob image) {
         this.image = image;
     }
 
     @Lob
-    @Column(name="attachment")
-    @Type(type="org.hibernate.type.BinaryType")
-    public byte[] getAttachment() {
+    @Column(name="attachment", columnDefinition="BLOB")
+    // @Type(type="org.hibernate.type.BinaryType")
+    public Blob getAttachment() {
         return attachment;
     }
 
-    public void setAttachment(byte[] attachment) {
+    public void setAttachment(Blob attachment) {
         this.attachment = attachment;
     }
 
@@ -150,7 +151,7 @@ public class Startup {
     }
 
     //    TODO: Do we need String status in parameters? Isn't default status for newly created Startup "Draft"?
-    public Startup(long id, String name, byte[] image, byte[] attachment, int current_investment, int needed_investment, String description, double rating, String status, Category category) {
+    public Startup(long id, String name, Blob image, Blob attachment, int current_investment, int needed_investment, String description, double rating, String status, Category category) {
         this.id = id;
         this.name = name;
         this.image = image;
