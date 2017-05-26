@@ -15,7 +15,9 @@
     <title>Title</title>
 </head>
 <br>
+<%--
 <a href="../../index.jsp">Back to main menu</a>
+--%>
 
 <br/>
 <br/>
