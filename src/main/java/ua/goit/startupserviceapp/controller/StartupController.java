@@ -64,7 +64,7 @@ public class StartupController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("Utf-8");
 
-        if (request.getParameterMap().size() >0) {
+        if (! request.getParameterMap().isEmpty()) {
             int id = Integer.parseInt(request.getParameter("id"));
             Startup s;
             if (id == 0) {
