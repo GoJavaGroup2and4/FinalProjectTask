@@ -1,4 +1,4 @@
-package ua.goit.startupserviceapp.dao;
+package ua.goit.startupserviceapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -6,5 +6,5 @@ import ua.goit.startupserviceapp.model.UserDB;
 
 @Repository
 public interface UserDBRepository extends JpaRepository<UserDB, Long> {
-    UserDB findByUsername(String login);
+    UserDB findByLogin(String login);
 }

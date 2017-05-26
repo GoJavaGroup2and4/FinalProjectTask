@@ -2,7 +2,7 @@ package ua.goit.startupserviceapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.goit.startupserviceapp.dao.StartupRepository;
+import ua.goit.startupserviceapp.repository.StartupRepository;
 import ua.goit.startupserviceapp.model.Startup;
 import java.util.List;
 

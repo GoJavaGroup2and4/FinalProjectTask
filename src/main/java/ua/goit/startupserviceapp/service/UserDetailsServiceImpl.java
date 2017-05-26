@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
-import ua.goit.startupserviceapp.dao.UserDBRepository;
+import ua.goit.startupserviceapp.repository.UserDBRepository;
 import ua.goit.startupserviceapp.model.Role;
 import ua.goit.startupserviceapp.model.UserDB;
 
@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UserDB user= userDBRepository.findByUsername(login);
+        UserDB user= userDBRepository.findByLogin(login);
         List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
         for (Role role:user.getRoles()){
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
