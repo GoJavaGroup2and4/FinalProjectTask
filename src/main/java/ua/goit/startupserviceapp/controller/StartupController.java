@@ -8,11 +8,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.service.StartupService;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
-public class StartupController {
+public class StartupController extends HttpServlet {
     private StartupService startupService;
 
     @Autowired(required = true)
@@ -28,6 +36,58 @@ public class StartupController {
 
         return "startups";
     }
+
+
+    @RequestMapping(value = "/newStartup")
+    public String newStartup(Model model) {
+        model.addAttribute("startup", new Startup());
+        //TODO use DAO getAll()
+        List<Category> list = new ArrayList<>();
+        list.add(new Category("category 1"));
+        list.add(new Category("category 2"));
+        list.get(1).setId(1);
+        list.add(new Category("category 3"));
+        list.get(2).setId(2);
+        model.addAttribute("listCategory", list);
+        return "sturtupedit";
+    }
+
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //    response.sendRedirect("/newStartup/add");
+
+    }
+
+    @Override
+    @RequestMapping(value = "startup/servlet-parameters")
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("Utf-8");
+
+        if (! request.getParameterMap().isEmpty()) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Startup s;
+            if (id == 0) {
+                s = new Startup();
+            } else {
+                //        s = new StartupServiceImpl().getStartupById(id);
+            }
+
+        /*    try {
+                InputStream st = request.getPart("photo").getInputStream();
+                Blob blob = new Dao().createBlob(st);
+                user.setPhoto(blob);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
+            process(request, user);
+        }
+        response.sendRedirect("../users.html");*/
+        }
+    }
+
+
+
 
     @RequestMapping(value = "startups/add", method = RequestMethod.POST)
     public String addStartup(@ModelAttribute("startup") Startup startup) {
