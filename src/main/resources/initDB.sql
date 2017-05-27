@@ -1,3 +1,5 @@
+ALTER TABLE user_startup ADD user_investment INT;
+
 CREATE TABLE IF NOT EXISTS category (
   category_id   INT(11)     NOT NULL AUTO_INCREMENT,
   category_name VARCHAR(50) NOT NULL,
