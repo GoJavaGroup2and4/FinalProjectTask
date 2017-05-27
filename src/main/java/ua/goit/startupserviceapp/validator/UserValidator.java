@@ -33,12 +33,12 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
         UserDB user = (UserDB) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "Required");
-        if (user.getLogin().length() < 8 || user.getLogin().length() > 32) {
-            errors.rejectValue("login", "Size.userForm.username");
+        if (user.getLogin().length() < 6 || user.getLogin().length() > 32) {
+            errors.rejectValue("login", "Size.userForm.login");
         }
 
         if (userService.findByUsername(user.getLogin()) != null) {
-            errors.rejectValue("login", "Duplicate.userForm.username");
+            errors.rejectValue("login", "Duplicate.userForm.login");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
@@ -49,5 +49,10 @@ public class UserValidator implements Validator {
         if (!user.getConfirmPassword().equals(user.getPassword())) {
             errors.rejectValue("confirmPassword", "Different.userForm.password");
         }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Required");
+
     }
 }
