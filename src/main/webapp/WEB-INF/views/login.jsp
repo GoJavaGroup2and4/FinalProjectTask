@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Startup: Log in to the site</title>
+    <title>StartUp: Log In to the site</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
@@ -24,27 +24,25 @@
 
 </head>
 <body>
-<div id="fullscreen_bg" class="fullscreen_bg"/>
-    <div class="modal-dialog">
-        <form method="post" action="${contextPath}/login">
-            <div class="loginmodal-container ${error != null ? 'has-error' : ''}">
-                <h1>Login to Your Account</h1><br>
-                <form>
-                    <span>${message}</span>
-                    <input type="text" name="login" placeholder="Login" autofocus="true">
-                    <input type="password" name="password" placeholder="Password">
-                    <span>${error}</span>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<div class="modal-dialog">
+    <form method="post" action="${contextPath}/login">
+        <div class="loginmodal-container ${error != null ? 'has-error' : ''}">
+            <h1>Login to Your Account</h1><br>
+            <form>
+                <span>${message}</span>
+                <input type="text" name="login" placeholder="Login" autofocus="true">
+                <input type="password" name="password" placeholder="Password">
+                <span>${error}</span>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-                    <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-                </form>
+                <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+            </form>
 
-                <div class="login-help">
-                    <a href="/registration">Register</a>
-                </div>
+            <div class="login-help">
+                <a href="/registration">Register</a>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
