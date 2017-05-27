@@ -1,13 +1,15 @@
 package ua.goit.startupserviceapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ua.goit.startupserviceapp.repository.RoleRepository;
-import ua.goit.startupserviceapp.repository.UserDBRepository;
 import ua.goit.startupserviceapp.model.Role;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.model.UserDB;
+import ua.goit.startupserviceapp.model.UserStartup;
+import ua.goit.startupserviceapp.repository.RoleRepository;
+import ua.goit.startupserviceapp.repository.UserDBRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,6 @@ public class UserServiceImpl implements UserService {
         roles.add(roleRepository.getOne(1L));
         user.setRoles(roles);
         userDBRepository.save(user);
-
     }
 
     @Override
@@ -47,9 +48,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void invest(UserDB user, Startup startup) {
+    @Secured("Investor")
+    public void invest(UserDB user_id, Startup startup_id, int investment) {
+        UserStartup userStartup=new UserStartup();
+        userStartup.setStartup(startup_id);
+        userStartup.setUser(user_id);
+        userStartup.setUserInvestment(investment);
 
-    }
+        Startup startup=new Startup();
+        startup.setCurrent_investment(startup.getCurrent_investment()+investment);
+        }
 
     @Override
     public void edit(UserDB user) {

@@ -1,5 +1,6 @@
 package ua.goit.startupserviceapp.service;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.model.UserDB;
@@ -19,7 +20,8 @@ public interface UserService {
 
     UserDB findByUsername(String login);
 
-    void invest(UserDB user, Startup startup);
+    @Secured("Investor")
+    void invest(UserDB user_id, Startup startup_id, int investment);
 
     public void edit (UserDB user);
 
