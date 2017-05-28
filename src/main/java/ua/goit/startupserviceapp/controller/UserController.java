@@ -7,10 +7,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.goit.startupserviceapp.model.Role;
 import ua.goit.startupserviceapp.model.UserDB;
+import ua.goit.startupserviceapp.repository.RoleRepository;
 import ua.goit.startupserviceapp.service.SecurityService;
 import ua.goit.startupserviceapp.service.UserService;
 import ua.goit.startupserviceapp.validator.UserValidator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controller for {@link ua.goit.startupserviceapp.model.UserDB}'s pages.
@@ -31,6 +36,7 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new UserDB());
+
         return "registration";
     }
 
@@ -38,9 +44,11 @@ public class UserController {
     public String registration(@ModelAttribute("userForm") UserDB userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
+
         if (bindingResult.hasErrors()) {
             return "registration";
         }
+
 
         userService.save(userForm);
         securityService.autoLogin(userForm.getLogin(), userForm.getConfirmPassword());
@@ -59,12 +67,17 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/","home"},method = RequestMethod.GET)
-    public String welcome(Model model){
+    public String home (Model model){
         return "home";
     }
 
     @RequestMapping(value = "/admin",method = RequestMethod.GET)
     public String admin(Model model){
         return "admin";
+    }
+
+    @RequestMapping(value = {"/welcome"},method = RequestMethod.GET)
+    public String welcome(Model model){
+        return "welcome";
     }
 }
