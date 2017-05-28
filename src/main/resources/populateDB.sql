@@ -32,10 +32,10 @@ INSERT INTO startup_evaluation (user_id, startup_id, mark) VALUES
   (5, 2, 9),
   (6, 2, 5);
 
-INSERT INTO user_startup (user_id, startup_id, start_date, end_date) VALUES
-  (2, 1, '2017-01-01', NULL),
-  (3, 2, '2017-02-01', NULL),
-  (4, 3, NULL, NULL);
+INSERT INTO user_startup (user_id, startup_id) VALUES
+  (2, 1),
+  (3, 2),
+  (4, 3);
 
 INSERT INTO permission (permission_name) VALUES
   ("Create startup"),
@@ -57,6 +57,7 @@ INSERT INTO permission (permission_name) VALUES
 INSERT INTO role (role_name) VALUES
   ("ROLE_ADMIN"),
   ("ROLE_INVESTOR"),
+  ("ROLE_ANONYMOUS"),
   ("ROLE_FOUNDER");
 
 INSERT INTO user_role (user_id, role_id) VALUES
