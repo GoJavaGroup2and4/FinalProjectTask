@@ -1,5 +1,3 @@
-ALTER TABLE user_startup ADD user_investment INT;
-
 CREATE TABLE IF NOT EXISTS category (
   category_id   INT(11)     NOT NULL AUTO_INCREMENT,
   category_name VARCHAR(50) NOT NULL,
@@ -10,21 +8,21 @@ CREATE TABLE IF NOT EXISTS category (
   ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS startup (
-startup_id         INT(11)     NOT NULL AUTO_INCREMENT,
-startup_name       VARCHAR(50) NOT NULL,
-picture            LONGBLOB,
-attachment         LONGBLOB,
-current_investment INT(11)              DEFAULT 0,
-needed_investment  INT(11)     NOT NULL,
-description        VARCHAR(2500)         DEFAULT NULL,
-rating             DOUBLE               DEFAULT NULL,
-category           INT(11)     NOT NULL,
-status             VARCHAR(30),
-PRIMARY KEY (startup_id),
-INDEX (startup_name),
-FOREIGN KEY (category) REFERENCES category (category_id)
+  startup_id         INT(11)     NOT NULL AUTO_INCREMENT,
+  startup_name       VARCHAR(50) NOT NULL,
+  picture            LONGBLOB,
+  attachment         LONGBLOB,
+  current_investment INT(11)              DEFAULT 0,
+  needed_investment  INT(11)     NOT NULL,
+  description        VARCHAR(2500)        DEFAULT NULL,
+  rating             DOUBLE               DEFAULT NULL,
+  category           INT(11)     NOT NULL,
+  status             VARCHAR(30),
+  PRIMARY KEY (startup_id),
+  INDEX (startup_name),
+  FOREIGN KEY (category) REFERENCES category (category_id)
 )
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS user (
@@ -36,7 +34,7 @@ CREATE TABLE IF NOT EXISTS user (
   country      VARCHAR(20)           DEFAULT NULL,
   city         VARCHAR(20)           DEFAULT NULL,
   login        VARCHAR(255) NOT NULL,
-  password     VARCHAR(255) NOT NULL,
+  password     VARCHAR(2500) NOT NULL,
   is_active    TINYINT               DEFAULT 1,
   PRIMARY KEY (user_id),
   INDEX (first_name, last_name)
@@ -54,10 +52,9 @@ CREATE TABLE IF NOT EXISTS startup_evaluation (
   ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS user_startup (
-  user_id    INT(11) NOT NULL,
-  startup_id INT(11) NOT NULL,
-  start_date DATE DEFAULT NULL,
-  end_date   DATE DEFAULT NULL,
+  user_id         INT(11) NOT NULL,
+  startup_id      INT(11) NOT NULL,
+  user_investment INT DEFAULT 0,
   PRIMARY KEY (user_id, startup_id),
   FOREIGN KEY (user_id) REFERENCES user (user_id),
   FOREIGN KEY (startup_id) REFERENCES startup (startup_id)
@@ -65,7 +62,7 @@ CREATE TABLE IF NOT EXISTS user_startup (
   ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS permission (
-  permission_id   INT(11)     NOT NULL AUTO_INCREMENT,
+  permission_id   INT(11)      NOT NULL AUTO_INCREMENT,
   permission_name VARCHAR(300) NOT NULL,
   PRIMARY KEY (permission_id),
   INDEX (permission_name),
