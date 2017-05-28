@@ -10,8 +10,12 @@
     <!--TODO: to add user's access configuration to all other pages after they are created...-->
     <!--Configuration of user's access to web pages-->
     <http auto-config="true">
-        <intercept-url pattern="/" access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/" access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/home" access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/startupdetails" access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/startups" access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/startupedit" access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
 
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error"
@@ -26,7 +30,6 @@
         <beans:constructor-arg name="strength" value="11"/>
     </beans:bean>
 
-    <!--TODO: User details service implementation class to be added here-->
     <!--User details service implementation-->
     <beans:bean id="userDetailsServiceImpl"
                 class="ua.goit.startupserviceapp.service.UserDetailsServiceImpl"></beans:bean>
