@@ -1,3 +1,4 @@
+/*
 package ua.goit.startupserviceapp.model;
 
 public enum VerificationTokenType {
@@ -5,3 +6,4 @@ public enum VerificationTokenType {
     emailVerification,
     emailRegistration;
 }
+*/

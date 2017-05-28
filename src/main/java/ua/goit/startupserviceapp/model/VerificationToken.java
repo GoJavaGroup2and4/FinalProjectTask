@@ -1,3 +1,4 @@
+/*
 package ua.goit.startupserviceapp.model;
 
 import javax.persistence.*;
@@ -84,3 +85,4 @@ public class VerificationToken extends BaseEntity {
         return getExpiryDate().isBefore(LocalDate.now());
     }
 }
+*/

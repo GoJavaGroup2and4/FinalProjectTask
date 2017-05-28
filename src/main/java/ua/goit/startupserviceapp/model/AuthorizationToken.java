@@ -1,3 +1,4 @@
+/*
 package ua.goit.startupserviceapp.model;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -52,3 +53,4 @@ public class AuthorizationToken extends AbstractPersistable<Long> {
         return timeCreated;
     }
 }
+*/
