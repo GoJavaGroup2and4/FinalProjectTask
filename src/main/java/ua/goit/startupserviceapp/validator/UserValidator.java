@@ -37,7 +37,7 @@ public class UserValidator implements Validator {
             errors.rejectValue("login", "Size.userForm.login");
         }
 
-        if (userService.findByUsername(user.getLogin()) != null) {
+        if (userService.findByLogin(user.getLogin()) != null) {
             errors.rejectValue("login", "Duplicate.userForm.login");
         }
 
@@ -53,6 +53,5 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "Required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "Required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Required");
-
     }
 }
