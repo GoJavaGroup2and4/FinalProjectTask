@@ -30,8 +30,8 @@ public class UserDB {
 //    @Transient
 //    private boolean isVerified;
 
-    @Transient
-    transient private String confirmPassword;
+
+    private String confirmPassword;
 
 
 
@@ -156,6 +156,7 @@ public class UserDB {
         this.startups = startups;
     }
 
+    @Transient
     public String getConfirmPassword() {
         return confirmPassword;
     }
