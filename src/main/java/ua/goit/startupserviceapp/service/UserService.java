@@ -16,28 +16,26 @@ import java.util.List;
 @Service
 public interface UserService {
 
-    void save (UserDB user);
+    void save(UserDB user);
 
-    UserDB findByUsername(String login);
+    UserDB findByLogin(String login);
 
     @Secured("Investor")
     void invest(UserDB user_id, Startup startup_id, int investment);
 
-    public void edit (UserDB user);
+    void edit(UserDB user);
 
-    public void delete (UserDB user);
+    void delete(UserDB user);
 
-    public void deleteById (int id);
+    void deleteById(int id);
 
-    public UserDB getUserById (int id);
+    UserDB getUserById(int id);
 
-    public List<UserDB> getAllUsers ();
+    List<UserDB> getAllUsers();
 
-    public List<UserDB> getAllFounders ();
+    List<UserDB> getAllFounders();
 
-    public List<UserDB> getAllInvestors ();
+    List<UserDB> getAllInvestors();
 
-    public List<UserDB> getAllAdministrators ();
-
-
+    List<UserDB> getAllAdministrators();
 }

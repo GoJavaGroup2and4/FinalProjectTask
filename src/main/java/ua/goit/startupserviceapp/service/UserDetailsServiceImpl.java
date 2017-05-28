@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  Implementation of {@link UserDetailsService} interface.
+ * Implementation of {@link UserDetailsService} interface.
  *
- *  @author Anastasiya Kravchenko
+ * @author Anastasiya Kravchenko
  */
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -27,12 +27,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UserDB user= userDBRepository.findByLogin(login);
-        List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
-        for (Role role:user.getRoles()){
+        UserDB user = userDBRepository.findByLogin(login);
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        for (Role role : user.getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
         return new org.springframework.security.core.userdetails.
-                User(user.getLogin(),user.getPassword(),grantedAuthorities);
+                User(user.getLogin(), user.getPassword(), grantedAuthorities);
     }
 }

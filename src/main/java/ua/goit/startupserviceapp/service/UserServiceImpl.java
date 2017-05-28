@@ -12,7 +12,9 @@ import ua.goit.startupserviceapp.repository.RoleRepository;
 import ua.goit.startupserviceapp.repository.UserDBRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * implementation of {@link ua.goit.startupserviceapp.service.UserService}
@@ -36,28 +38,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(UserDB user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        List<Role> roles=new ArrayList<>();
-        roles.add(roleRepository.getOne(1L));
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleRepository.getOne(2L));
         user.setRoles(roles);
         userDBRepository.save(user);
     }
 
     @Override
-    public UserDB findByUsername(String login) {
+    public UserDB findByLogin(String login) {
         return userDBRepository.findByLogin(login);
     }
 
     @Override
     @Secured("Investor")
     public void invest(UserDB user_id, Startup startup_id, int investment) {
-        UserStartup userStartup=new UserStartup();
+        UserStartup userStartup = new UserStartup();
         userStartup.setStartup(startup_id);
         userStartup.setUser(user_id);
         userStartup.setUserInvestment(investment);
 
-        Startup startup=new Startup();
-        startup.setCurrent_investment(startup.getCurrent_investment()+investment);
-        }
+        Startup startup = new Startup();
+        startup.setCurrent_investment(startup.getCurrent_investment() + investment);
+    }
 
     @Override
     public void edit(UserDB user) {
