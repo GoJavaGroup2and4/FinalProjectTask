@@ -4,19 +4,19 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "user_startup")
-public class UserStartup implements Serializable{
+@Table(name = "startup_evaluation")
+public class StartupEvaluation implements Serializable{
     private UserDB user;
     private Startup startup;
-    private int userInvestment;
+    private int mark;
 
-    public UserStartup(int user_id, int startup_id, int investment) {
+    public StartupEvaluation() {
     }
 
-    public UserStartup() {
+    public StartupEvaluation(UserDB user, Startup startup, int mark) {
         this.user = user;
         this.startup = startup;
-        this.userInvestment = userInvestment;
+        this.mark = mark;
     }
 
     @Id
@@ -41,20 +41,21 @@ public class UserStartup implements Serializable{
         this.startup = startup;
     }
 
-    @Column(name = "user_investment")
-    public int getUserInvestment() {
-        return userInvestment;
+    @Column(name = "mark")
+    public int getMark() {
+        return mark;
     }
 
-    public void setUserInvestment(int userInvestment) {
-        this.userInvestment = userInvestment;
+    public void setMark(int mark) {
+        this.mark = mark;
     }
 
     @Override
     public String toString() {
-        return "UserStartup{" +
+        return "StartupEvaluation{" +
                 "user=" + user +
                 ", \n startup=" + startup +
+                ", \n mark=" + mark +
                 '}';
     }
 }

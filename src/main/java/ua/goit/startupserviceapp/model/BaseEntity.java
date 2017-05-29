@@ -1,3 +1,4 @@
+/*
 package ua.goit.startupserviceapp.model;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -63,3 +64,4 @@ public abstract class BaseEntity extends AbstractPersistable<Long> {
         return timeCreated;
     }
 }
+*/

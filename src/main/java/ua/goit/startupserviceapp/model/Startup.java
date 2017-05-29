@@ -3,6 +3,7 @@ package ua.goit.startupserviceapp.model;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,15 +14,15 @@ import java.util.Set;
 public class Startup {
     private long id;
     private String name;
-    private byte[] image;
-    private byte[] attachment;
+    private Blob image;
+    private Blob attachment;
     private int current_investment;
     private int needed_investment;
     private String description;
-    private double rating;
+    private Double rating;
     private String status;
     private Category category;
-    private Set<ProjectEvaluation> marks = new HashSet<>();
+    private Set<StartupEvaluation> marks = new HashSet<>();
     private Set<UserStartup> users = new HashSet<>();
 
     @Id
@@ -45,24 +46,24 @@ public class Startup {
     }
 
     @Lob
-    @Column(name="picture")
-    @Type(type="org.hibernate.type.BinaryType")
-    public byte[] getImage() {
+    @Column(name="picture", columnDefinition="BLOB")
+    //  @Type(type="org.hibernate.type.BinaryType")
+    public Blob getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(Blob image) {
         this.image = image;
     }
 
     @Lob
-    @Column(name="attachment")
-    @Type(type="org.hibernate.type.BinaryType")
-    public byte[] getAttachment() {
+    @Column(name="attachment", columnDefinition="BLOB")
+    // @Type(type="org.hibernate.type.BinaryType")
+    public Blob getAttachment() {
         return attachment;
     }
 
-    public void setAttachment(byte[] attachment) {
+    public void setAttachment(Blob attachment) {
         this.attachment = attachment;
     }
 
@@ -94,15 +95,16 @@ public class Startup {
     }
 
     @Column(name = "rating")
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
     @Column(name = "status")
+//    @Enumerated(EnumType.STRING) // Add lately or never add
     public String getStatus() {
         return status;
     }
@@ -121,16 +123,16 @@ public class Startup {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "project")
-    public Set<ProjectEvaluation> getMarks() {
+    @OneToMany(mappedBy = "startup")
+    public Set<StartupEvaluation> getMarks() {
         return marks;
     }
 
-    public void setMarks(Set<ProjectEvaluation> marks) {
+    public void setMarks(Set<StartupEvaluation> marks) {
         this.marks = marks;
     }
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "startup")
     public Set<UserStartup> getUsers() {
         return users;
     }
@@ -142,24 +144,59 @@ public class Startup {
     public Startup() {
     }
 
-    public Startup(String name, int needed_investment, Category category) {
+    public Startup(String name, String description, int needed_investment, Category category) {
         this.name = name;
+        this.description = description;
         this.needed_investment = needed_investment;
         this.category = category;
+    }
+
+    //    TODO: Do we need String status in parameters? Isn't default status for newly created Startup "Draft"?
+    public Startup(long id, String name, Blob image, Blob attachment, int current_investment, int needed_investment, String description, double rating, String status, Category category) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.attachment = attachment;
+        this.current_investment = current_investment;
+        this.needed_investment = needed_investment;
+        this.description = description;
+        this.rating = rating;
+        this.status = status;
+        this.category = category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Startup startup = (Startup) o;
+
+        if (needed_investment != startup.needed_investment) return false;
+        if (name != null ? !name.equals(startup.name) : startup.name != null) return false;
+        return category != null ? category.equals(startup.category) : startup.category == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + needed_investment;
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "Startup{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", image=" + Arrays.toString(image) +
-                ", attachment=" + Arrays.toString(attachment) +
-                ", current_investment=" + current_investment +
-                ", needed_investment=" + needed_investment +
-                ", description='" + description + '\'' +
-                ", rating=" + rating +
-                ", status='" + status + '\'' +
+                ", \n name='" + name + '\'' +
+//                ", image=" + Arrays.toString(image) +             // Do we need pictures to be displayed in console?))
+//                ", attachment=" + Arrays.toString(attachment) +
+                ", \n current_investment=" + current_investment +
+                ", \n needed_investment=" + needed_investment +
+                ", \n description='" + description + '\'' +
+                ", \n rating=" + rating +
+                ", \n status='" + status + '\'' +
                 ", category=" + category +
                 '}';
     }
