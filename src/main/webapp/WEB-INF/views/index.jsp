@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Welcome to STARTUP project!</title>
+    <title>Welcome to STARTUP!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Startups"/>
@@ -48,8 +48,8 @@
                     <nav class="link-effect-3" id="link-effect-3">
                         <ul class="nav1 nav">
                             <li class="active"><a data-hover="Home" href="home">Home</a></li>
-                            <li><a data-hover="All startups" href="#allstartups" class="scroll">All startups</a></li>
                             <li><a data-hover="About" href="#about" class="scroll">About</a></li>
+                            <li><a data-hover="All startups" href="#allstartups" class="scroll">All startups</a></li>
                             <li><a data-hover="Team" href="#team" class="scroll">Team</a></li>
                         </ul>
                     </nav>
@@ -71,8 +71,8 @@
                 <div class="w3l_banner_logo">
                     <h2>SU</h2>
                 </div>
-                <h3>MAKE YOUR DREAM CLOSER</h3>
-                <p>Find new possibilities to go UP today!</p>
+                <h3>GET CLOSER TO YOUR DREAMS</h3>
+                <p>Find new possibilities to go UP and FORWARD today!</p>
                 <div class="more">
                     <a href="#" class="hvr-underline-from-center" data-toggle="modal" data-target="#myModal">See
                         More</a>
@@ -126,12 +126,12 @@
         </div>
         <div class="col-md-8 wthree_banner_bottom_right">
             <h3>Here you can choose any project, which fits your demand</h3>
-            <p>See our advantages:</p>
+            <p>Our main advantages:</p>
             <ol>
                 <li>Easy to find</li>
                 <li>Fast startup development</li>
-                <li>Security of investments</li>
-                <li>Full time customer support</li>
+                <li>Security of your investments</li>
+                <li>Full time 24/7/365 customer premium support</li>
             </ol>
         </div>
         <div class="clearfix"></div>
