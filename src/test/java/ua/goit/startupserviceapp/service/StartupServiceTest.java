@@ -210,9 +210,9 @@ public class StartupServiceTest {
     public void getAllStartups(){
 //        init
         Category category = new Category("Test");
-        Startup startup1 = new Startup("First", 1000, category);
-        Startup startup2 = new Startup("Second", 2000, category);
-        Startup startup3 = new Startup("Third", 3000, category);
+        Startup startup1 = new Startup("First", "Test Description", 1000, category);
+        Startup startup2 = new Startup("Second", "Test Description", 2000, category);
+        Startup startup3 = new Startup("Third", "Test Description", 3000, category);
         List<Startup> testList = new ArrayList<>();
         testList.add(startup1);
         testList.add(startup2);
@@ -232,10 +232,10 @@ public class StartupServiceTest {
     public void getStartupsByName() {
 //        init
         Category category = new Category("Test");
-        Startup startup1 = new Startup("First", 1000, category);
-        Startup startup2 = new Startup("Second", 2000, category);
-        Startup startup22 = new Startup("Second", 2222, category);
-        Startup startup3 = new Startup("Third", 3000, category);
+        Startup startup1 = new Startup("First", "Test Description", 1000, category);
+        Startup startup2 = new Startup("Second", "Test Description", 2000, category);
+        Startup startup22 = new Startup("Second", "Test Description", 2222, category);
+        Startup startup3 = new Startup("Third", "Test Description", 3000, category);
 
         List<Startup> allStartups = new ArrayList<>();
         allStartups.add(startup1);
