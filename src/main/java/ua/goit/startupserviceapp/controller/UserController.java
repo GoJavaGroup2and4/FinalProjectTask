@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ua.goit.startupserviceapp.model.UserDB;
 import ua.goit.startupserviceapp.service.SecurityService;
 import ua.goit.startupserviceapp.service.UserService;
+import ua.goit.startupserviceapp.service.UserServiceImpl;
 import ua.goit.startupserviceapp.validator.UserValidator;
 
 /**
@@ -44,7 +45,7 @@ public class UserController {
 
         userService.save(userForm);
         securityService.autoLogin(userForm.getLogin(), userForm.getConfirmPassword());
-        return "redirect:/welcome";
+        return "redirect:/allstartups";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
