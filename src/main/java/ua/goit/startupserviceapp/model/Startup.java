@@ -144,8 +144,9 @@ public class Startup {
     public Startup() {
     }
 
-    public Startup(String name, int needed_investment, Category category) {
+    public Startup(String name, String description, int needed_investment, Category category) {
         this.name = name;
+        this.description = description;
         this.needed_investment = needed_investment;
         this.category = category;
     }
