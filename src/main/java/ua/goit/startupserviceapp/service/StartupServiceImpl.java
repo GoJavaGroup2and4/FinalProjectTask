@@ -116,4 +116,9 @@ public class StartupServiceImpl implements StartupService {
         return startupsByName.get(0);
 
     }
+
+    @Override
+    public Startup findByName(String name) {
+        return startupRepository.findByName(name);
+    }
 }
