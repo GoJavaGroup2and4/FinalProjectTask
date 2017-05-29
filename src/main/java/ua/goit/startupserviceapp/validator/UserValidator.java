@@ -33,6 +33,11 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
         UserDB user = (UserDB) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
+
         if (user.getLogin().length() < 6 || user.getLogin().length() > 32) {
             errors.rejectValue("login", "Size.userForm.login");
         }
@@ -41,7 +46,6 @@ public class UserValidator implements Validator {
             errors.rejectValue("login", "Duplicate.userForm.login");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "Size.userForm.password");
         }
@@ -50,8 +54,5 @@ public class UserValidator implements Validator {
             errors.rejectValue("confirmPassword", "Different.userForm.password");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "Required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "Required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "Required");
     }
 }
