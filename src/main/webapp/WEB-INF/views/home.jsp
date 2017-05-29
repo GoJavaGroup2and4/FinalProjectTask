@@ -23,7 +23,7 @@
     <div class="hero-text-box">
         <h1>Startup platform - Know what you own,<br>and know why you own it.</h1>
         <a class="btn btn-full" href="#">Invest now!</a>
-        <a class="btn btn-ghost" href="startups">Show me more</a>
+        <a class="btn btn-ghost" href="allstartups">Show me more</a>
     </div>
 </header>
 </body>
