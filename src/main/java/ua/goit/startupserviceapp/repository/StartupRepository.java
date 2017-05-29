@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import ua.goit.startupserviceapp.model.Startup;
 
 @Repository
-public interface StartupRepository extends JpaRepository<Startup, Long>{
+public interface StartupRepository extends JpaRepository<Startup, Long> {
+    Startup findByName(String name);
 }
