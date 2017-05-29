@@ -13,31 +13,33 @@ import java.util.List;
 
 public interface StartupService {
 
-    public void save (Startup startup);
+    void save (Startup startup);
 
-    public void edit (Startup startup);
+    void edit (Startup startup);
 
-    public void delete(Startup startup);
+    void delete(Startup startup);
 
-    public void deleteById (long id);
+    void deleteById (long id);
 
-    public void ready (Startup startup);
+    void ready (Startup startup);
 
-    public void approve (Startup startup);
+    void approve (Startup startup);
 
-    public void reject (Startup startup);
+    void reject (Startup startup);
 
-    public List<Startup> getAllStartups ();
+    Startup findByName (String name);
 
-//    public List<Startup> getStartupsByUser(UserDB user);
+    List<Startup> getAllStartups ();
 
-    public List <Startup> getStartupsByName(String name);
+//    List<Startup> getStartupsByUser(UserDB user);
 
-//    public List <Startup> getStartupsByCategory();
+    List <Startup> getStartupsByName(String name);
 
-//    public List <Startup> getStartupsByStatus(String status);
+//    List <Startup> getStartupsByCategory();
 
-    public Startup getStartupById (long id);
+//    List <Startup> getStartupsByStatus(String status);
+
+    Startup getStartupById (long id);
 
 
 
