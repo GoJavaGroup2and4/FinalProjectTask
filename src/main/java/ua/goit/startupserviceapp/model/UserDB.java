@@ -161,6 +161,7 @@ public class UserDB {
         return confirmPassword;
     }
 
+    @Transient
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }

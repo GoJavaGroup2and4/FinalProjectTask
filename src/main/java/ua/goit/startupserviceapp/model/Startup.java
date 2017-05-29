@@ -19,7 +19,7 @@ public class Startup {
     private int current_investment;
     private int needed_investment;
     private String description;
-    private double rating;
+    private Double rating;
     private String status;
     private Category category;
     private Set<StartupEvaluation> marks = new HashSet<>();
@@ -95,11 +95,11 @@ public class Startup {
     }
 
     @Column(name = "rating")
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
