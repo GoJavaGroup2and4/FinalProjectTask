@@ -46,10 +46,14 @@
 				</div>
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form>
+
+			<form id="logoutForm" method="POST" action="${contextPath}/logout">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			</form>
         
 			<div id="navbar" class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right">
-				<button type="submit" class="btn btn-primary">Log out</button>
+				<a onclick="document.forms['logoutForm'].submit()" class="btn btn-primary">Log out</a>
 				<button type="submit" class="btn btn-primary">My info</button>
 				<button type="submit" class="btn btn-info">Admin</button>
 				</form>
