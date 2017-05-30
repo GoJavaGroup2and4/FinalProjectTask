@@ -103,7 +103,7 @@
         <div class="btn-group form-group" data-toggle="buttons">
             <label class="btn btn-primary active">
                 <input type="radio" name="roleId" value="4" id="option1"
-                       autocomplete="off" checked> Founder
+                       autocomplete="off"> Founder
             </label>
             <label class="btn btn-primary">
                 <input type="radio" name="roleId" value="2" id="option2"
@@ -112,8 +112,9 @@
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <input onclick="location.href='home'" class="btn btn-lg btn-primary btn-block" type="button" value="Cancel"/>
     </form:form>
-</div>
+<bdiv>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
