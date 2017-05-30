@@ -123,7 +123,7 @@ public class Startup {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "startup")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "startup")
     public Set<StartupEvaluation> getMarks() {
         return marks;
     }

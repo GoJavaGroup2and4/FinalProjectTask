@@ -20,18 +20,18 @@
 <br/>
 
 <div>
-    <c:if test="${startup.status == 'approved'}">
+    <c:if test="${startup.status == 'Approved'}">
         <div><a href="<c:url value="/invest/${startup.id}"/>"> Make an investment</a></div>
     </c:if>
 
-    <div>Total required amount: <c:out value="${startup.needed_investment}"/></div>
+    <div>Total required amount: <c:out value="${startup.needed_investment}"/>$</div>
 
-    <div>Investments received: <c:out value="${startup.current_investment}"/></div>
+    <div>Investments received: <c:out value="${startup.current_investment}"/>$</div>
 </div>
 
-<%--<div>--%>
-    <%--<div>Average Startup rating: <c:out value="${average_rating}"/> votes(<c:out value="${votes_count}"/>)</div>--%>
-<%--</div>--%>
+<div>
+    <div>Average Startup rating: <c:out value="${average_rating}"/> (votes: <c:out value="${votes_count}"/>)</div>
+</div>
 
 <br/>
 
@@ -46,6 +46,7 @@
 
 <div>
     <c:if test="${is_admin}">
+        <h4>Admin Block:</h4>
         <div>Startup status: <c:out value="${startup.status}"/></div>
         <c:choose>
             <c:when test="${startup.status == 'Ready for approve'}">
@@ -58,12 +59,17 @@
         </c:choose>
         <div><a href="<c:url value="/startupdetails/delete/${startup.id}"/>">Delete startup</a></div>
     </c:if>
+</div>
 
+<br/>
+
+<div>
     <c:if test="${is_owner}">
+        <h4>Owner Block:</h4>
         <div>Startup status: <c:out value="${startup.status}"/></div>
         <c:choose>
             <c:when test="${startup.status == 'Draft' || startup.status == 'Rejected'}">
-                <div><a href="<c:url value="/startupdetails/ready/${startup.id}"/> ">Send startup for approve</a> </div>
+                <div><a href="<c:url value="/startupdetails/sendforapprove/${startup.id}"/> ">Send startup for approve</a> </div>
             </c:when>
             <c:when test="${startup.status == 'Approved'}">
                 <div><a href="<c:url value="/startupdetails/close/${startup.id}"/> ">Close startup</a> </div>

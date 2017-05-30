@@ -21,11 +21,11 @@ public interface StartupService {
 
     void deleteById(long id);
 
-    void ready(Startup startup);
+    void ready(long id);
 
-    void approve(Startup startup);
+    void approve(long id);
 
-    void reject(Startup startup);
+    void reject(long id);
 
     Startup findByName(String name);
 
@@ -39,16 +39,16 @@ public interface StartupService {
 
     List<Startup> getAllMobileStartups();
 
-
 //    List<Startup> getStartupsByUser(UserDB user);
 
     List<Startup> getStartupsByName(String name);
 
-//    List <Startup> getStartupsByCategory();
-
-//    List <Startup> getStartupsByStatus(String status);
 
     Startup getStartupById(long id);
+
+    Double averageRating(long id);
+
+    int votesCount (long id);
 
 
 }
