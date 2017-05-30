@@ -24,7 +24,7 @@
 
 <c:forEach items="${mobileStartups}" var="startup">
     <div class="col-md-3">
-        <a style="text-decoration: none;" href="<c:url value='/allstartups/${startup.id}'/>" class="">
+        <a style="text-decoration: none;" href="<c:url value='/startupdetails/${startup.id}'/>" class="">
             <div class="table-startup">
                 <h4>
                     <p>${startup.name}</p>

@@ -13,15 +13,23 @@ import ua.goit.startupserviceapp.service.CategoryService;
 import ua.goit.startupserviceapp.service.SecurityService;
 import ua.goit.startupserviceapp.service.StartupService;
 import ua.goit.startupserviceapp.validator.StartupValidator;
+import ua.goit.startupserviceapp.service.UserService;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class StartupController {
+public class StartupController extends HttpServlet {
 
     @Autowired
     private StartupService startupService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private SecurityService securityService;
@@ -83,9 +91,15 @@ public class StartupController {
         return "allstartups";
     }
 
-    @RequestMapping("startupdetails/{id}")
-    public String startupDetails(@PathVariable("id") Long id, Model model) {
+    @RequestMapping(value = "/startupdetails/{id}", method = RequestMethod.GET)
+    public String startupDetails (@PathVariable("id") long id, Model model, HttpServletRequest request){
+
         model.addAttribute("startup", this.startupService.getStartupById(id));
+        model.addAttribute("is_admin", this.userService.isAdmin(request));
+        model.addAttribute("is_owner", this.userService.isStartupOwner(id, request));
+        model.addAttribute("is_authenticated", this.userService.isAuthenticated(request));
+//        model.addAttribute("average_rating", this.evaluationService.averageRating(id));
+//        model.addAttribute("votes_count", this.evaluationService.votesCount(id));
 
         return "startupdetails";
     }

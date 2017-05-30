@@ -2,14 +2,20 @@ package ua.goit.startupserviceapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.goit.startupserviceapp.model.Role;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.model.UserDB;
 import ua.goit.startupserviceapp.model.UserStartup;
 import ua.goit.startupserviceapp.repository.RoleRepository;
 import ua.goit.startupserviceapp.repository.UserDBRepository;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -100,4 +106,47 @@ public class UserServiceImpl implements UserService {
     public List<UserDB> getAllAdministrators() {
         return null;
     }
+
+    @Override
+    @Transactional (readOnly = true)
+    public UserDB getAuthenticatedUser(HttpServletRequest request) {
+
+        UserDB user;
+
+        HttpSession session= request.getSession (true);
+        SecurityContextImpl sci = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+
+        UserDetails userDetails  = (UserDetails) sci.getAuthentication().getPrincipal();
+        user = userDBRepository.findByLogin(userDetails.getUsername());
+
+        return user;
+    }
+
+    @Override
+    public boolean isAuthenticated(HttpServletRequest request) {
+
+        HttpSession session= request.getSession (true);
+        SecurityContextImpl sci = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+
+        return sci.getAuthentication().isAuthenticated();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isAdmin(HttpServletRequest request) {
+
+        UserDB user = getAuthenticatedUser(request);
+
+        return user.getRoles().contains(new Role("ROLE_ADMIN"));
+
+    }
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isStartupOwner(long id, HttpServletRequest request) {
+
+
+        return getAuthenticatedUser(request).getStartups().stream()
+                .anyMatch(s -> s.getStartup().getId() == id);
+    }
+
 }

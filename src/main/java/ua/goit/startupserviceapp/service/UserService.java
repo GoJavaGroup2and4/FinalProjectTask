@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.model.UserDB;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -38,4 +39,12 @@ public interface UserService {
     List<UserDB> getAllInvestors();
 
     List<UserDB> getAllAdministrators();
+
+    public UserDB getAuthenticatedUser(HttpServletRequest request);
+
+    public boolean isAuthenticated(HttpServletRequest request);
+
+    public boolean isAdmin(HttpServletRequest request);
+
+    public boolean isStartupOwner(long id, HttpServletRequest request);
 }
