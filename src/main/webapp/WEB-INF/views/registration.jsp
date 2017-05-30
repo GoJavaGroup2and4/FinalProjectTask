@@ -27,54 +27,55 @@
 <body>
 
 <div class="modal-dialog">
-    <form:form method="POST" modelAttribute="userForm" class="loginmodal-container">
+    <form:form method="post" modelAttribute="userForm" class="loginmodal-container">
         <h1>Create Your Account</h1><br>
+
         <spring:bind path="login">
             <div class="${status.error ? 'has-error' : ''}">
+                <form:errors path="login"></form:errors>
                 <form:input type="text" path="login" class="form-control" placeholder="Login"
                             autofocus="true"></form:input>
-                <form:errors path="login"></form:errors>
 
             </div>
         </spring:bind>
 
         <spring:bind path="password">
             <div class="${status.error ? 'has-error' : ''}">
+                <form:errors path="password"></form:errors>
                 <form:input type="password" path="password" class="form-control"
                             placeholder="Password"></form:input>
-                <form:errors path="password"></form:errors>
             </div>
         </spring:bind>
 
         <spring:bind path="confirmPassword">
             <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:errors path="confirmPassword"></form:errors>
                 <form:input type="password" path="confirmPassword" class="form-control"
                             placeholder="Confirm your password"></form:input>
-                <form:errors path="confirmPassword"></form:errors>
             </div>
         </spring:bind>
 
         <spring:bind path="firstName">
             <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:errors path="firstName"></form:errors>
                 <form:input type="text" path="firstName" class="form-control" placeholder="First Name"
                             autofocus="true"></form:input>
-                <form:errors path="firstName"></form:errors>
             </div>
         </spring:bind>
 
         <spring:bind path="lastName">
             <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:errors path="lastName"></form:errors>
                 <form:input type="text" path="lastName" class="form-control" placeholder="Last Name"
                             autofocus="true"></form:input>
-                <form:errors path="lastName"></form:errors>
             </div>
         </spring:bind>
 
         <spring:bind path="email">
             <div class="${status.error ? 'has-error' : ''}">
+                <form:errors path="email"></form:errors>
                 <form:input type="text" path="email" class="form-control" placeholder="Email"
                             autofocus="true"></form:input>
-                <form:errors path="email"></form:errors>
             </div>
         </spring:bind>
 
@@ -98,8 +99,19 @@
                             autofocus="true"></form:input>
             </div>
         </spring:bind>
+
+        <div class="btn-group form-group" data-toggle="buttons">
+            <label class="btn btn-primary active">
+                <input type="radio" name="roleId" value="4" id="option1"
+                       autocomplete="off" checked> Founder
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="roleId" value="2" id="option2"
+                       autocomplete="off"> Investor
+            </label>
+        </div>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-        <a href="home" class="btn btn-lg btn-primary btn-block" type="submit">Cansel</a>
     </form:form>
 </div>
 
