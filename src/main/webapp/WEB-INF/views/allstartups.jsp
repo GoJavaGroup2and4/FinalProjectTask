@@ -1,29 +1,54 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: oops
-  Date: 5/21/2017
-  Time: 6:09 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
-<%@ page session="false" %>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>--%>
+<%--<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>--%>
+<%--<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>--%>
+<%--<%@ page session="false" %>--%>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/allStartupsStyle.css"/>">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>All Startups</title>
 </head>
-<br>
-<%--
-<a href="../../index.jsp">Back to main menu</a>
---%>
 
-<br/>
-<br/>
+<body>
+<jsp:include page="navbar.jsp"/>
 
-<h1>Startup list</h1>
 
+<section class="section-types">
+
+    <c:forEach items="${categories}" var="category">
+        <div class="row">
+            <h2>${category.name}</h2>
+        </div>
+
+        <c:forEach items="${allStartups}" var="startup">
+            <div class="col-md-3">
+                <a style="text-decoration: none;" href="<c:url value='/allstartups/${startup.id}'/>" class="">
+                    <div class="jumbo1">
+                        <h4>
+                            <p>${startup.name}</p>
+                        </h4>
+                        <h4>
+                            <small>Needed investments:</small>
+                            <p>${startup.needed_investment}</p>
+                        </h4>
+                        <h4>
+                            <small>Current investments:</small>
+                            <p>${startup.current_investment}</p>
+                        </h4>
+                    </div>
+                </a>
+            </div>
+        </c:forEach>
+    </c:forEach>
+
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>
