@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.goit.startupserviceapp.repository.StartupRepository;
 import ua.goit.startupserviceapp.model.Startup;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -80,7 +82,7 @@ public class StartupServiceImpl implements StartupService {
         return startupRepository.findAll();
     }
 
-//    TODO: розібратися що таке UserStartup
+    //    TODO: розібратися що таке UserStartup
 //    @Override
 //    public List<Startup> getStartupsByUser(UserDB user) {
 //        return null;
@@ -120,5 +122,49 @@ public class StartupServiceImpl implements StartupService {
     @Override
     public Startup findByName(String name) {
         return startupRepository.findByName(name);
+    }
+
+    @Override
+    public List<Startup> getAllApprovedStartups() {
+        List<Startup> startups = new ArrayList<>();
+        for (Startup startup : getAllStartups()) {
+            if (startup.getStatus().equalsIgnoreCase("Approved")) {
+                startups.add(startup);
+            }
+        }
+        return startups;
+    }
+
+    @Override
+    public List<Startup> getAllBusinessStartups() {
+        List<Startup> startups = new ArrayList<>();
+        for (Startup startup : getAllApprovedStartups()) {
+            if (startup.getCategory().getName().equalsIgnoreCase("Business (shares) for sale")) {
+                startups.add(startup);
+            }
+        }
+        return startups;
+    }
+
+    @Override
+    public List<Startup> getAllInvestmentStartups() {
+        List<Startup> startups = new ArrayList<>();
+        for (Startup startup : getAllApprovedStartups()) {
+            if (startup.getCategory().getName().equalsIgnoreCase("Investment projects")) {
+                startups.add(startup);
+            }
+        }
+        return startups;
+    }
+
+    @Override
+    public List<Startup> getAllMobileStartups() {
+        List<Startup> startups = new ArrayList<>();
+        for (Startup startup : getAllApprovedStartups()) {
+            if (startup.getCategory().getName().equalsIgnoreCase("Mobile applications")) {
+                startups.add(startup);
+            }
+        }
+        return startups;
     }
 }

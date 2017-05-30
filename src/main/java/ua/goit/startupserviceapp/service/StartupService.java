@@ -13,37 +13,42 @@ import java.util.List;
 
 public interface StartupService {
 
-    void save (Startup startup);
+    void save(Startup startup);
 
-    void edit (Startup startup);
+    void edit(Startup startup);
 
     void delete(Startup startup);
 
-    void deleteById (long id);
+    void deleteById(long id);
 
-    void ready (Startup startup);
+    void ready(Startup startup);
 
-    void approve (Startup startup);
+    void approve(Startup startup);
 
-    void reject (Startup startup);
+    void reject(Startup startup);
 
-    Startup findByName (String name);
+    Startup findByName(String name);
 
-    List<Startup> getAllStartups ();
+    List<Startup> getAllStartups();
+
+    List<Startup> getAllApprovedStartups();
+
+    List<Startup> getAllBusinessStartups();
+
+    List<Startup> getAllInvestmentStartups();
+
+    List<Startup> getAllMobileStartups();
+
 
 //    List<Startup> getStartupsByUser(UserDB user);
 
-    List <Startup> getStartupsByName(String name);
+    List<Startup> getStartupsByName(String name);
 
 //    List <Startup> getStartupsByCategory();
 
 //    List <Startup> getStartupsByStatus(String status);
 
-    Startup getStartupById (long id);
-
-
-
-
+    Startup getStartupById(long id);
 
 
 }
