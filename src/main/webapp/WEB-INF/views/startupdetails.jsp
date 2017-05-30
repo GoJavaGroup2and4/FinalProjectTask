@@ -59,19 +59,19 @@
         <div><a href="<c:url value="/startupdetails/delete/${startup.id}"/>">Delete startup</a></div>
     </c:if>
 
-    <%--<c:if test="${is_owner}">--%>
-        <%--<div>Startup status: <c:out value="${startup.status}"/></div>--%>
-        <%--<c:choose>--%>
-            <%--<c:when test="${startup.status == 'Draft' || startup.status == 'Rejected'}">--%>
-                <%--<div><a href="<c:url value="/startupdetails/ready/${startup.id}"/> ">Send startup for approve</a> </div>--%>
-            <%--</c:when>--%>
-            <%--<c:when test="${startup.status == 'Approved'}">--%>
-                <%--<div><a href="<c:url value="/startupdetails/close/${startup.id}"/> ">Close startup</a> </div>--%>
-            <%--</c:when>--%>
-        <%--</c:choose>--%>
+    <c:if test="${is_owner}">
+        <div>Startup status: <c:out value="${startup.status}"/></div>
+        <c:choose>
+            <c:when test="${startup.status == 'Draft' || startup.status == 'Rejected'}">
+                <div><a href="<c:url value="/startupdetails/ready/${startup.id}"/> ">Send startup for approve</a> </div>
+            </c:when>
+            <c:when test="${startup.status == 'Approved'}">
+                <div><a href="<c:url value="/startupdetails/close/${startup.id}"/> ">Close startup</a> </div>
+            </c:when>
+        </c:choose>
 
-        <%--<div><a href="<c:url value="/startupdetails/edit/${startup.id}"/>">Edit startup</a></div>--%>
-    <%--</c:if>--%>
+        <div><a href="<c:url value="/startupedit/${startup.id}"/>">Edit startup</a></div>
+    </c:if>
 
 </div>
 
