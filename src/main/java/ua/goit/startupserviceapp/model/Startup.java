@@ -19,7 +19,7 @@ public class Startup {
     private int current_investment;
     private int needed_investment;
     private String description;
-    private double rating;
+//    private double rating;
     private String status;
     private Category category;
     private Set<StartupEvaluation> marks = new HashSet<>();
@@ -94,14 +94,14 @@ public class Startup {
         this.description = description;
     }
 
-    @Column(name = "rating")
+    /*@Column(name = "rating")
     public double getRating() {
         return rating;
     }
 
     public void setRating(double rating) {
         this.rating = rating;
-    }
+    }*/
 
     @Column(name = "status")
 //    @Enumerated(EnumType.STRING) // Add lately or never add
@@ -160,7 +160,7 @@ public class Startup {
         this.current_investment = current_investment;
         this.needed_investment = needed_investment;
         this.description = description;
-        this.rating = rating;
+//        this.rating = rating;
         this.status = status;
         this.category = category;
     }
@@ -195,7 +195,7 @@ public class Startup {
                 ", \n current_investment=" + current_investment +
                 ", \n needed_investment=" + needed_investment +
                 ", \n description='" + description + '\'' +
-                ", \n rating=" + rating +
+//                ", \n rating=" + rating +
                 ", \n status='" + status + '\'' +
                 ", category=" + category +
                 '}';
