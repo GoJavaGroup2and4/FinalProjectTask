@@ -61,6 +61,7 @@ public class StartupServiceTest {
 //       check
         verify(startupRepository, times(1)).save(startup);
         assertEquals("GoJava5", startupRepository.save(startup).getName());
+        assertEquals("Draft", startupRepository.save(startup).getStatus());
     }
 
     @Test

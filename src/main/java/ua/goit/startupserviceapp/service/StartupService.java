@@ -27,6 +27,8 @@ public interface StartupService {
 
     void reject(long id);
 
+    void close(long id);
+
     Startup findByName(String name);
 
     List<Startup> getAllStartups();

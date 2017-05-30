@@ -51,13 +51,12 @@
         <c:choose>
             <c:when test="${startup.status == 'Ready for approve'}">
                 <div><a href="<c:url value="/startupdetails/approve/${startup.id}"/>">Approve startup</a></div>
-            </c:when>
-
-            <c:when test="${startup.status == 'Ready for approve'}">
                 <div><a href="<c:url value="/startupdetails/reject/${startup.id}"/>">Reject startup</a></div>
             </c:when>
+            <c:when test="${startup.status == 'Rejected' || startup.status == 'Closed'}">
+                <div><a href="<c:url value="/startupdetails/delete/${startup.id}"/>">Delete startup</a></div>
+                </c:when>
         </c:choose>
-        <div><a href="<c:url value="/startupdetails/delete/${startup.id}"/>">Delete startup</a></div>
     </c:if>
 </div>
 
@@ -67,16 +66,13 @@
     <c:if test="${is_owner}">
         <h4>Owner Block:</h4>
         <div>Startup status: <c:out value="${startup.status}"/></div>
-        <c:choose>
-            <c:when test="${startup.status == 'Draft' || startup.status == 'Rejected'}">
+            <c:if test="${startup.status == 'Draft' || startup.status == 'Rejected'}">
                 <div><a href="<c:url value="/startupdetails/sendforapprove/${startup.id}"/> ">Send startup for approve</a> </div>
-            </c:when>
-            <c:when test="${startup.status == 'Approved'}">
+            </c:if>
+            <c:if test="${startup.status != 'Closed'}">
+                <div><a href="<c:url value="/startupedit/${startup.id}"/>">Edit startup</a></div>
                 <div><a href="<c:url value="/startupdetails/close/${startup.id}"/> ">Close startup</a> </div>
-            </c:when>
-        </c:choose>
-
-        <div><a href="<c:url value="/startupedit/${startup.id}"/>">Edit startup</a></div>
+            </c:if>
     </c:if>
 
 </div>

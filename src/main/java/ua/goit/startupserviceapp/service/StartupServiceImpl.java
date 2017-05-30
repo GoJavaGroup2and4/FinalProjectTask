@@ -35,6 +35,7 @@ public class StartupServiceImpl implements StartupService {
 
     @Override
     public void edit(Startup startup) {
+        startup.setStatus("Draft");
         startupRepository.save(startup);
     }
 
@@ -73,6 +74,15 @@ public class StartupServiceImpl implements StartupService {
     public void reject(long id) {
         Startup startup = startupRepository.findById(id);
         startup.setStatus("Rejected");
+        startupRepository.save(startup);
+    }
+
+    @Override
+    @Transactional
+    public void close(long id) {
+        Startup startup = startupRepository.findById(id);
+        startup.setStatus("Closed");
+        startup.setCurrent_investment(0);
         startupRepository.save(startup);
     }
 

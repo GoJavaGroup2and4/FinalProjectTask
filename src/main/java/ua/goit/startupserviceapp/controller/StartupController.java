@@ -117,4 +117,28 @@ public class StartupController extends HttpServlet {
         return "redirect:/startupdetails/{id}";
     }
 
+    @RequestMapping(value = "/startupdetails/reject/{id}")
+    public String reject (@PathVariable ("id") long id, Model model){
+
+        this.startupService.reject(id);
+
+        return "redirect:/startupdetails/{id}";
+    }
+
+    @RequestMapping(value = "/startupdetails/delete/{id}")
+    public String delete (@PathVariable ("id") long id, Model model){
+
+        this.startupService.deleteById(id);
+
+        return "redirect:/startupdetails/{id}";
+    }
+
+    @RequestMapping(value = "/startupdetails/close/{id}")
+    public String close (@PathVariable ("id") long id, Model model){
+
+        this.startupService.close(id);
+
+        return "redirect:/startupdetails/{id}";
+    }
+
 }
