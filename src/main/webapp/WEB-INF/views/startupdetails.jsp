@@ -69,7 +69,7 @@
         <div>Startup status: <c:out value="${startup.status}"/></div>
         <c:choose>
             <c:when test="${startup.status == 'Draft' || startup.status == 'Rejected'}">
-                <div><a href="<c:url value="/startupdetails/ready/${startup.id}"/> ">Send startup for approve</a> </div>
+                <div><a href="<c:url value="/startupdetails/sendforapprove/${startup.id}"/> ">Send startup for approve</a> </div>
             </c:when>
             <c:when test="${startup.status == 'Approved'}">
                 <div><a href="<c:url value="/startupdetails/close/${startup.id}"/> ">Close startup</a> </div>

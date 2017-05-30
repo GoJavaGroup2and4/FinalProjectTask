@@ -102,35 +102,17 @@ public class StartupServiceTest {
     public void ready() {
 //        init
         Startup startup = mock(Startup.class);
-        when(startup.getStatus()).thenReturn("Draft");
-        doAnswer(i -> {
-            when(startup.getStatus()).thenReturn("Ready");
-            assertEquals("Ready", startup.getStatus());
-            return null;
-        }).when(startup).setStatus("Ready");
+        when(startupRepository.findById(anyLong())).thenReturn(startup);
+        when(startupRepository.save(startup)).thenReturn(startup);
+
 
 //      use
-        startupService.ready(startup);
+        startupService.ready(startup.getId());
 
 //        check
-        verify(startup, times(1)).setStatus("Ready");
-        verify(startup, times(2)).getStatus();
-        verifyNoMoreInteractions(startup);
-
-    }
-
-    @Test
-    public void ready_wrong_status() {
-//        init
-        Startup startup = mock(Startup.class);
-        when(startup.getStatus()).thenReturn("Approved");
-
-//      use
-        startupService.ready(startup);
-
-//        check
-        verify(startup, times(1)).getStatus();
-        assertNotEquals("Ready", startup.getStatus());
+        verify(startupRepository, times(1)).findById(anyLong());
+        verify(startup, times(1)).setStatus("Ready for approve");
+        verify(startupRepository, times(1)).save(startup);
 
     }
 
@@ -138,71 +120,34 @@ public class StartupServiceTest {
     public void approve() {
 //        init
         Startup startup = mock(Startup.class);
-        when(startup.getStatus()).thenReturn("Ready");
-        doAnswer(i -> {
-            when(startup.getStatus()).thenReturn("Approved");
-            assertEquals("Approved", startup.getStatus());
-            return null;
-        }).when(startup).setStatus("Approved");
+        when(startupRepository.findById(anyLong())).thenReturn(startup);
+        when(startupRepository.save(startup)).thenReturn(startup);
+
 
 //      use
-        startupService.approve(startup);
+        startupService.approve(startup.getId());
 
 //        check
+        verify(startupRepository, times(1)).findById(anyLong());
         verify(startup, times(1)).setStatus("Approved");
-        verify(startup, times(2)).getStatus();
-        verifyNoMoreInteractions(startup);
+        verify(startupRepository, times(1)).save(startup);
 
     }
-
-    @Test
-    public void approve_wrong_status() {
-//        init
-        Startup startup = mock(Startup.class);
-        when(startup.getStatus()).thenReturn("Draft");
-
-//      use
-        startupService.ready(startup);
-
-//        check
-        verify(startup, times(1)).getStatus();
-        assertNotEquals("Approved", startup.getStatus());
-
-    }
-
     @Test
     public void reject() {
 //        init
         Startup startup = mock(Startup.class);
-        when(startup.getStatus()).thenReturn("Ready");
-        doAnswer(i -> {
-            when(startup.getStatus()).thenReturn("Rejected");
-            assertEquals("Rejected", startup.getStatus());
-            return null;
-        }).when(startup).setStatus("Rejected");
+        when(startupRepository.findById(anyLong())).thenReturn(startup);
+        when(startupRepository.save(startup)).thenReturn(startup);
+
 
 //      use
-        startupService.reject(startup);
+        startupService.reject(startup.getId());
 
 //        check
+        verify(startupRepository, times(1)).findById(anyLong());
         verify(startup, times(1)).setStatus("Rejected");
-        verify(startup, times(2)).getStatus();
-        verifyNoMoreInteractions(startup);
-
-    }
-
-    @Test
-    public void reject_wrong_status() {
-//        init
-        Startup startup = mock(Startup.class);
-        when(startup.getStatus()).thenReturn("Draft");
-
-//      use
-        startupService.ready(startup);
-
-//        check
-        verify(startup, times(1)).getStatus();
-        assertNotEquals("Rejected", startup.getStatus());
+        verify(startupRepository, times(1)).save(startup);
 
     }
 
@@ -260,26 +205,17 @@ public class StartupServiceTest {
     @Test
     public void getStartupById() {
 //        init
-        Startup startup1 = new Startup();
-        startup1.setId(0);
-        Startup startup2 = new Startup();
-        startup2.setId(1);
-        Startup startup3 = new Startup();
-        startup3.setId(2);
+        Startup startup = new Startup();
+        startup.setId(0);
 
-        List<Startup> allStartups = new ArrayList<>();
-        allStartups.add(startup1);
-        allStartups.add(startup2);
-        allStartups.add(startup3);
-
-        when(startupRepository.findAll()).thenReturn(allStartups);
+        when(startupRepository.findById(anyLong())).thenReturn(startup);
 
 //        use
         Startup startupToCheck = startupService.getStartupById(1);
 
 //        check
-        verify(startupRepository, times(1)).findAll();
-        assertEquals(startup2, startupToCheck);
+        verify(startupRepository, times(1)).findById(anyLong());
+        assertEquals(startup, startupToCheck);
     }
 
 

@@ -2,6 +2,7 @@ package ua.goit.startupserviceapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.goit.startupserviceapp.model.StartupEvaluation;
 import ua.goit.startupserviceapp.repository.StartupRepository;
 import ua.goit.startupserviceapp.model.Startup;
@@ -50,33 +51,29 @@ public class StartupServiceImpl implements StartupService {
 
 //        TODO: In case when status is already approved or above - validator has to show respective error on web-page. Or develop another logic
 //        TODO: add Admin authorization checks
-    @Override
-    public void ready(Startup startup) {
-        if(startup.getStatus().equals("Draft")){
-            startup.setStatus("Ready");
-        }
-        else return;
 
+    @Override
+    @Transactional
+    public void ready(long id) {
+        Startup startup = startupRepository.findById(id);
+        startup.setStatus("Ready for approve");
+        startupRepository.save(startup);
     }
 
     @Override
-    public void approve(Startup startup) {
-
-        if(startup.getStatus().equals("Ready")){
-            startup.setStatus("Approved");
-        }
-        else return;
-
-
+    @Transactional
+    public void approve(long id) {
+        Startup startup = startupRepository.findById(id);
+        startup.setStatus("Approved");
+        startupRepository.save(startup);
     }
 
     @Override
-    public void reject(Startup startup) {
-        if(startup.getStatus().equals("Ready")){
-            startup.setStatus("Rejected");
-        }
-        else return;
-
+    @Transactional
+    public void reject(long id) {
+        Startup startup = startupRepository.findById(id);
+        startup.setStatus("Rejected");
+        startupRepository.save(startup);
     }
 
     @Override
@@ -99,26 +96,9 @@ public class StartupServiceImpl implements StartupService {
         return startupsByName;
     }
 
-//    TODO: розібратися чи дійсно Category.class має бути таким складним, чи нам вистачить ENUM. Після цього завершити реалізацію метода
-//    @Override
-//    public List<Startup> getStartupsByCategory() {
-//        return null;
-//    }
-
-//    TODO: status - String or ENUM? make respective realisation.
-//    @Override
-//    public List<Startup> getStartupsByStatus(String status) {
-//        return null;
-//    }
-
     @Override
     public Startup getStartupById(long id) {
-        List <Startup> startupsByName = this.getAllStartups();
-
-        startupsByName.removeIf(p -> p.getId() != id);
-
-        return startupsByName.get(0);
-
+        return startupRepository.findById(id);
     }
 
     @Override

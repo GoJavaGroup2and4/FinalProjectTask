@@ -88,7 +88,7 @@ public class StartupController extends HttpServlet {
         return "allstartups";
     }
 
-    @RequestMapping(value = "/startupdetails/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/startupdetails/{id}")
     public String startupDetails (@PathVariable("id") long id, Model model, HttpServletRequest request){
 
         model.addAttribute("startup", this.startupService.getStartupById(id));
@@ -99,5 +99,13 @@ public class StartupController extends HttpServlet {
         model.addAttribute("votes_count", this.startupService.votesCount(id));
 
         return "startupdetails";
+    }
+
+    @RequestMapping(value = "/startupdetails/sendforapprove/{id}")
+    public String sendForApprove (@PathVariable ("id") long id, Model model){
+
+        this.startupService.ready(id);
+
+        return "redirect:/startupdetails/{id}";
     }
 }
