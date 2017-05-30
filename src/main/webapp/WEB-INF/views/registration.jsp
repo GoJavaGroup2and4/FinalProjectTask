@@ -99,6 +99,7 @@
             </div>
         </spring:bind>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <a href="home" class="btn btn-lg btn-primary btn-block" type="submit">Cansel</a>
     </form:form>
 </div>
 
