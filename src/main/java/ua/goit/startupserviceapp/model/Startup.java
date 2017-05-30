@@ -19,7 +19,7 @@ public class Startup {
     private int current_investment;
     private int needed_investment;
     private String description;
-    private double rating;
+    private Double rating;
     private String status;
     private Category category;
     private Set<StartupEvaluation> marks = new HashSet<>();
@@ -95,11 +95,11 @@ public class Startup {
     }
 
     @Column(name = "rating")
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
@@ -152,7 +152,7 @@ public class Startup {
     }
 
     //    TODO: Do we need String status in parameters? Isn't default status for newly created Startup "Draft"?
-    public Startup(long id, String name, Blob image, Blob attachment, int current_investment, int needed_investment, String description, double rating, String status, Category category) {
+    public Startup(long id, String name, Blob image, Blob attachment, int current_investment, int needed_investment, String description, Double rating, String status, Category category) {
         this.id = id;
         this.name = name;
         this.image = image;
