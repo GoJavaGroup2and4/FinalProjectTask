@@ -108,4 +108,13 @@ public class StartupController extends HttpServlet {
 
         return "redirect:/startupdetails/{id}";
     }
+
+    @RequestMapping(value = "/startupdetails/approve/{id}")
+    public String approve (@PathVariable ("id") long id, Model model){
+
+        this.startupService.approve(id);
+
+        return "redirect:/startupdetails/{id}";
+    }
+
 }
