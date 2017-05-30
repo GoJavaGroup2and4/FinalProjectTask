@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
-import ua.goit.startupserviceapp.service.CategoryService;
-import ua.goit.startupserviceapp.service.SecurityService;
-import ua.goit.startupserviceapp.service.StartupService;
+import ua.goit.startupserviceapp.service.*;
 import ua.goit.startupserviceapp.validator.StartupValidator;
-import ua.goit.startupserviceapp.service.UserService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -98,8 +95,8 @@ public class StartupController extends HttpServlet {
         model.addAttribute("is_admin", this.userService.isAdmin(request));
         model.addAttribute("is_owner", this.userService.isStartupOwner(id, request));
         model.addAttribute("is_authenticated", this.userService.isAuthenticated(request));
-//        model.addAttribute("average_rating", this.evaluationService.averageRating(id));
-//        model.addAttribute("votes_count", this.evaluationService.votesCount(id));
+        model.addAttribute("average_rating", this.startupService.averageRating(id));
+        model.addAttribute("votes_count", this.startupService.votesCount(id));
 
         return "startupdetails";
     }

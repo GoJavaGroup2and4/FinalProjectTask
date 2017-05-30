@@ -116,10 +116,14 @@ public class UserServiceImpl implements UserService {
         HttpSession session= request.getSession (true);
         SecurityContextImpl sci = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 
-        UserDetails userDetails  = (UserDetails) sci.getAuthentication().getPrincipal();
-        user = userDBRepository.findByLogin(userDetails.getUsername());
+        try {
+            UserDetails userDetails = (UserDetails) sci.getAuthentication().getPrincipal();
+            user = userDBRepository.findByLogin(userDetails.getUsername());
+            return user;
+        } catch (NullPointerException e){
+            return new UserDB();
+        }
 
-        return user;
     }
 
     @Override
@@ -128,7 +132,11 @@ public class UserServiceImpl implements UserService {
         HttpSession session= request.getSession (true);
         SecurityContextImpl sci = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
 
-        return sci.getAuthentication().isAuthenticated();
+        try {
+            return sci.getAuthentication().isAuthenticated();
+        } catch (NullPointerException e){
+            return false;
+        }
     }
 
     @Override
@@ -144,9 +152,12 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public boolean isStartupOwner(long id, HttpServletRequest request) {
 
+        UserDB user = getAuthenticatedUser(request);
 
-        return getAuthenticatedUser(request).getStartups().stream()
-                .anyMatch(s -> s.getStartup().getId() == id);
+        return user.getStartups().stream()
+                .anyMatch(s -> s.getStartup().getId() == id)
+                &&
+                user.getRoles().contains(new Role("ROLE_FOUNDER"));
     }
 
 }

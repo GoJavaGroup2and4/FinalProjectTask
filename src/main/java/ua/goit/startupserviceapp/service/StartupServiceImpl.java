@@ -2,11 +2,13 @@ package ua.goit.startupserviceapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.goit.startupserviceapp.model.StartupEvaluation;
 import ua.goit.startupserviceapp.repository.StartupRepository;
 import ua.goit.startupserviceapp.model.Startup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Implementation of {@link ua.goit.startupserviceapp.service.UserService}
@@ -166,5 +168,41 @@ public class StartupServiceImpl implements StartupService {
             }
         }
         return startups;
+    }
+
+    @Override
+    public Double averageRating(long id) {
+
+        Startup startup = startupRepository.findById(id);
+
+        double averageRating;
+        int totalRating = 0;
+
+        Set<StartupEvaluation> allMarks = startup.getMarks();
+
+        for (StartupEvaluation allMark : allMarks) {
+            totalRating += allMark.getMark();
+        }
+
+        try{
+            averageRating = (double) totalRating/allMarks.size();
+        }
+        catch (ArithmeticException e){
+            return 0.0;
+        }
+/**
+ *      rounding averageRating to 1 decimal place
+ */
+        averageRating = averageRating*10;
+        averageRating = Math.round(averageRating);
+        averageRating = averageRating/10;
+
+        return averageRating;
+    }
+
+    @Override
+    public int votesCount(long id) {
+        Startup startup = startupRepository.findById(id);
+        return startup.getMarks().size();
     }
 }

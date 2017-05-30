@@ -7,4 +7,6 @@ import ua.goit.startupserviceapp.model.Startup;
 @Repository
 public interface StartupRepository extends JpaRepository<Startup, Long> {
     Startup findByName(String name);
+
+    Startup findById(long id);
 }

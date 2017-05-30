@@ -50,5 +50,9 @@ public interface StartupService {
 
     Startup getStartupById(long id);
 
+    Double averageRating(long id);
+
+    int votesCount (long id);
+
 
 }
