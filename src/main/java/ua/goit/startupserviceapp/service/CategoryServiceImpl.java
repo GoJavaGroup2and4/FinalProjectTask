@@ -6,6 +6,7 @@ import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.repository.CategoryRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -25,5 +26,17 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getCategoryById(long id) {
         return categoryRepository.getOne(id);
+    }
+
+    @Override
+    public List<String> getAllCategoryNames() {
+
+        List<String> categoryNames;
+
+        categoryNames = this.getAllCategories().stream()
+                .map(Category::getName)
+                .collect(Collectors.toList());
+
+        return categoryNames;
     }
 }

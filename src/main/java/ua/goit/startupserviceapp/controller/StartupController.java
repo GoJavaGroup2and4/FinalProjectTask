@@ -73,12 +73,21 @@ public class StartupController extends HttpServlet {
         return "redirect:/allstartups";
     }
 
-    @RequestMapping("edit/{id}")
-    public String editStartup(@PathVariable("id") Long id, Model model) {
+    @RequestMapping(value = "/startupedit/{id}")
+    public String editStartup(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
         model.addAttribute("startup", this.startupService.getStartupById(id));
-        model.addAttribute("listStartups", this.startupService.getAllStartups());
+        model.addAttribute("is_authenticated", this.userService.isAuthenticated(request));
+        model.addAttribute("categories", this.categoryService.getAllCategories());
+        model.addAttribute("category_names", this.categoryService.getAllCategoryNames());
 
-        return "allstartups";
+        return "/startupedit";
+    }
+
+    @RequestMapping(value = "/startupedit", method = RequestMethod.POST)
+    public String editStartupPost (@ModelAttribute("startup") Startup startup){
+        this.startupService.edit(startup);
+
+        return "/startupdetails";
     }
 
     @RequestMapping(value = "/startupdetails/{id}")
