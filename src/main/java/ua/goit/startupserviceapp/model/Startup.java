@@ -132,7 +132,7 @@ public class Startup {
         this.marks = marks;
     }
 
-    @OneToMany(mappedBy = "startup")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "startup")
     public Set<UserStartup> getUsers() {
         return users;
     }
