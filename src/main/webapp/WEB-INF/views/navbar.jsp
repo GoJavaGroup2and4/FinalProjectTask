@@ -62,7 +62,14 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
-                <a onclick="document.forms['logoutForm'].submit()" class="btn btn-primary">Log out</a>
+
+                <c:if test="${!empty pageContext.request.getRemoteUser()}">
+                    <a onclick="document.forms['logoutForm'].submit()" class="btn btn-primary">Log out</a>
+                </c:if>
+                <c:if test="${empty pageContext.request.getRemoteUser()}">
+                    <a onclick="location.href='login'" class="btn btn-primary">Log in</a>
+                </c:if>
+
                 <button type="submit" class="btn btn-primary">My info</button>
                 <c:choose>
                     <c:when test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
