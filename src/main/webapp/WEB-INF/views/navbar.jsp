@@ -48,12 +48,18 @@
             <li><a href="#">My Startups</a></li>--%>
         </ul>
 
-        <form class="navbar-form navbar-left" role="search">
+        <ul class="nav navbar-nav">
+            <li><a href="mystartups">My startups</a></li>
+            <%--<li><a href="#">Invest</a></li>
+            <li><a href="#">My Startups</a></li>--%>
+        </ul>
+
+        <%--<form class="navbar-form navbar-left" role="search">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+        </form>--%>
 
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

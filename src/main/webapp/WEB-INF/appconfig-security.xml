@@ -23,6 +23,8 @@
         <intercept-url pattern="/startupedit"
                        access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/mystartups"
+                       access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN')"/>
 
         <form-login login-page="/login" default-target-url="/allstartups" authentication-failure-url="/login?error"
                     username-parameter="login" password-parameter="password"/>
