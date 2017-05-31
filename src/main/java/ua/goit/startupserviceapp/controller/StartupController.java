@@ -46,10 +46,10 @@ public class StartupController extends HttpServlet {
     }
 
     @RequestMapping(value = "mystartups", method = RequestMethod.GET)
-    public String mystartups(Model model) {
+    public String mystartups(Model model, HttpServletRequest request) {
         model.addAttribute("startup", new Startup());
-        model.addAttribute("user", securityService.findLoggedInUsername());
-        model.addAttribute("allUserStartups", this.startupService.getStartupsByUser(userService.findByLogin(securityService.findLoggedInUsername())));
+        model.addAttribute("user", this.userService.getAuthenticatedUser(request));
+        model.addAttribute("allUserStartups", this.startupService.getStartupsByUser(userService.getAuthenticatedUser(request)));
 
         return "mystartups";
     }
