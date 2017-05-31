@@ -39,14 +39,13 @@
                     aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
             </button>
-            <a class="navbar-brand" href="#">STARTUP PLATFORM</a>
+            <a class="navbar-brand" href="/allstartups">STARTUP PLATFORM</a>
         </div>
 
         <ul class="nav navbar-nav">
-            <li><a href="#">Startups</a></li>
-            <li><a href="#">Add startup</a></li>
-            <li><a href="#">Invest</a></li>
-            <li><a href="#">My Startups</a></li>
+            <li><a href="/allstartups/add">Add startup</a></li>
+            <%--<li><a href="#">Invest</a></li>
+            <li><a href="#">My Startups</a></li>--%>
         </ul>
 
         <form class="navbar-form navbar-left" role="search">
@@ -67,7 +66,7 @@
                     <a onclick="document.forms['logoutForm'].submit()" class="btn btn-primary">Log out</a>
                 </c:if>
                 <c:if test="${empty pageContext.request.getRemoteUser()}">
-                    <a onclick="location.href='login'" class="btn btn-primary">Log in</a>
+                    <a href="<c:url value="/login"/>" class="btn btn-primary">Log in</a>
                 </c:if>
 
                 <button type="submit" class="btn btn-primary">My info</button>
