@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.service.CategoryService;
+import ua.goit.startupserviceapp.service.SecurityService;
 import ua.goit.startupserviceapp.service.StartupService;
 import ua.goit.startupserviceapp.service.UserService;
 
@@ -30,6 +31,9 @@ public class StartupController extends HttpServlet {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+	private SecurityService securityService;
+
     @RequestMapping(value = "allstartups", method = RequestMethod.GET)
     public String allstartups(Model model) {
         model.addAttribute("startup", new Startup());
@@ -39,6 +43,15 @@ public class StartupController extends HttpServlet {
         model.addAttribute("businessStartups", this.startupService.getAllBusinessStartups());
         model.addAttribute("categories", this.categoryService.getAllCategories());
         return "allstartups";
+    }
+
+    @RequestMapping(value = "mystartups", method = RequestMethod.GET)
+    public String mystartups(Model model) {
+        model.addAttribute("startup", new Startup());
+        model.addAttribute("user", securityService.findLoggedInUsername());
+        model.addAttribute("allUserStartups", this.startupService.getStartupsByUser(userService.findByLogin(securityService.findLoggedInUsername())));
+
+        return "mystartups";
     }
 
     @RequestMapping(value = "/newStartup")
