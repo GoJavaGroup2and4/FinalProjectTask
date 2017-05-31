@@ -5,12 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.startupserviceapp.model.StartupEvaluation;
 import ua.goit.startupserviceapp.model.UserDB;
+import ua.goit.startupserviceapp.model.UserStartup;
 import ua.goit.startupserviceapp.repository.StartupRepository;
 import ua.goit.startupserviceapp.model.Startup;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -26,7 +25,7 @@ public class StartupServiceImpl implements StartupService {
     private StartupRepository startupRepository;
 
     @Autowired
-    public StartupServiceImpl (StartupRepository startupRepository) {
+    public StartupServiceImpl(StartupRepository startupRepository) {
         this.startupRepository = startupRepository;
     }
 
@@ -89,6 +88,7 @@ public class StartupServiceImpl implements StartupService {
     }
 
     @Override
+    @Transactional
     public List<Startup> getAllStartups() {
         return startupRepository.findAll();
     }
@@ -101,7 +101,7 @@ public class StartupServiceImpl implements StartupService {
 
     @Override
     public List<Startup> getStartupsByName(String name) {
-        List <Startup> startupsByName = this.getAllStartups();
+        List<Startup> startupsByName = this.getAllStartups();
 
         startupsByName.removeIf(p -> !p.getName().equals(name));
 
@@ -168,7 +168,7 @@ public class StartupServiceImpl implements StartupService {
         Startup startup = startupRepository.findById(id);
         Set<StartupEvaluation> allMarks = startup.getMarks();
 
-        if(allMarks.size() == 0){
+        if (allMarks.size() == 0) {
             return 0.0;
         }
 
@@ -178,7 +178,7 @@ public class StartupServiceImpl implements StartupService {
         for (StartupEvaluation allMark : allMarks) {
             totalRating += allMark.getMark();
         }
-        averageRating = (double) totalRating/allMarks.size();
+        averageRating = (double) totalRating / allMarks.size();
 
 /**
  *      rounding averageRating to 1 decimal place
@@ -195,14 +195,15 @@ public class StartupServiceImpl implements StartupService {
     }
 
     /**
-     * This method round any double varible to one decimal
+     * This method rounds any double variable to one decimal
+     *
      * @param d the variable to round
      * @return the result of rounding
      */
     private double roundToOneDecimal(double d) {
-        d = d*10;
+        d = d * 10;
         d = Math.round(d);
-        d = d/10;
+        d = d / 10;
         return d;
     }
 
@@ -219,10 +220,21 @@ public class StartupServiceImpl implements StartupService {
         return startups;
     }
 
+    /**
+     * This method gets Set of {@link UserStartup} by {@link UserDB}
+     * then gets {@link Startup} from every {@link UserStartup}
+     * and puts it into the List of {@link Startup}
+     */
     @Override
+    @Transactional
     public List<Startup> getStartupsByUser(UserDB user) {
-        List<Startup> startups = this.getAllStartups();
-        startups.removeIf(p -> !p.getUsers().contains(user));
+        Set<UserStartup> userStartups = user.getStartups();
+        List<Startup> startups = new ArrayList<>();
+        Iterator<UserStartup> iterator = userStartups.iterator();
+
+        while (iterator.hasNext()) {
+            startups.add(iterator.next().getStartup());
+        }
 
         return startups;
     }
