@@ -1,70 +1,64 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title><c:out value="${startup.name}"/></title>
 </head>
 <body>
-<form action="startup/servlet-parameters" method="POST" enctype="multipart/form-data">
+<jsp:include page="navbar.jsp"/>
+
+<h1><c:out value="${startup.name}"/></h1>
+
+<form:form action="/startupedit/" method="POST" commandName="startup">
     <c:if test="${!empty startup}">
-        <table class="tg">
+        <table>
             <tr>
-                <td>Id:</td>
-                <td><input readonly="readonly" type="text" name="id" value="${startup.id}"/></td>
-            </tr>
-            <tr>
-                <td>Name:</td>
-                <td><input type="text" name="name" value="${startup.name}"/></td>
-            </tr>
-            <tr>
-                <td>Picture:</td>
                 <td>
-                    <input type="file" name="picture" size="50"/>
+                    <form:label path="name">
+                        <spring:message text="Name"/>
+                    </form:label>
+                </td>
+                <td><form:input path="name"/></td>
+            </tr>
+            <tr>
+                <td><form:label path="needed_investment">
+                        <spring:message text="Needed Invesment"/>
+                    </form:label>
+                </td>
+                <td><form:input path="needed_investment"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <form:label path="description">
+                        <spring:message text="Description"/>
+                    </form:label>
+                </td>
+                <td><form:input path="description"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <form:label path="category">
+                        <spring:message text="Category"/>
+                    </form:label>
+                </td>
+                <td>
+                    <form:select path="category" multiple="single">
+                        <form:option value="${startup.category.name}"/>
+                        <form:options items="${category_names}"/>
+                    </form:select>
                 </td>
             </tr>
             <tr>
-                <td>Attachment:</td>
-                <td>
-                    <input type="file" name="attachment" size="50"/>
+                <td colspan="2">
+                    <input type="submit" value="<spring:message text="Save changes"/>"/>
                 </td>
-            </tr>
-            <tr>
-                <td>Current investment:</td>
-                <td>
-                    <input type="text" name="currentInvestment" value="${startup.current_investment}"/>
-                </td>
-            </tr>
-            <tr>
-                <td>Needed investment:</td>
-                <td><input type="text" name="neededInvestment" value="${startup.needed_investment}"/></td>
-            </tr>
-            <tr>
-                <td>Description:</td>
-                <td><input type="text" name="description" value="${startup.description}"/></td>
-            </tr>
-            <%--<tr>
-                <td>Rating:</td>
-                <td><input type="text" name="rating" value="${startup.rating}"/></td>
-            </tr>--%>
-            <tr>
-                <td>Category:</td>
-                <td>
-                    <select name="category">
-                        <c:forEach items="${listCategory}" var="category">
-                            <option value="${category.id}">${category.name}</option>
-                        </c:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Status:</td>
-                <td><input type="text" name="status" value="${startup.status}"/></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="Submit"/></td>
             </tr>
         </table>
     </c:if>
-</form>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+</form:form>
 </body>
 </html>
