@@ -7,9 +7,9 @@ import ua.goit.startupserviceapp.model.StartupEvaluation;
 import ua.goit.startupserviceapp.repository.StartupRepository;
 import ua.goit.startupserviceapp.model.Startup;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link ua.goit.startupserviceapp.service.UserService}
@@ -118,45 +118,45 @@ public class StartupServiceImpl implements StartupService {
 
     @Override
     public List<Startup> getAllApprovedStartups() {
-        List<Startup> startups = new ArrayList<>();
-        for (Startup startup : getAllStartups()) {
-            if (startup.getStatus().equalsIgnoreCase("Approved")) {
-                startups.add(startup);
-            }
-        }
+        List<Startup> startups;
+
+        startups = this.getAllStartups().stream()
+                .filter(s -> s.getStatus().equalsIgnoreCase("Approved"))
+                .collect(Collectors.toList());
+
         return startups;
     }
 
     @Override
     public List<Startup> getAllBusinessStartups() {
-        List<Startup> startups = new ArrayList<>();
-        for (Startup startup : getAllApprovedStartups()) {
-            if (startup.getCategory().getName().equalsIgnoreCase("Business (shares) for sale")) {
-                startups.add(startup);
-            }
-        }
+        List<Startup> startups;
+
+        startups = this.getAllApprovedStartups().stream()
+                .filter(s -> s.getCategory().getName().equalsIgnoreCase("Business (shares) for sale"))
+                .collect(Collectors.toList());
+
         return startups;
     }
 
     @Override
     public List<Startup> getAllInvestmentStartups() {
-        List<Startup> startups = new ArrayList<>();
-        for (Startup startup : getAllApprovedStartups()) {
-            if (startup.getCategory().getName().equalsIgnoreCase("Investment projects")) {
-                startups.add(startup);
-            }
-        }
+        List<Startup> startups;
+
+        startups = this.getAllApprovedStartups().stream()
+                .filter(s -> s.getCategory().getName().equalsIgnoreCase("Investment projects"))
+                .collect(Collectors.toList());
+
         return startups;
     }
 
     @Override
     public List<Startup> getAllMobileStartups() {
-        List<Startup> startups = new ArrayList<>();
-        for (Startup startup : getAllApprovedStartups()) {
-            if (startup.getCategory().getName().equalsIgnoreCase("Mobile applications")) {
-                startups.add(startup);
-            }
-        }
+        List<Startup> startups;
+
+        startups = this.getAllApprovedStartups().stream()
+                .filter(s -> s.getCategory().getName().equalsIgnoreCase("Mobile applications"))
+                .collect(Collectors.toList());
+
         return startups;
     }
 
@@ -164,28 +164,24 @@ public class StartupServiceImpl implements StartupService {
     public Double averageRating(long id) {
 
         Startup startup = startupRepository.findById(id);
+        Set<StartupEvaluation> allMarks = startup.getMarks();
+
+        if(allMarks.size() == 0){
+            return 0.0;
+        }
 
         double averageRating;
         int totalRating = 0;
 
-        Set<StartupEvaluation> allMarks = startup.getMarks();
-
         for (StartupEvaluation allMark : allMarks) {
             totalRating += allMark.getMark();
         }
+        averageRating = (double) totalRating/allMarks.size();
 
-        try{
-            averageRating = (double) totalRating/allMarks.size();
-        }
-        catch (ArithmeticException e){
-            return 0.0;
-        }
 /**
  *      rounding averageRating to 1 decimal place
  */
-        averageRating = averageRating*10;
-        averageRating = Math.round(averageRating);
-        averageRating = averageRating/10;
+        averageRating = roundToOneDecimal(averageRating);
 
         return averageRating;
     }
@@ -194,5 +190,17 @@ public class StartupServiceImpl implements StartupService {
     public int votesCount(long id) {
         Startup startup = startupRepository.findById(id);
         return startup.getMarks().size();
+    }
+
+    /**
+     * This method round any double varible to one decimal
+     * @param d the variable to round
+     * @return the result of rounding
+     */
+    private double roundToOneDecimal(double d) {
+        d = d*10;
+        d = Math.round(d);
+        d = d/10;
+        return d;
     }
 }

@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import ua.goit.startupserviceapp.model.Role;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import ua.goit.startupserviceapp.model.UserDB;
 import ua.goit.startupserviceapp.repository.RoleRepository;
 import ua.goit.startupserviceapp.service.SecurityService;
 import ua.goit.startupserviceapp.service.UserService;
-import ua.goit.startupserviceapp.service.UserServiceImpl;
 import ua.goit.startupserviceapp.validator.UserValidator;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Controller for {@link ua.goit.startupserviceapp.model.UserDB}'s pages.

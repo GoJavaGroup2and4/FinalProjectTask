@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
-import ua.goit.startupserviceapp.service.*;
-import ua.goit.startupserviceapp.validator.StartupValidator;
+import ua.goit.startupserviceapp.service.CategoryService;
+import ua.goit.startupserviceapp.service.StartupService;
+import ua.goit.startupserviceapp.service.UserService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +26,6 @@ public class StartupController extends HttpServlet {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private StartupValidator startupValidator;
 
     @Autowired
     private CategoryService categoryService;
@@ -140,5 +133,4 @@ public class StartupController extends HttpServlet {
 
         return "redirect:/startupdetails/{id}";
     }
-
 }
