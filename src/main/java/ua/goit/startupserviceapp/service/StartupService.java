@@ -1,7 +1,9 @@
 package ua.goit.startupserviceapp.service;
 
 import ua.goit.startupserviceapp.model.Startup;
+import ua.goit.startupserviceapp.model.UserDB;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -41,10 +43,11 @@ public interface StartupService {
 
     List<Startup> getAllMobileStartups();
 
-//    List<Startup> getStartupsByUser(UserDB user);
+    List<Startup> getStartupsByUser(UserDB user);
 
     List<Startup> getStartupsByName(String name);
 
+    Collection<Startup> findAllByKeyWord(String key);
 
     Startup getStartupById(long id);
 

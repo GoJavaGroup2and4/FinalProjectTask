@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.startupserviceapp.model.StartupEvaluation;
+import ua.goit.startupserviceapp.model.UserDB;
 import ua.goit.startupserviceapp.repository.StartupRepository;
 import ua.goit.startupserviceapp.model.Startup;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -202,5 +204,26 @@ public class StartupServiceImpl implements StartupService {
         d = Math.round(d);
         d = d/10;
         return d;
+    }
+
+    @Override
+    @Transactional
+    public Collection<Startup> findAllByKeyWord(String key) {
+        Collection<Startup> startups;
+        if (key.isEmpty()) {
+            startups = getAllApprovedStartups();
+        } else {
+            startups = startupRepository.findAllByKeyWord(key);
+        }
+
+        return startups;
+    }
+
+    @Override
+    public List<Startup> getStartupsByUser(UserDB user) {
+        List<Startup> startups = this.getAllStartups();
+        startups.removeIf(p -> !p.getUsers().contains(user));
+
+        return startups;
     }
 }
