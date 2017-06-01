@@ -161,5 +161,4 @@ public class UserServiceImpl implements UserService {
                 &&
                 user.getRoles().contains(new Role("ROLE_FOUNDER"));
     }
-
 }

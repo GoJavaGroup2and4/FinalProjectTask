@@ -232,4 +232,14 @@ public class StartupServiceImpl implements StartupService {
 
         return startups;
     }
+
+    @Override
+    @Transactional
+    public void invest(long startupId, int investment) {
+
+        Startup startup = startupRepository.findById(startupId);
+        startup.setCurrent_investment(startup.getCurrent_investment() + investment);
+
+        startupRepository.save(startup);
+    }
 }

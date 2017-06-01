@@ -20,10 +20,6 @@
 <br/>
 
 <div>
-    <c:if test="${startup.status == 'Approved'}">
-        <div><a href="<c:url value="/invest/${startup.id}"/>"> Make an investment</a></div>
-    </c:if>
-
     <div>Total required amount: <c:out value="${startup.needed_investment}"/>$</div>
 
     <div>Investments received: <c:out value="${startup.current_investment}"/>$</div>
@@ -45,6 +41,48 @@
 <br/>
 
 <div>
+    <c:if test="${startup.status == 'Approved'}">
+        <h4>Investor Block:</h4>
+        <div>
+            <form action="/startupdetails/${id}/invest" method="POST">
+                <table>
+                   <tr>
+                       <td>Enter your amount: </td>
+                       <td><input type="text" name="investment"></td>
+                   </tr>
+                    <tr>
+                        <td colspan = "2">
+                            <input type = "submit" value = "Make an investment"/>
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+            </form>
+        </div>
+    </c:if>
+
+</div>
+
+<br/>
+
+<div>
+    <c:if test="${is_owner}">
+        <h4>Owner Block:</h4>
+        <div>Startup status: <c:out value="${startup.status}"/></div>
+        <c:if test="${startup.status == 'Draft' || startup.status == 'Rejected'}">
+            <div><a href="<c:url value="/startupdetails/sendforapprove/${startup.id}"/> ">Send startup for approve</a> </div>
+        </c:if>
+        <c:if test="${startup.status != 'Closed'}">
+            <div><a href="<c:url value="/startupedit/${startup.id}"/>">Edit startup</a></div>
+            <div><a href="<c:url value="/startupdetails/close/${startup.id}"/> ">Close startup</a> </div>
+        </c:if>
+    </c:if>
+
+</div>
+
+<br/>
+
+<div>
     <c:if test="${is_admin}">
         <h4>Admin Block:</h4>
         <div>Startup status: <c:out value="${startup.status}"/></div>
@@ -58,23 +96,6 @@
                 </c:when>
         </c:choose>
     </c:if>
-</div>
-
-<br/>
-
-<div>
-    <c:if test="${is_owner}">
-        <h4>Owner Block:</h4>
-        <div>Startup status: <c:out value="${startup.status}"/></div>
-            <c:if test="${startup.status == 'Draft' || startup.status == 'Rejected'}">
-                <div><a href="<c:url value="/startupdetails/sendforapprove/${startup.id}"/> ">Send startup for approve</a> </div>
-            </c:if>
-            <c:if test="${startup.status != 'Closed'}">
-                <div><a href="<c:url value="/startupedit/${startup.id}"/>">Edit startup</a></div>
-                <div><a href="<c:url value="/startupdetails/close/${startup.id}"/> ">Close startup</a> </div>
-            </c:if>
-    </c:if>
-
 </div>
 
 </body>

@@ -3,10 +3,7 @@ package ua.goit.startupserviceapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.service.CategoryService;
@@ -123,6 +120,19 @@ public class StartupController extends HttpServlet {
         model.addAttribute("votes_count", this.startupService.votesCount(id));
 
         return "startupdetails";
+    }
+
+    @RequestMapping(value = "/startupdetails/{id}/invest", method = RequestMethod.POST)
+    public String startupInvest (@RequestParam("investment") int investment, @PathVariable ("id") long startupId, HttpServletRequest request){
+        
+        if(userService.isAuthenticated(request)) {
+            this.startupService.invest(startupId, investment);
+
+            return "redirect:/startupdetails/{id}";
+        }
+        else {
+            return "redirect:/login";
+        }
     }
 
     @RequestMapping(value = "/startupdetails/sendforapprove/{id}")

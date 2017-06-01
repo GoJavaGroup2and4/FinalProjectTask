@@ -55,5 +55,5 @@ public interface StartupService {
 
     int votesCount (long id);
 
-
+    void invest(long startupId, int investment);
 }
