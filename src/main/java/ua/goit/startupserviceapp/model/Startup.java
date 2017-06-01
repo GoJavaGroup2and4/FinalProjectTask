@@ -1,10 +1,7 @@
 package ua.goit.startupserviceapp.model;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.sql.Blob;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -152,7 +149,7 @@ public class Startup {
     }
 
     //    TODO: Do we need String status in parameters? Isn't default status for newly created Startup "Draft"?
-    public Startup(long id, String name, Blob image, Blob attachment, int current_investment, int needed_investment, String description, Double rating, String status, Category category) {
+    public Startup(long id, String name, Blob image, Blob attachment, int current_investment, int needed_investment, String description, Double rating, Category category) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -161,7 +158,7 @@ public class Startup {
         this.needed_investment = needed_investment;
         this.description = description;
         this.rating = rating;
-        this.status = status;
+        this.status = "Draft";
         this.category = category;
     }
 
@@ -190,8 +187,6 @@ public class Startup {
         return "Startup{" +
                 "id=" + id +
                 ", \n name='" + name + '\'' +
-//                ", image=" + Arrays.toString(image) +             // Do we need pictures to be displayed in console?))
-//                ", attachment=" + Arrays.toString(attachment) +
                 ", \n current_investment=" + current_investment +
                 ", \n needed_investment=" + needed_investment +
                 ", \n description='" + description + '\'' +

@@ -86,21 +86,30 @@ public class StartupController extends HttpServlet {
         return "redirect:/allstartups";
     }
 
-    @RequestMapping(value = "/startupedit/{id}")
+    @RequestMapping(value = "/startupedit/{id}", method = RequestMethod.GET)
     public String editStartup(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
-        model.addAttribute("startup", this.startupService.getStartupById(id));
-        model.addAttribute("is_authenticated", this.userService.isAuthenticated(request));
-        model.addAttribute("categories", this.categoryService.getAllCategories());
-        model.addAttribute("category_names", this.categoryService.getAllCategoryNames());
 
-        return "/startupedit";
+        if(this.userService.isStartupOwner(id, request)) {
+            model.addAttribute("startup", this.startupService.getStartupById(id));
+            model.addAttribute("is_authenticated", this.userService.isAuthenticated(request));
+            model.addAttribute("categories", this.categoryService.getAllCategories());
+            model.addAttribute("category_names", this.categoryService.getAllCategoryNames());
+            return "startupedit";
+        }
+        else {
+            return "redirect:/startupdetails/{id}";
+        }
     }
 
-    @RequestMapping(value = "/startupedit", method = RequestMethod.POST)
-    public String editStartupPost (@ModelAttribute("startup") Startup startup){
+    @RequestMapping(value = "startupedit/{id}", method = RequestMethod.POST)
+    public String editStartup(@ModelAttribute("startup") Startup startup){
+
+        Category category = categoryService.getCategoryByName(startup.getCategory().getName());
+        startup.setCategory(category);
+
         this.startupService.edit(startup);
 
-        return "/startupdetails";
+        return "redirect:/startupdetails/{id}";
     }
 
     @RequestMapping(value = "/startupdetails/{id}")

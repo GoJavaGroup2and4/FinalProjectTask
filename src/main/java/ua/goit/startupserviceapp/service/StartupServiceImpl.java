@@ -30,29 +30,29 @@ public class StartupServiceImpl implements StartupService {
     }
 
     @Override
+    @Transactional
     public void save(Startup startup) {
         startupRepository.save(startup);
     }
 
     @Override
+    @Transactional
     public void edit(Startup startup) {
         startup.setStatus("Draft");
         startupRepository.save(startup);
     }
 
     @Override
+    @Transactional
     public void delete(Startup startup) {
         startupRepository.delete(startup);
     }
 
     @Override
+    @Transactional
     public void deleteById(long id) {
         startupRepository.delete(id);
     }
-
-
-//        TODO: In case when status is already approved or above - validator has to show respective error on web-page. Or develop another logic
-//        TODO: add Admin authorization checks
 
     @Override
     @Transactional
@@ -92,12 +92,6 @@ public class StartupServiceImpl implements StartupService {
     public List<Startup> getAllStartups() {
         return startupRepository.findAll();
     }
-
-    //    TODO: розібратися що таке UserStartup
-//    @Override
-//    public List<Startup> getStartupsByUser(UserDB user) {
-//        return null;
-//    }
 
     @Override
     public List<Startup> getStartupsByName(String name) {

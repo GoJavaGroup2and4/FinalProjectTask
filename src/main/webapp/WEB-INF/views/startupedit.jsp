@@ -12,7 +12,7 @@
 
 <h1><c:out value="${startup.name}"/></h1>
 
-<form:form action="/startupedit/" method="POST" commandName="startup">
+<form:form action="/startupedit/${startup.id}" method="POST" commandName="startup" modelAttribute="startup">
     <c:if test="${!empty startup}">
         <table>
             <tr>

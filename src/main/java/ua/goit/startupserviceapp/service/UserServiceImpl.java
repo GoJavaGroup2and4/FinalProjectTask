@@ -152,12 +152,12 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     @Transactional(readOnly = true)
-    public boolean isStartupOwner(long id, HttpServletRequest request) {
+    public boolean isStartupOwner(long startupId, HttpServletRequest request) {
 
         UserDB user = getAuthenticatedUser(request);
 
         return user.getStartups().stream()
-                .anyMatch(s -> s.getStartup().getId() == id)
+                .anyMatch(s -> s.getStartup().getId() == startupId)
                 &&
                 user.getRoles().contains(new Role("ROLE_FOUNDER"));
     }
