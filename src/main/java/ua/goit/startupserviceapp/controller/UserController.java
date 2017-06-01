@@ -65,20 +65,21 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value = "/userdetails/{login}", method = RequestMethod.GET)
-    public String userDetails(Model model, @PathVariable("login") String login){
-        model.addAttribute("userForm", userService.findByLogin(login));
+    @RequestMapping(value = "userdetails", method = RequestMethod.GET)
+    public String userDetails(Model model){
+
+        model.addAttribute("userForm", userService.findByLogin(securityService.getLoggedUserLogin()));
 
         return "userdetails";
     }
 
-    @RequestMapping(value = "userdetails/{login}", method = RequestMethod.POST)
-    public String userDetails(@ModelAttribute("userForm") UserDB userForm, @PathVariable("login") String login, Model model){
-        userForm.setRoles(userService.findByLogin(login).getRoles());
-        userForm.setPassword(userService.findByLogin(login).getPassword());
+    @RequestMapping(value = "userdetails", method = RequestMethod.POST)
+    public String userDetails(@ModelAttribute("userForm") UserDB userForm, Model model){
+        userForm.setRoles(userService.findByLogin(userForm.getLogin()).getRoles());
+        userForm.setPassword(userService.findByLogin(userForm.getLogin()).getPassword());
         userService.saveWithoutEncode(userForm);
 
-        return "redirect:/userdetails/" + login + "/";
+        return "userdetails";
     }
 
     @RequestMapping(value = {"/","home"},method = RequestMethod.GET)

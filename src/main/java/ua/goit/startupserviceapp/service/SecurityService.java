@@ -9,6 +9,8 @@ public interface SecurityService {
 
     String findLoggedInUsername();
 
+    String getLoggedUserLogin();
+
     void autoLogin(String login,String password);
 
 }
