@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<jsp:include page="navbar.jsp"/>
 <input type="hidden" name="userLogin" value="${pageContext.request.getRemoteUser()}"/>
 
 <div class="container">
