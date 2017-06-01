@@ -124,7 +124,11 @@ public class StartupController extends HttpServlet {
 
     @RequestMapping(value = "/startupdetails/{id}/invest", method = RequestMethod.POST)
     public String startupInvest (@RequestParam("investment") int investment, @PathVariable ("id") long startupId, HttpServletRequest request){
-        
+
+        if(investment <= 0){
+            return "redirect:/startupdetails/{id}";
+        }
+
         if(userService.isAuthenticated(request)) {
             this.startupService.invest(startupId, investment);
 
