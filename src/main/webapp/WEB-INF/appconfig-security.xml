@@ -22,6 +22,8 @@
                        access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
         <intercept-url pattern="/startupedit"
                        access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/userdetails"
+                       access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN', 'ROLE_ANONYMOUS')"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/mystartups"
                        access="hasAnyRole('ROLE_FOUNDER', 'ROLE_INVESTOR', 'ROLE_ADMIN')"/>

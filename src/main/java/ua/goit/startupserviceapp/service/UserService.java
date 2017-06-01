@@ -19,6 +19,8 @@ public interface UserService {
 
     void save(UserDB user);
 
+    void saveWithoutEncode(UserDB user);
+
     UserDB findByLogin(String login);
 
     @Secured("Investor")

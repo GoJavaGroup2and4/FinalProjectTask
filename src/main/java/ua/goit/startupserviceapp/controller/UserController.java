@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ua.goit.startupserviceapp.model.UserDB;
 import ua.goit.startupserviceapp.repository.RoleRepository;
 import ua.goit.startupserviceapp.service.SecurityService;
@@ -66,6 +63,22 @@ public class UserController {
             model.addAttribute("message", "Logged out successfully. ");
         }
         return "login";
+    }
+
+    @RequestMapping(value = "/userdetails/{login}", method = RequestMethod.GET)
+    public String userDetails(Model model, @PathVariable("login") String login){
+        model.addAttribute("userForm", userService.findByLogin(login));
+
+        return "userdetails";
+    }
+
+    @RequestMapping(value = "userdetails/{login}", method = RequestMethod.POST)
+    public String userDetails(@ModelAttribute("userForm") UserDB userForm, @PathVariable("login") String login, Model model){
+        userForm.setRoles(userService.findByLogin(login).getRoles());
+        userForm.setPassword(userService.findByLogin(login).getPassword());
+        userService.saveWithoutEncode(userForm);
+
+        return "redirect:/userdetails/" + login + "/";
     }
 
     @RequestMapping(value = {"/","home"},method = RequestMethod.GET)

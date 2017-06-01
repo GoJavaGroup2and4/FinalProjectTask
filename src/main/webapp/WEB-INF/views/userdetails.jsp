@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,66 +13,78 @@
 <body>
 
 <div class="container">
-    <h2>Personal information:</h2>
     <br/>
-    <form class="form-horizontal" action="/action_page.php">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form:form method="post" modelAttribute="userForm" class="form-horizontal" role="form">
+                <fieldset>
+                    <legend>Personal information:</legend>
 
-        <div class="form-group">
-            <label class="control-label col-sm-2">Login:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static">put here user's Login</p>
-            </div>
+                    <form:hidden path="id"/>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Login:</label>
+                        <div class="col-sm-7">
+                            <form:input path="login" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">First name:</label>
+                        <div class="col-sm-7">
+                            <form:input path="firstName" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="password" id="${userForm.password}">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Last name:</label>
+                        <div class="col-sm-7">
+                            <form:input path="lastName" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Phone number:</label>
+                        <div class="col-sm-7">
+                            <form:input path="phoneNumber" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Email:</label>
+                        <div class="col-sm-7">
+                            <form:input path="email" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Country:</label>
+                        <div class="col-sm-7">
+                            <form:input path="country" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">City:</label>
+                        <div class="col-sm-7">
+                            <form:input path="city" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-4">
+                            <button type="submit" class="btn btn-primary">Edit profile</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="<c:url value="/allstartups"/>" class="btn btn-ghost">Cancel</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form:form>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2">First name:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static">put here user's first name</p>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2">Last name:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static">put here user's last name</p>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2">Phone number:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static">put here user's Phone number</p>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2">Email:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static">put here user's Email</p>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2">Country:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static">put here user's country</p>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-2">City:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static">put here user's city</p>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Edit profile</button>
-            </div>
-        </div>
-
-    </form>
+    </div>
 </div>
 
 </body>

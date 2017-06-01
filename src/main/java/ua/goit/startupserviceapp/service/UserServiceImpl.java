@@ -47,6 +47,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveWithoutEncode(UserDB user) {
+        userDBRepository.save(user);
+    }
+
+    @Override
+    @Transactional
     public UserDB findByLogin(String login) {
         return userDBRepository.findByLogin(login);
     }

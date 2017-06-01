@@ -43,7 +43,7 @@
         </div>
 
         <ul class="nav navbar-nav">
-            <li><a href="/allstartups/add">Add startup</a></li>
+            <li><a href="<c:url value="/allstartups/add"/>">Add startup</a></li>
             <%--<li><a href="#">Invest</a></li>
             <li><a href="#">My Startups</a></li>--%>
         </ul>
@@ -70,12 +70,12 @@
 
                 <c:if test="${!empty pageContext.request.getRemoteUser()}">
                     <a onclick="document.forms['logoutForm'].submit()" class="btn btn-primary">Log out</a>
+                    <a href="<c:url value="/userdetails/${pageContext.request.getRemoteUser()}"/>" type="submit" class="btn btn-primary">My info</a>
                 </c:if>
                 <c:if test="${empty pageContext.request.getRemoteUser()}">
                     <a href="<c:url value="/login"/>" class="btn btn-primary">Log in</a>
                 </c:if>
 
-                <button type="submit" class="btn btn-primary">My info</button>
                 <c:choose>
                     <c:when test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
                         <button type="submit" class="btn btn-info">Admin</button>
