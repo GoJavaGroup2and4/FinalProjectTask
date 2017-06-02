@@ -40,7 +40,7 @@
             </form>
 
             <div class="login-help">
-                <a href="/registration">Register</a>
+                <a href="registration">Register</a>
             </div>
         </div>
     </form>
