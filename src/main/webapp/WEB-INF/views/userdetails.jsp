@@ -82,7 +82,7 @@
                             <button type="submit" class="btn btn-primary">Edit profile</button>
                         </div>
                         <div class="col-sm-3">
-                            <a href="<c:url value="/WEB-INF/views/allstartups.jsp"/>" class="btn btn-ghost">Cancel</a>
+                            <a href="<c:url value="/allstartups"/>" class="btn btn-ghost">Cancel</a>
                         </div>
                     </div>
                 </fieldset>
