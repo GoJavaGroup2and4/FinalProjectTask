@@ -10,7 +10,7 @@ public class UserStartup implements Serializable{
     private Startup startup;
     private int userInvestment;
 
-    public UserStartup(int user_id, int startup_id, int investment) {
+    public UserStartup(long user_id, long startup_id, int investment) {
     }
 
     public UserStartup() {
