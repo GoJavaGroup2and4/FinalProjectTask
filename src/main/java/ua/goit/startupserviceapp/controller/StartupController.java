@@ -3,6 +3,7 @@ package ua.goit.startupserviceapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
@@ -10,6 +11,7 @@ import ua.goit.startupserviceapp.service.CategoryService;
 import ua.goit.startupserviceapp.service.SecurityService;
 import ua.goit.startupserviceapp.service.StartupService;
 import ua.goit.startupserviceapp.service.UserService;
+import ua.goit.startupserviceapp.validator.StartupValidator;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +33,30 @@ public class StartupController extends HttpServlet {
     @Autowired
 	private SecurityService securityService;
 
+    @Autowired
+    private StartupValidator startupValidator;
+
+    @RequestMapping(value = "addstartup", method = RequestMethod.GET)
+    public String addStartup(Model model) {
+        model.addAttribute("startupForm", new Startup());
+
+        return "addstartup";
+    }
+
+    @RequestMapping(value = "addstartup", method = RequestMethod.POST)
+    public String addStartup(@ModelAttribute("startupForm") Startup startupForm, BindingResult bindingResult) {
+        startupValidator.validate(startupForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "addstartup";
+        }
+
+        startupService.save(startupForm);
+
+        return "redirect:/allstartups";
+    }
+
+
     @RequestMapping(value = "allstartups", method = RequestMethod.GET)
     public String allstartups(Model model) {
         model.addAttribute("startup", new Startup());
@@ -51,7 +77,7 @@ public class StartupController extends HttpServlet {
         return "mystartups";
     }
 
-    @RequestMapping(value = "/newStartup")
+    /*@RequestMapping(value = "/newStartup")
     public String newStartup(Model model) {
         model.addAttribute("startup", new Startup());
         //TODO use DAO getAll()
@@ -63,9 +89,10 @@ public class StartupController extends HttpServlet {
         list.get(2).setId(2);
         model.addAttribute("listCategory", list);
         return "startup/edit";
-    }
+    }*/
 
-    @RequestMapping(value = "allstartups/add", method = RequestMethod.POST)
+//    @RequestMapping(value = "allstartups/add", method = RequestMethod.POST)
+    /*@RequestMapping(value = "addstartup", method = RequestMethod.POST)
     public String addStartup(@ModelAttribute("startup") Startup startup) {
         if (startup.getId() == 0) {
             this.startupService.save(startup);
@@ -74,7 +101,7 @@ public class StartupController extends HttpServlet {
         }
 
         return "redirect:/allstartups";
-    }
+    }*/
 
     @RequestMapping("/remove/{id}")
     public String removeStartup(@PathVariable("id") Long id) {
