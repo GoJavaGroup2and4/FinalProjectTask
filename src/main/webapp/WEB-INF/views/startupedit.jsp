@@ -6,59 +6,75 @@
 <html>
 <head>
     <title><c:out value="${startup.name}"/></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
 
-<h1><c:out value="${startup.name}"/></h1>
-
 <form:form action="/startupedit/${startup.id}" method="POST" commandName="startup" modelAttribute="startup">
     <c:if test="${!empty startup}">
-        <table>
-            <tr>
-                <td>
-                    <form:label path="name">
-                        <spring:message text="Name"/>
-                    </form:label>
-                </td>
-                <td><form:input path="name"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="needed_investment">
-                        <spring:message text="Needed Invesment"/>
-                    </form:label>
-                </td>
-                <td><form:input path="needed_investment"/></td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="description">
-                        <spring:message text="Description"/>
-                    </form:label>
-                </td>
-                <td><form:input path="description"/></td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="category">
-                        <spring:message text="Category"/>
-                    </form:label>
-                </td>
-                <td>
-                    <form:select path="category" multiple="single">
-                        <form:option value="${startup.category.name}"/>
-                        <form:options items="${category_names}"/>
-                    </form:select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="<spring:message text="Save changes"/>"/>
-                </td>
-            </tr>
-        </table>
+        <div class="container">
+            <h2>${startup.name}:</h2>
+            <br/>
+
+            <form class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">
+                        <spring:message text="Name:"/>
+                    </label>
+                    <div class="col-sm-10">
+                        <form:input class="form-control" path="name"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">
+                        <spring:message text="Needed Invesment:"/>
+                    </label>
+                    <div class="col-sm-10">
+                        <form:input class="form-control" path="needed_investment"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">
+                        <spring:message text="Description:"/>
+                    </label>
+                    <div class="col-sm-10">
+                        <form:input class="form-control" path="description"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">
+                        <spring:message text="Category:"/>
+                    </label>
+                    <div class="col-sm-10">
+                        <form:select class="form-control" path="category" multiple="single">
+                            <form:option value="${startup.category.name}"/>
+                            <form:options items="${category_names}"/>
+                        </form:select>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">
+                        <input class="btn btn-primary" type="submit" value="<spring:message text="Save changes"/>"/>
+                    </label>
+                </div>
+
+
+            </form>
+
+        </div>
     </c:if>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form:form>
+
 </body>
 </html>
