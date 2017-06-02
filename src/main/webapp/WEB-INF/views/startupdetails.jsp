@@ -1,99 +1,178 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
-    <title><c:out value="${startup.name}"/> </title>
+    <title><c:out value="${startup.name}"/></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
 
-<h1><c:out value="${startup.name}"/></h1>
+<div class="container">
+    <h2>${startup.name} detailed information:</h2>
+    <br/>
+    <form class="form-horizontal">
 
-<div>
-    <div>Category: <span><c:out value="${startup.category.name}"/></span></div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Category:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">${startup.category.name}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Total required amount:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">$${startup.needed_investment}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Investments received:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">$${startup.current_investment}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Average Startup rating:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">${average_rating} (votes: ${votes_count})</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">Description:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">${startup.description}</p>
+            </div>
+        </div>
+    </form>
+    <br/>
 </div>
 
-<br/>
-
-<div>
-    <div>Total required amount: <c:out value="${startup.needed_investment}"/>$</div>
-
-    <div>Investments received: <c:out value="${startup.current_investment}"/>$</div>
-</div>
-
-<div>
-    <div>Average Startup rating: <c:out value="${average_rating}"/> (votes: <c:out value="${votes_count}"/>)</div>
-</div>
-
-<br/>
-
-<div>
-    <div>Description:</div>
-    <div>
-        <div><c:out value="${startup.description}"/></div>
-    </div>
-</div>
-
-<br/>
-
-<div>
+<div class="container">
     <c:if test="${startup.status == 'Approved'}">
-        <h4>Investor Block:</h4>
-        <div>
+        <h2>Investor's Block:</h2>
+        <br/>
+        <div class="form-horizontal">
             <form action="/startupdetails/${id}/invest" method="POST">
-                <table>
-                   <tr>
-                       <td>Enter your amount: </td>
-                       <td><input type="text" name="investment"></td>
-                   </tr>
-                    <tr>
-                        <td colspan = "2">
-                            <input type = "submit" value = "Make an investment"/>
-                        </td>
-                    </tr>
-                </table>
-                <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Enter your amount:</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text" name="investment"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-5">
+                        <button type="submit" class="btn btn-primary">Make an investment!</button>
+                    </div>
+                </div>
+
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
     </c:if>
-
 </div>
 
-<br/>
-
-<div>
+<div class="container">
     <c:if test="${is_owner}">
-        <h4>Owner Block:</h4>
-        <div>Startup status: <c:out value="${startup.status}"/></div>
+        <h2>Startup Owner's Block:</h2>
+        <br/>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Startup status:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">${startup.status}</p>
+                </div>
+            </div>
+        </form>
+
         <c:if test="${startup.status == 'Draft' || startup.status == 'Rejected'}">
-            <div><a href="<c:url value="/startupdetails/sendforapprove/${startup.id}"/> ">Send startup for approve</a> </div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">
+                        <a class="btn btn-success"
+                           href="<c:url value="/startupdetails/sendforapprove/${startup.id}"/> ">Send for approve</a>
+                    </label>
+                </div>
+            </form>
         </c:if>
+
         <c:if test="${startup.status != 'Closed'}">
-            <div><a href="<c:url value="/startupedit/${startup.id}"/>">Edit startup</a></div>
-            <div><a href="<c:url value="/startupdetails/close/${startup.id}"/> ">Close startup</a> </div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">
+                        <a href="<c:url value="/startupedit/${startup.id}"/>">Edit startup</a>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">
+                        <a href="<c:url value="/startupdetails/close/${startup.id}"/> ">Close startup</a>
+                    </label>
+                </div>
+            </form>
         </c:if>
     </c:if>
-
 </div>
 
-<br/>
-
-<div>
+<div class="container">
     <c:if test="${is_admin}">
-        <h4>Admin Block:</h4>
-        <div>Startup status: <c:out value="${startup.status}"/></div>
+        <h2>Admin's Block:</h2>
+        <br/>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Startup status:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">${startup.status}</p>
+                </div>
+            </div>
+        </form>
+
         <c:choose>
             <c:when test="${startup.status == 'Ready for approve'}">
-                <div><a href="<c:url value="/startupdetails/approve/${startup.id}"/>">Approve startup</a></div>
-                <div><a href="<c:url value="/startupdetails/reject/${startup.id}"/>">Reject startup</a></div>
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">
+                            <div class="btn btn-success"><a
+                                    href="<c:url value="/startupdetails/approve/${startup.id}"/>">Approve startup</a>
+                            </div>
+                        </label>
+                    </div>
+                </form>
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">
+                            <div class="btn btn-warning"><a
+                                    href="<c:url value="/startupdetails/reject/${startup.id}"/>">Reject startup</a>
+                            </div>
+                        </label>
+                    </div>
+                </form>
+
             </c:when>
+
             <c:when test="${startup.status == 'Rejected' || startup.status == 'Closed'}">
-                <div><a href="<c:url value="/startupdetails/delete/${startup.id}"/>">Delete startup</a></div>
-                </c:when>
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">
+                            <div class="btn btn-danger"><a href="<c:url value="/startupdetails/delete/${startup.id}"/>">Delete
+                                startup</a></div>
+                        </label>
+                    </div>
+                </form>
+
+            </c:when>
         </c:choose>
     </c:if>
 </div>
