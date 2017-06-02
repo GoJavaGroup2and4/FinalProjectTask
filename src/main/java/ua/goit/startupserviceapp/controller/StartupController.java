@@ -15,8 +15,6 @@ import ua.goit.startupserviceapp.validator.StartupValidator;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class StartupController extends HttpServlet {
@@ -29,9 +27,6 @@ public class StartupController extends HttpServlet {
 
     @Autowired
     private CategoryService categoryService;
-
-    @Autowired
-	private SecurityService securityService;
 
     @Autowired
     private StartupValidator startupValidator;
@@ -80,32 +75,6 @@ public class StartupController extends HttpServlet {
 
         return "mystartups";
     }
-
-    /*@RequestMapping(value = "/newStartup")
-    public String newStartup(Model model) {
-        model.addAttribute("startup", new Startup());
-        //TODO use DAO getAll()
-        List<Category> list = new ArrayList<>();
-        list.add(new Category("category 1"));
-        list.add(new Category("category 2"));
-        list.get(1).setId(1);
-        list.add(new Category("category 3"));
-        list.get(2).setId(2);
-        model.addAttribute("listCategory", list);
-        return "startup/edit";
-    }*/
-
-//    @RequestMapping(value = "allstartups/add", method = RequestMethod.POST)
-    /*@RequestMapping(value = "addstartup", method = RequestMethod.POST)
-    public String addStartup(@ModelAttribute("startup") Startup startup) {
-        if (startup.getId() == 0) {
-            this.startupService.save(startup);
-        } else {
-            this.startupService.edit(startup);
-        }
-
-        return "redirect:/allstartups";
-    }*/
 
     @RequestMapping("/remove/{id}")
     public String removeStartup(@PathVariable("id") Long id) {
