@@ -1,11 +1,6 @@
 package ua.goit.startupserviceapp.model;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
 import javax.persistence.*;
-import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 

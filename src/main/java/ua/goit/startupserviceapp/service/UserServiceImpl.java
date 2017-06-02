@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.goit.startupserviceapp.model.Role;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.model.UserDB;
-import ua.goit.startupserviceapp.model.UserStartup;
 import ua.goit.startupserviceapp.repository.RoleRepository;
 import ua.goit.startupserviceapp.repository.UserDBRepository;
 import javax.servlet.http.HttpServletRequest;
@@ -60,11 +59,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Secured("Investor")
     public void invest(UserDB user_id, Startup startup_id, int investment) {
-        UserStartup userStartup = new UserStartup();
-        userStartup.setStartup(startup_id);
-        userStartup.setUser(user_id);
-        userStartup.setUserInvestment(investment);
-
         Startup startup = new Startup();
         startup.setCurrent_investment(startup.getCurrent_investment() + investment);
     }
@@ -157,7 +151,7 @@ public class UserServiceImpl implements UserService {
         UserDB user = getAuthenticatedUser(request);
 
         return user.getStartups().stream()
-                .anyMatch(s -> s.getStartup().getId() == startupId)
+                .anyMatch(s -> s.getId() == startupId)
                 &&
                 user.getRoles().contains(new Role("ROLE_FOUNDER"));
     }

@@ -20,7 +20,7 @@ public class Startup {
     private String status;
     private Category category;
     private Set<StartupEvaluation> marks = new HashSet<>();
-    private Set<UserStartup> users = new HashSet<>();
+    private Set<UserDB> users = new HashSet<>();
 
     @Id
     @Column(name = "startup_id", unique = true, nullable = false)
@@ -129,12 +129,15 @@ public class Startup {
         this.marks = marks;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "startup")
-    public Set<UserStartup> getUsers() {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinTable(name = "user_startup",
+                joinColumns = {@JoinColumn(name = "startup_id")},
+                inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    public Set<UserDB> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<UserStartup> users) {
+    public void setUsers(Set<UserDB> users) {
         this.users = users;
     }
 

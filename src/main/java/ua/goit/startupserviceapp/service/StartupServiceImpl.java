@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.startupserviceapp.model.StartupEvaluation;
 import ua.goit.startupserviceapp.model.UserDB;
-import ua.goit.startupserviceapp.model.UserStartup;
 import ua.goit.startupserviceapp.repository.StartupRepository;
 import ua.goit.startupserviceapp.model.Startup;
 
@@ -32,6 +31,7 @@ public class StartupServiceImpl implements StartupService {
     @Override
     @Transactional
     public void save(Startup startup) {
+        startup.setStatus("Draft");
         startupRepository.save(startup);
     }
 
@@ -215,20 +215,15 @@ public class StartupServiceImpl implements StartupService {
     }
 
     /**
-     * This method gets Set of {@link UserStartup} by {@link UserDB}
-     * then gets {@link Startup} from every {@link UserStartup}
+     * This method gets Set of {@link Startup} by {@link UserDB}
      * and puts it into the List of {@link Startup}
      */
     @Override
     @Transactional
     public List<Startup> getStartupsByUser(UserDB user) {
-        Set<UserStartup> userStartups = user.getStartups();
-        List<Startup> startups = new ArrayList<>();
-        Iterator<UserStartup> iterator = userStartups.iterator();
 
-        while (iterator.hasNext()) {
-            startups.add(iterator.next().getStartup());
-        }
+        List<Startup> startups = new ArrayList<>();
+        startups.addAll(user.getStartups());
 
         return startups;
     }

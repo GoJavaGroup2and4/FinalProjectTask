@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ua.goit.startupserviceapp.model.Category;
 import ua.goit.startupserviceapp.model.Startup;
 import ua.goit.startupserviceapp.service.CategoryService;
-import ua.goit.startupserviceapp.service.SecurityService;
 import ua.goit.startupserviceapp.service.StartupService;
 import ua.goit.startupserviceapp.service.UserService;
 import ua.goit.startupserviceapp.validator.StartupValidator;
@@ -40,14 +39,18 @@ public class StartupController extends HttpServlet {
 
     @RequestMapping(value = "addstartup", method = RequestMethod.POST)
     public String addStartup(@ModelAttribute("startupForm") Startup startupForm,
-                             @RequestParam("categoryId") long categoryId, BindingResult bindingResult) {
+                             @RequestParam("categoryId") long categoryId, BindingResult bindingResult, HttpServletRequest request) {
         startupValidator.validate(startupForm, bindingResult);
+
+        if(!userService.isAuthenticated(request)){
+            return "redirect:/login";
+        }
 
         if (bindingResult.hasErrors()) {
             return "addstartup";
         }
         startupForm.setCategory(categoryService.getCategoryById(categoryId));
-        startupForm.setStatus("Ready for approve");
+        startupForm.getUsers().add(userService.getAuthenticatedUser(request));
 
         startupService.save(startupForm);
 
@@ -168,7 +171,7 @@ public class StartupController extends HttpServlet {
 
         this.startupService.deleteById(id);
 
-        return "redirect:/startupdetails/{id}";
+        return "redirect:/allstartups";
     }
 
     @RequestMapping(value = "/startupdetails/close/{id}")

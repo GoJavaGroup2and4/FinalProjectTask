@@ -21,18 +21,11 @@ public class UserDB {
     private String password;
     private int active;
     private Set<StartupEvaluation> marks = new HashSet<>();
-    private Set<UserStartup> startups = new HashSet<>();
+    private Set<Startup> startups = new HashSet<>();
 
     private List<Role> roles=new ArrayList<>();
-  //  private List<VerificationToken> verificationTokens = new ArrayList<VerificationToken>();
-   // private AuthorizationToken authorizationToken;
-
-//    @Transient
-//    private boolean isVerified;
-
 
     private String confirmPassword;
-
 
 
     public UserDB() {
@@ -147,12 +140,15 @@ public class UserDB {
         this.marks = marks;
     }
 
-    @OneToMany(mappedBy = "user")
-    public Set<UserStartup> getStartups() {
+    @ManyToMany(cascade = CascadeType.REFRESH)
+    @JoinTable(name = "user_startup",
+                joinColumns = {@JoinColumn(name = "user_id")},
+                inverseJoinColumns = {@JoinColumn(name = "startup_id")})
+    public Set<Startup> getStartups() {
         return startups;
     }
 
-    public void setStartups(Set<UserStartup> startups) {
+    public void setStartups(Set<Startup> startups) {
         this.startups = startups;
     }
 
@@ -166,11 +162,11 @@ public class UserDB {
         this.confirmPassword = confirmPassword;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     public List<Role> getRoles() {
         return roles;
