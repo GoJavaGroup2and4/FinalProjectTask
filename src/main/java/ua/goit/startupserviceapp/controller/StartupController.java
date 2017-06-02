@@ -44,17 +44,21 @@ public class StartupController extends HttpServlet {
     }
 
     @RequestMapping(value = "addstartup", method = RequestMethod.POST)
-    public String addStartup(@ModelAttribute("startupForm") Startup startupForm, BindingResult bindingResult) {
+    public String addStartup(@ModelAttribute("startupForm") Startup startupForm,
+                             @RequestParam("categoryId") long categoryId, BindingResult bindingResult) {
         startupValidator.validate(startupForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "addstartup";
         }
+        startupForm.setCategory(categoryService.getCategoryById(categoryId));
+        startupForm.setStatus("Ready for approve");
 
         startupService.save(startupForm);
 
-        return "redirect:/allstartups";
+        return "redirect:allstartups";
     }
+
 
 
     @RequestMapping(value = "allstartups", method = RequestMethod.GET)
