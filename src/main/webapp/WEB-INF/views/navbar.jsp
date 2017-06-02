@@ -43,13 +43,13 @@
         </div>
 
         <ul class="nav navbar-nav">
-            <li><a href="<c:url value="/allstartups/add"/>">Add startup</a></li>
+            <li><a href="<c:url value="/addstartup"/>">Add startup</a></li>
             <%--<li><a href="#">Invest</a></li>
             <li><a href="#">My Startups</a></li>--%>
         </ul>
 
         <ul class="nav navbar-nav">
-            <li><a href="mystartups">My startups</a></li>
+            <li><a href="/mystartups">My startups</a></li>
             <%--<li><a href="#">Invest</a></li>
             <li><a href="#">My Startups</a></li>--%>
         </ul>
@@ -76,11 +76,11 @@
                     <a href="<c:url value="/login"/>" class="btn btn-primary">Log in</a>
                 </c:if>
 
-                <c:choose>
+                <%--<c:choose>
                     <c:when test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
                         <button type="submit" class="btn btn-info">Admin</button>
                     </c:when>
-                </c:choose>
+                </c:choose>--%>
             </form>
         </div>
 
