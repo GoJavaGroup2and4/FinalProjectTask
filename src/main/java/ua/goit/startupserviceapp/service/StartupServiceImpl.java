@@ -88,28 +88,14 @@ public class StartupServiceImpl implements StartupService {
     }
 
     @Override
+    public Startup findByName(String name) {
+        return startupRepository.findByName(name);
+    }
+
+    @Override
     @Transactional
     public List<Startup> getAllStartups() {
         return startupRepository.findAll();
-    }
-
-    @Override
-    public List<Startup> getStartupsByName(String name) {
-        List<Startup> startupsByName = this.getAllStartups();
-
-        startupsByName.removeIf(p -> !p.getName().equals(name));
-
-        return startupsByName;
-    }
-
-    @Override
-    public Startup getStartupById(long id) {
-        return startupRepository.findById(id);
-    }
-
-    @Override
-    public Startup findByName(String name) {
-        return startupRepository.findByName(name);
     }
 
     @Override
@@ -156,6 +142,47 @@ public class StartupServiceImpl implements StartupService {
         return startups;
     }
 
+    /**
+     * This method gets Set of {@link Startup} by {@link UserDB}
+     * and puts it into the List of {@link Startup}
+     */
+    @Override
+    @Transactional
+    public List<Startup> getStartupsByUser(UserDB user) {
+
+        List<Startup> startups = new ArrayList<>();
+        startups.addAll(user.getStartups());
+
+        return startups;
+    }
+
+    @Override
+    public List<Startup> getStartupsByName(String name) {
+        List<Startup> startupsByName = this.getAllStartups();
+
+        startupsByName.removeIf(p -> !p.getName().equals(name));
+
+        return startupsByName;
+    }
+
+    @Override
+    @Transactional
+    public Collection<Startup> findAllByKeyWord(String key) {
+        Collection<Startup> startups;
+        if (key.isEmpty()) {
+            startups = getAllApprovedStartups();
+        } else {
+            startups = startupRepository.findAllByKeyWord(key);
+        }
+
+        return startups;
+    }
+
+    @Override
+    public Startup getStartupById(long id) {
+        return startupRepository.findById(id);
+    }
+
     @Override
     public Double averageRating(long id) {
 
@@ -188,6 +215,17 @@ public class StartupServiceImpl implements StartupService {
         return startup.getMarks().size();
     }
 
+    @Override
+    @Transactional
+    public void invest(long startupId, int investment) {
+
+        Startup startup = startupRepository.findById(startupId);
+        startup.setCurrent_investment(startup.getCurrent_investment() + investment);
+
+        startupRepository.save(startup);
+    }
+
+
     /**
      * This method rounds any double variable to one decimal
      *
@@ -199,42 +237,5 @@ public class StartupServiceImpl implements StartupService {
         d = Math.round(d);
         d = d / 10;
         return d;
-    }
-
-    @Override
-    @Transactional
-    public Collection<Startup> findAllByKeyWord(String key) {
-        Collection<Startup> startups;
-        if (key.isEmpty()) {
-            startups = getAllApprovedStartups();
-        } else {
-            startups = startupRepository.findAllByKeyWord(key);
-        }
-
-        return startups;
-    }
-
-    /**
-     * This method gets Set of {@link Startup} by {@link UserDB}
-     * and puts it into the List of {@link Startup}
-     */
-    @Override
-    @Transactional
-    public List<Startup> getStartupsByUser(UserDB user) {
-
-        List<Startup> startups = new ArrayList<>();
-        startups.addAll(user.getStartups());
-
-        return startups;
-    }
-
-    @Override
-    @Transactional
-    public void invest(long startupId, int investment) {
-
-        Startup startup = startupRepository.findById(startupId);
-        startup.setCurrent_investment(startup.getCurrent_investment() + investment);
-
-        startupRepository.save(startup);
     }
 }
