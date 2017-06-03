@@ -1,9 +1,0 @@
-DROP TABLE user_startup;
-DROP TABLE user_role;
-DROP TABLE role_permission;
-DROP TABLE project_evaluation;
-DROP TABLE user;
-DROP TABLE startup;
-DROP TABLE role;
-DROP TABLE permission;
-DROP TABLE category;
