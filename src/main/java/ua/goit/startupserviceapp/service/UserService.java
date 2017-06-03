@@ -23,25 +23,6 @@ public interface UserService {
 
     UserDB findByLogin(String login);
 
-    @Secured("Investor")
-    void invest(UserDB user_id, Startup startup_id, int investment);
-
-    void edit(UserDB user);
-
-    void delete(UserDB user);
-
-    void deleteById(int id);
-
-    UserDB getUserById(int id);
-
-    List<UserDB> getAllUsers();
-
-    List<UserDB> getAllFounders();
-
-    List<UserDB> getAllInvestors();
-
-    List<UserDB> getAllAdministrators();
-
     public UserDB getAuthenticatedUser(HttpServletRequest request);
 
     public boolean isAuthenticated(HttpServletRequest request);

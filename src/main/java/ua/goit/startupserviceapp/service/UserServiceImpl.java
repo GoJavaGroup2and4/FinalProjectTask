@@ -31,17 +31,11 @@ public class UserServiceImpl implements UserService {
     private UserDBRepository userDBRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void save(UserDB user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        /*List<Role> roles = new ArrayList<>();
-        roles.add(roleRepository.getOne(2L));
-        user.setRoles(roles);*/
         userDBRepository.save(user);
     }
 
@@ -54,53 +48,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDB findByLogin(String login) {
         return userDBRepository.findByLogin(login);
-    }
-
-    @Override
-    @Secured("Investor")
-    public void invest(UserDB user_id, Startup startup_id, int investment) {
-        Startup startup = new Startup();
-        startup.setCurrent_investment(startup.getCurrent_investment() + investment);
-    }
-
-    @Override
-    public void edit(UserDB user) {
-
-    }
-
-    @Override
-    public void delete(UserDB user) {
-
-    }
-
-    @Override
-    public void deleteById(int id) {
-
-    }
-
-    @Override
-    public UserDB getUserById(int id) {
-        return null;
-    }
-
-    @Override
-    public List<UserDB> getAllUsers() {
-        return null;
-    }
-
-    @Override
-    public List<UserDB> getAllFounders() {
-        return null;
-    }
-
-    @Override
-    public List<UserDB> getAllInvestors() {
-        return null;
-    }
-
-    @Override
-    public List<UserDB> getAllAdministrators() {
-        return null;
     }
 
     @Override
@@ -119,7 +66,6 @@ public class UserServiceImpl implements UserService {
         } catch (NullPointerException e){
             return new UserDB();
         }
-
     }
 
     @Override
@@ -144,6 +90,7 @@ public class UserServiceImpl implements UserService {
         return user.getRoles().contains(new Role("ROLE_ADMIN"));
 
     }
+
     @Override
     @Transactional(readOnly = true)
     public boolean isStartupOwner(long startupId, HttpServletRequest request) {
@@ -151,8 +98,14 @@ public class UserServiceImpl implements UserService {
         UserDB user = getAuthenticatedUser(request);
 
         return user.getStartups().stream()
-                .anyMatch(s -> s.getId() == startupId)
-                &&
-                user.getRoles().contains(new Role("ROLE_FOUNDER"));
+                .anyMatch(s -> s.getId() == startupId);
+    }
+
+    public void setUserDBRepository(UserDBRepository userDBRepository) {
+        this.userDBRepository = userDBRepository;
+    }
+
+    public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 }

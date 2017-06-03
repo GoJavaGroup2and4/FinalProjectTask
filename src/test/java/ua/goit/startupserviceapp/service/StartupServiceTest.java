@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
  */
 public class StartupServiceTest {
 
-    private StartupServiceImpl startupService;
+    private StartupService startupService;
     private StartupRepository startupRepository;
 
     @Before
@@ -53,11 +53,8 @@ public class StartupServiceTest {
 
     @Test
     public void edit(){
-
 //       init
         Startup startup = new Startup();
-        startup.setName("GoJava5");
-        final String[] authorToCheck = new String[1];
         when(startupRepository.save(startup)).thenReturn(startup);
 
 //       use
@@ -65,7 +62,6 @@ public class StartupServiceTest {
 
 //       check
         verify(startupRepository, times(1)).save(startup);
-        assertEquals("GoJava5", startupRepository.save(startup).getName());
         assertEquals("Draft", startupRepository.save(startup).getStatus());
     }
 
@@ -74,7 +70,6 @@ public class StartupServiceTest {
 
 //       init
         Startup startup = new Startup();
-        startup.setName("lalala");
         doAnswer(i -> {
             assertEquals(startup, i.getArgumentAt(0, Startup.class));
             return null;
@@ -91,7 +86,6 @@ public class StartupServiceTest {
     public void deleteById(){
 //       init
         Startup startup = new Startup();
-        startup.setName("lalala");
         doAnswer(i -> {
             assertEquals(startup.getId(), (long) i.getArgumentAt(0, Long.class));
             return null;
@@ -185,7 +179,7 @@ public class StartupServiceTest {
         Startup foundStartup = startupService.findByName("startup");
 
 //        check
-        verify(startupRepository.findByName(anyString()), times(1));
+        verify(startupRepository, times(1)).findByName(anyString());
         assertEquals(startup, foundStartup);
     }
 
