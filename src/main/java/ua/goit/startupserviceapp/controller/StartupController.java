@@ -181,4 +181,9 @@ public class StartupController extends HttpServlet {
 
         return "redirect:/startupdetails/{id}";
     }
+
+    @RequestMapping(value = "/error")
+    public String handleResourceNotFoundException(){
+        return "error";
+    }
 }
