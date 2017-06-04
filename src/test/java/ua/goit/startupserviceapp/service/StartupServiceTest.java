@@ -383,6 +383,4 @@ public class StartupServiceTest {
         verify(startupRepository, times(1)).findById(anyLong());
         assertEquals(5, votes);
     }
-
-
 }
