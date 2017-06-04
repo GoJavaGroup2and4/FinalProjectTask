@@ -106,10 +106,12 @@ public class StartupController extends HttpServlet {
 
         Category category = categoryService.getCategoryByName(startup.getCategory().getName());
         startup.setCategory(category);
+        Startup startupDB = startupService.getStartupById(startup.getId());
+        startup.setUsers(startupDB.getUsers());
 
         this.startupService.edit(startup);
 
-        return "redirect:startupdetails/{id}";
+        return "redirect:/startupdetails/{id}";
     }
 
     @RequestMapping(value = "/startupdetails/{id}")
