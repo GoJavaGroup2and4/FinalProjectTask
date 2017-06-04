@@ -59,7 +59,7 @@
         <h2>Investor's Block:</h2>
         <br/>
         <div class="form-horizontal">
-            <form action="/startupdetails/${id}/invest" method="POST">
+            <form action="/startupdetails/${id}" method="POST">
 
                 <div class="form-group">
                     <label class="control-label col-sm-2">Enter your amount:</label>
