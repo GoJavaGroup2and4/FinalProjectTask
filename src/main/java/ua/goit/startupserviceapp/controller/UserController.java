@@ -79,9 +79,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "userdetails", method = RequestMethod.POST)
-    public String userDetails(@ModelAttribute("userForm") UserDB userForm, Model model){
+    public String userDetails(@ModelAttribute("userForm") UserDB userForm, Model model, HttpServletRequest request){
         userForm.setRoles(userService.findByLogin(userForm.getLogin()).getRoles());
         userForm.setPassword(userService.findByLogin(userForm.getLogin()).getPassword());
+        userForm.setStartups(userService.getAuthenticatedUser(request).getStartups());
+
         userService.saveWithoutEncode(userForm);
 
         return "userdetails";
