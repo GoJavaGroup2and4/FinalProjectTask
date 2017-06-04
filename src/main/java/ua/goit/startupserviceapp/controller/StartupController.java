@@ -83,7 +83,7 @@ public class StartupController extends HttpServlet {
     public String removeStartup(@PathVariable("id") Long id) {
         this.startupService.deleteById(id);
 
-        return "redirect:/allstartups";
+        return "redirect:allstartups";
     }
 
     @RequestMapping(value = "/startupedit/{id}", method = RequestMethod.GET)
@@ -97,7 +97,7 @@ public class StartupController extends HttpServlet {
             return "startupedit";
         }
         else {
-            return "redirect:/startupdetails/{id}";
+            return "redirect:startupdetails/{id}";
         }
     }
 
@@ -109,7 +109,7 @@ public class StartupController extends HttpServlet {
 
         this.startupService.edit(startup);
 
-        return "redirect:/startupdetails/{id}";
+        return "redirect:startupdetails/{id}";
     }
 
     @RequestMapping(value = "/startupdetails/{id}")
@@ -129,16 +129,16 @@ public class StartupController extends HttpServlet {
     public String startupInvest (@RequestParam("investment") int investment, @PathVariable ("id") long startupId, HttpServletRequest request){
 
         if(investment <= 0){
-            return "redirect:/startupdetails/{id}";
+            return "redirect:startupdetails/{id}";
         }
 
         if(userService.isAuthenticated(request)) {
             this.startupService.invest(startupId, investment);
 
-            return "redirect:/startupdetails/{id}";
+            return "redirect:startupdetails/{id}";
         }
         else {
-            return "redirect:/login";
+            return "redirect:login";
         }
     }
 
@@ -147,7 +147,7 @@ public class StartupController extends HttpServlet {
 
         this.startupService.ready(id);
 
-        return "redirect:/startupdetails/{id}";
+        return "redirect:startupdetails/{id}";
     }
 
     @RequestMapping(value = "/startupdetails/approve/{id}")
@@ -155,7 +155,7 @@ public class StartupController extends HttpServlet {
 
         this.startupService.approve(id);
 
-        return "redirect:/startupdetails/{id}";
+        return "redirect:startupdetails/{id}";
     }
 
     @RequestMapping(value = "/startupdetails/reject/{id}")
@@ -163,7 +163,7 @@ public class StartupController extends HttpServlet {
 
         this.startupService.reject(id);
 
-        return "redirect:/startupdetails/{id}";
+        return "redirect:startupdetails/{id}";
     }
 
     @RequestMapping(value = "/startupdetails/delete/{id}")
@@ -171,7 +171,7 @@ public class StartupController extends HttpServlet {
 
         this.startupService.deleteById(id);
 
-        return "redirect:/allstartups";
+        return "redirect:allstartups";
     }
 
     @RequestMapping(value = "/startupdetails/close/{id}")
@@ -179,11 +179,11 @@ public class StartupController extends HttpServlet {
 
         this.startupService.close(id);
 
-        return "redirect:/startupdetails/{id}";
+        return "redirect:startupdetails/{id}";
     }
 
     @RequestMapping(value = "/error")
-    public String handleResourceNotFoundException(){
+    public String errorPage(){
         return "error";
     }
 }

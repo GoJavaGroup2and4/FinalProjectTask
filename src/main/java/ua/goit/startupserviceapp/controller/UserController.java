@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import ua.goit.startupserviceapp.model.UserDB;
 import ua.goit.startupserviceapp.repository.RoleRepository;
 import ua.goit.startupserviceapp.service.SecurityService;
+import ua.goit.startupserviceapp.service.StartupService;
 import ua.goit.startupserviceapp.service.UserService;
 import ua.goit.startupserviceapp.validator.UserValidator;
 
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -31,6 +33,9 @@ public class UserController {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private StartupService startupService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -87,13 +92,21 @@ public class UserController {
         return "home";
     }
 
-    @RequestMapping(value = "/admin",method = RequestMethod.GET)
-    public String admin(Model model){
-        return "admin";
-    }
-
     @RequestMapping(value = {"/welcome"},method = RequestMethod.GET)
     public String welcome(Model model){
         return "welcome";
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String admin (Model model, HttpServletRequest request){
+
+        if(userService.isAdmin(request)){
+            model.addAttribute("allstartups", startupService.getAllStartups());
+            return "admin";
+        }
+        else {
+            return "redirect:allstartups";
+        }
+
     }
 }
