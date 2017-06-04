@@ -183,7 +183,7 @@ public class StartupController extends HttpServlet {
     }
 
     @RequestMapping(value = "/error")
-    public String handleResourceNotFoundException(){
+    public String errorPage(){
         return "error";
     }
 }

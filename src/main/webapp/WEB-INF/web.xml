@@ -72,4 +72,9 @@
         <location>/error</location>
     </error-page>
 
+    <error-page>
+        <error-code>403</error-code>
+        <location>/allstartups</location>
+    </error-page>
+
 </web-app>

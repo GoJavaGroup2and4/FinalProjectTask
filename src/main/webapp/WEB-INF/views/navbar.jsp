@@ -76,11 +76,11 @@
                     <a href="<c:url value="/login"/>" class="btn btn-primary">Log in</a>
                 </c:if>
 
-                <%--<c:choose>
+                <c:choose>
                     <c:when test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
-                        <button type="submit" class="btn btn-info">Admin</button>
+                        <a href="<c:url value="/admin"/> " class="btn btn-info">Admin</a>
                     </c:when>
-                </c:choose>--%>
+                </c:choose>
             </form>
         </div>
 
