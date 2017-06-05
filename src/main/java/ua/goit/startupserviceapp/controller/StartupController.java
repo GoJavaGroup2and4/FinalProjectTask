@@ -131,13 +131,13 @@ public class StartupController extends HttpServlet {
     public String startupInvest (@RequestParam("investment") int investment, @PathVariable ("id") long startupId, HttpServletRequest request){
 
         if(investment <= 0){
-            return "redirect:/startupdetails/{id}";
+            return "redirect:/allstartups";
         }
 
         if(userService.isAuthenticated(request)) {
             this.startupService.invest(startupId, investment);
 
-            return "redirect:/startupdetails/{id}";
+            return "redirect:/allstartups";
         }
         else {
             return "redirect:/login";

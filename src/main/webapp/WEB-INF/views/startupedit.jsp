@@ -65,7 +65,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">
                         <input class="btn btn-primary" type="submit" value="<spring:message text="Save changes"/>"/>
-                        <a href="<c:url value="/allstartups"/>" class="btn btn-ghost">Cancel</a>
+                        <a href="<c:url value="/startupdetails/${startup.id}"/>" class="btn btn-ghost">Cancel</a>
                     </label>
                 </div>
 
