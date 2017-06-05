@@ -11,20 +11,17 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"/>
-<input type="hidden" name="userLogin" value="${pageContext.request.getRemoteUser()}"/>
 
 <div class="container">
     <br/>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
 
-
             <form:form method="post" modelAttribute="userForm" class="form-horizontal" role="form">
                 <fieldset>
                     <legend>Personal information:</legend>
 
                     <form:hidden path="id"/>
-
 
                     <div class="form-group">
                         <label class="control-label col-sm-5">Login:</label>
@@ -90,7 +87,5 @@
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
