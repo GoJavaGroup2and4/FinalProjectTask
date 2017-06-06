@@ -39,7 +39,7 @@
                     aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
             </button>
-            <a class="navbar-brand" href="/allstartups">STARTUP PLATFORM</a>
+            <a class="navbar-brand" href="<c:url value="/allstartups"/>">STARTUP PLATFORM</a>
         </div>
 
         <ul class="nav navbar-nav">
@@ -49,7 +49,7 @@
         </ul>
 
         <ul class="nav navbar-nav">
-            <li><a href="/mystartups">My startups</a></li>
+            <li><a href=<c:url value="/mystartups"/>>My startups</a></li>
             <%--<li><a href="#">Invest</a></li>
             <li><a href="#">My Startups</a></li>--%>
         </ul>

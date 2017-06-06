@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="navbar.jsp"/>
 
-<form:form action="/startupedit/${startup.id}" method="POST" commandName="startup" modelAttribute="startup">
+<form:form action="${pageContext.request.contextPath}/startupedit/${startup.id}" method="POST" commandName="startup" modelAttribute="startup">
     <c:if test="${!empty startup}">
         <div class="container">
             <h2>${startup.name}:</h2>
