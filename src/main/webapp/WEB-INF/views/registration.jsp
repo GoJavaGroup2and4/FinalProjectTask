@@ -81,6 +81,7 @@
 
         <spring:bind path="phoneNumber">
             <div class="${status.error ? 'has-error' : ''}">
+                <form:errors path="phoneNumber"></form:errors>
                 <form:input type="text" path="phoneNumber" class="form-control" placeholder="Phone Number"
                             autofocus="true"></form:input>
             </div>

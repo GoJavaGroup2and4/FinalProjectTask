@@ -54,5 +54,9 @@ public class UserValidator implements Validator {
             errors.rejectValue("confirmPassword", "Different.userForm.password");
         }
 
+        if (!user.getPhoneNumber().matches("^[+]?\\d+")) {
+            errors.rejectValue("phoneNumber", "Consist.userForm.phoneNumber");
+        }
+
     }
 }
